@@ -6,3 +6,9 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+
+# 忽视 IntelliJ IDEA 的配置文件夹
+.idea/
+
+# 忽视所有 target 目录下的文件
+target/
