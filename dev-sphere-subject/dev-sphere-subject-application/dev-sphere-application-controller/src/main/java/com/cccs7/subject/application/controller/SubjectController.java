@@ -11,11 +11,18 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2025/01/01
  */
 @RestController
+@RequestMapping("/subject")
 public class SubjectController {
 
-    @GetMapping("/test ")
-    public String test(){
+    @GetMapping("/test")
+    public String test1(){
+
         return "hello";
     }
 
+
+    @GetMapping("/1")
+    public String hello(){
+        return "1";
+    }
 }
