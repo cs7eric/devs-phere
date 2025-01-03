@@ -13,6 +13,7 @@ spring:
       min-idle: 20
       max-active: 100
       max-wait: 60000
+#      connectionProperties: config.decrypt=true;config.decrypt.key=${publicKey};
       stat-view-servlet:
         enabled: true
         url-pattern: /druid/*
@@ -28,3 +29,5 @@ spring:
         config:
           enabled: true
 
+logging:
+  config:classpath:log4j2-spring.xml
