@@ -2,6 +2,8 @@ package com.cccs7.subject.infra.basic.service;
 
 import com.cccs7.subject.infra.basic.entity.SubjectCategory;
 
+import java.util.List;
+
 /**
  * 题目分类(SubjectCategory)表服务接口
  *
@@ -44,4 +46,7 @@ public interface SubjectCategoryService {
      */
     boolean deleteById(Long id);
 
+    List<SubjectCategory> queryCategory(SubjectCategory subjectCategory);
+
+    Integer querySubjectCount(Long id);
 }

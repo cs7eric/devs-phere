@@ -16,4 +16,6 @@ public interface SubjectCategoryConverter {
 
     List<SubjectCategory> bos2pos(List<SubjectCategoryBO> boList);
 
+    List<SubjectCategoryBO> pos2bos(List<SubjectCategory> poList);
+
 }
