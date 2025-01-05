@@ -1,5 +1,7 @@
 package com.cccs7.subject.infra.basic.entity;
 
+import lombok.Data;
+
 import java.util.Date;
 import java.io.Serializable;
 
@@ -9,6 +11,7 @@ import java.io.Serializable;
  * @author makejava
  * @since 2025-01-01 23:12:18
  */
+@Data
 public class SubjectLiked implements Serializable {
     private static final long serialVersionUID = 975767697619934021L;
 /**

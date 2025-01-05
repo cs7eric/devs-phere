@@ -3,20 +3,14 @@ package com.cccs7.subject.application.controller;
 import com.cccs7.subject.application.convert.SubjectCategoryDTOConverter;
 import com.cccs7.subject.application.dto.SubjectCategoryDTO;
 import com.cccs7.subject.common.entity.Result;
-import com.cccs7.subject.domain.convert.SubjectCategoryConverter;
 import com.cccs7.subject.domain.entity.SubjectCategoryBO;
 import com.cccs7.subject.domain.service.SubjectCategoryDomainService;
-import com.cccs7.subject.infra.basic.entity.SubjectCategory;
-import com.cccs7.subject.infra.basic.service.SubjectCategoryService;
 import com.google.common.base.Preconditions;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -30,7 +24,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/subject/category")
 public class SubjectCategoryController {
-
 
 
     @Resource
