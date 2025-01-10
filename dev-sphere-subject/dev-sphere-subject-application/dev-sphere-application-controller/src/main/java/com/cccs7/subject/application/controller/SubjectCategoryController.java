@@ -3,6 +3,7 @@ package com.cccs7.subject.application.controller;
 import com.cccs7.subject.application.convert.SubjectCategoryDTOConverter;
 import com.cccs7.subject.application.dto.SubjectCategoryDTO;
 import com.cccs7.subject.common.entity.Result;
+import com.cccs7.subject.common.enums.CategoryTypeEnum;
 import com.cccs7.subject.domain.entity.SubjectCategoryBO;
 import com.cccs7.subject.domain.service.SubjectCategoryDomainService;
 import com.google.common.base.Preconditions;
@@ -75,11 +76,11 @@ public class SubjectCategoryController {
 
         try {
             if (log.isInfoEnabled()) {
-                log.info("SubjectCategoryController.update.params:{}", subjectCategoryDTO);
+                log.info("SubjectCategoryController.queryPrimaryCategory.dto:{}", subjectCategoryDTO);
             }
 
             SubjectCategoryBO subjectCategoryBO = SubjectCategoryDTOConverter.INSTANCE.dto2bo(subjectCategoryDTO);
-            List<SubjectCategoryBO> subjectCategoryBOList = subjectCategoryDomainService.queryCatefory(subjectCategoryBO);
+            List<SubjectCategoryBO> subjectCategoryBOList = subjectCategoryDomainService.queryCategory(subjectCategoryBO);
             List<SubjectCategoryDTO> subjectCategoryDTOS = SubjectCategoryDTOConverter.INSTANCE.bos2dtos(subjectCategoryBOList);
             return Result.ok(subjectCategoryDTOS);
 
@@ -89,4 +90,44 @@ public class SubjectCategoryController {
             return Result.fail(subjectCategoriesDTO);
         }
     }
+
+    @GetMapping("/queryCategoryByPrimary")
+    public Result<List<SubjectCategoryDTO>> queryCategoryByPrimary(@RequestBody SubjectCategoryDTO subjectCategoryDTO) {
+
+        try {
+            if (log.isInfoEnabled()) {
+                log.info("SubjectCategoryController.queryCategoryByPrimary.dto:{}", subjectCategoryDTO);
+            }
+
+            Preconditions.checkNotNull(subjectCategoryDTO.getParentId(), "分类ID不能为空");
+
+            SubjectCategoryBO subjectCategoryBO = SubjectCategoryDTOConverter.INSTANCE.dto2bo(subjectCategoryDTO);
+            subjectCategoryBO.setCategoryType(CategoryTypeEnum.PRIMARY.getCode());
+            List<SubjectCategoryBO> subjectCategoryBOList = subjectCategoryDomainService.queryCategory(subjectCategoryBO);
+            List<SubjectCategoryDTO> subjectCategoryDTOS = SubjectCategoryDTOConverter.INSTANCE.bos2dtos(subjectCategoryBOList);
+            return Result.ok(subjectCategoryDTOS);
+        } catch (Exception e) {
+            log.error("SubjectCategoryController.queryPrimaryCategory.error:{}", e.getMessage(), e);
+
+            return Result.fail("查询失败");
+        }
+    }
+
+    @DeleteMapping("/delete")
+    public Result delete(@RequestBody SubjectCategoryDTO subjectCategoryDTO) {
+
+        // 校验 ID 是否为空
+        Preconditions.checkNotNull(subjectCategoryDTO.getId(), "ID 不能为空");
+
+        if (log.isInfoEnabled()) {
+            log.info("subjectCategoryController.delete.dto:{}", subjectCategoryDTO);
+        }
+
+        SubjectCategoryBO subjectCategoryBO = SubjectCategoryDTOConverter.INSTANCE.dto2bo(subjectCategoryDTO);
+        boolean deleted = subjectCategoryDomainService.delete(subjectCategoryBO);
+
+        return deleted ? Result.ok(true) : Result.fail(false);
+    }
+
+
 }
