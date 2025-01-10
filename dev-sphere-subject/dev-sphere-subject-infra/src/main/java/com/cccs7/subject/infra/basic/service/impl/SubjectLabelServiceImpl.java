@@ -1,11 +1,13 @@
 package com.cccs7.subject.infra.basic.service.impl;
 
+import com.cccs7.subject.common.enums.IsDeletedFlagEnum;
 import com.cccs7.subject.infra.basic.entity.SubjectLabel;
 import com.cccs7.subject.infra.basic.mapper.SubjectLabelDao;
 import com.cccs7.subject.infra.basic.service.SubjectLabelService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 
 /**
@@ -50,9 +52,9 @@ public class SubjectLabelServiceImpl implements SubjectLabelService {
      * @return 实例对象
      */
     @Override
-    public SubjectLabel update(SubjectLabel subjectLabel) {
-        this.subjectLabelDao.update(subjectLabel);
-        return this.queryById(subjectLabel.getId());
+    public int update(SubjectLabel subjectLabel) {
+        return this.subjectLabelDao.update(subjectLabel);
+
     }
 
     /**
@@ -64,5 +66,25 @@ public class SubjectLabelServiceImpl implements SubjectLabelService {
     @Override
     public boolean deleteById(Long id) {
         return this.subjectLabelDao.deleteById(id) > 0;
+    }
+
+
+    /**
+     * 逻辑删除
+     *
+     * @param subjectLabel 主题标签
+     * @return int
+     */
+    @Override
+    public int delete(SubjectLabel subjectLabel) {
+
+        subjectLabel.setIsDeleted(IsDeletedFlagEnum.DELETED.getCode());
+        return this.subjectLabelDao.update(subjectLabel);
+
+    }
+
+    @Override
+    public List<SubjectLabel> queryLabelByCategoryId(SubjectLabel subjectLabel) {
+        return subjectLabelDao.queryLabelByCategoryId(subjectLabel);
     }
 }

@@ -69,5 +69,12 @@ public interface SubjectLabelDao {
      */
     int deleteById(Long id);
 
+    /**
+     * 按分类id查询标签
+     *
+     * @param subjectLabel 主题标签
+     * @return {@link List }<{@link SubjectLabel }>
+     */
+    List<SubjectLabel> queryLabelByCategoryId(SubjectLabel subjectLabel);
 }
 

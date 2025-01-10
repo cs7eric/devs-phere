@@ -33,7 +33,7 @@ public interface SubjectMappingService {
      * @param subjectMapping 实例对象
      * @return 实例对象
      */
-    SubjectMapping update(SubjectMapping subjectMapping);
+    int update(SubjectMapping subjectMapping);
 
     /**
      * 通过主键删除数据

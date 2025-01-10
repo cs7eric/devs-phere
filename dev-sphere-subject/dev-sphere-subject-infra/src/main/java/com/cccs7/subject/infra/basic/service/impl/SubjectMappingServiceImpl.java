@@ -48,9 +48,9 @@ public class SubjectMappingServiceImpl implements SubjectMappingService {
      * @return 实例对象
      */
     @Override
-    public SubjectMapping update(SubjectMapping subjectMapping) {
-        this.subjectMappingDao.update(subjectMapping);
-        return this.queryById(subjectMapping.getId());
+    public int update(SubjectMapping subjectMapping) {
+
+        return this.subjectMappingDao.update(subjectMapping);
     }
 
     /**
