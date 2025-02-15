@@ -1,16 +1,23 @@
 package com.cccs7.subject.application.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.cccs7.subject.infra.basic.entity.SubjectCategory;
-import com.cccs7.subject.infra.basic.service.SubjectCategoryService;
+import com.cccs7.subject.application.convert.SubjectAnswerDTOConverter;
+import com.cccs7.subject.application.convert.SubjectInfoDTOConverter;
+import com.cccs7.subject.application.dto.SubjectInfoDTO;
+import com.cccs7.subject.common.entity.Result;
+import com.cccs7.subject.domain.entity.SubjectAnswerBO;
+import com.cccs7.subject.domain.entity.SubjectInfoBO;
+import com.cccs7.subject.domain.service.SubjectInfoDomainService;
+import com.google.common.base.Preconditions;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 刷题 controller
@@ -25,30 +32,41 @@ public class SubjectController {
 
 
     @Resource
-    private SubjectCategoryService subjectCategoryService;
-
-    @GetMapping("/test")
-    public String test1(){
-
-        return "hello";
-    }
+    private SubjectInfoDomainService subjectInfoDomainService;
 
 
-    @GetMapping("/1")
-    public String hello(){
-        return "1";
-    }
+    /**
+     * 添加题目
+     *
+     * @param subjectInfoDTO 题目DTO
+     * @return {@link Result }<{@link Boolean }>
+     */
+    @PostMapping("/add")
+    public Result<Boolean> add(@RequestBody SubjectInfoDTO subjectInfoDTO) {
+        try {
+            if (log.isInfoEnabled()) {
+                log.info("SubjectCategoryController.add.dto:{}", subjectInfoDTO);
+            }
 
-    @GetMapping("id")
-    public String query() {
+            Preconditions.checkArgument(!StringUtils.isBlank(subjectInfoDTO.getSubjectName()), "题目名称不能为空");
+            Preconditions.checkNotNull(subjectInfoDTO.getSubjectDifficult(), "题目难度不能为空");
+            Preconditions.checkNotNull(subjectInfoDTO.getSubjectType(), "题目类型不能为空");
+            Preconditions.checkNotNull(subjectInfoDTO.getSubjectScore(), "题目分数不能为空");
+            Preconditions.checkArgument(!StringUtils.isBlank(subjectInfoDTO.getSubjectParse()), "题目解析不能为空");
+            Preconditions.checkArgument(!CollectionUtils.isEmpty(subjectInfoDTO.getCategoryIds()), "分类ID不能为空");
+            Preconditions.checkArgument(!CollectionUtils.isEmpty(subjectInfoDTO.getLabelIds()), "标签ID不能为空");
+            SubjectInfoBO subjectInfoBO = SubjectInfoDTOConverter.INSTANCE.dto2bo(subjectInfoDTO);
 
-        SubjectCategory subjectCategory = subjectCategoryService.queryById(1L);
+            List<SubjectAnswerBO> subjectAnswerBOList
+                    = SubjectAnswerDTOConverter.INSTANCE.dtos2bos(subjectInfoDTO.getOptionList());
+            subjectInfoBO.setOptionList(subjectAnswerBOList);
+            subjectInfoDomainService.add(subjectInfoBO);
 
-        if (log.isInfoEnabled()){
-            log.info("subjectCategoryController.query.entity:{}", JSON.toJSONString(subjectCategory));
+            return Result.ok(true);
+        } catch (Exception e) {
+            log.error("subjectCategoryController.add.error:{}", e.getMessage());
+            return Result.fail(false);
         }
-        System.out.println(subjectCategory);
-        return "1";
     }
 
 }

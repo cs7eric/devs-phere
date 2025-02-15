@@ -5,11 +5,12 @@ import lombok.Data;
 import java.util.Date;
 import java.io.Serializable;
 
+
 /**
  * 题目分类关系表(SubjectMapping)实体类
  *
- * @author makejava
- * @since 2025-01-01 23:12:34
+ * @author cccs7 - csq020611@gmail.com
+ * @date 2025/02/05
  */
 @Data
 public class SubjectMapping implements Serializable {

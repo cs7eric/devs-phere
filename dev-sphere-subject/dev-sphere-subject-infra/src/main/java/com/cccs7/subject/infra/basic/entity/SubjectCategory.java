@@ -5,11 +5,12 @@ import lombok.Data;
 import java.util.Date;
 import java.io.Serializable;
 
+
 /**
- * 题目分类(SubjectCategory)实体类
+ * 学科分类
  *
- * @author makejava
- * @since 2025-01-01 23:09:10
+ * @author cccs7 - csq020611@gmail.com
+ * @date 2025/02/05
  */
 @Data
 public class SubjectCategory implements Serializable {

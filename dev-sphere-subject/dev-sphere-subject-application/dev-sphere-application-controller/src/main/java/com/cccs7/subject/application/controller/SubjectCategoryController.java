@@ -30,6 +30,12 @@ public class SubjectCategoryController {
     @Resource
     private SubjectCategoryDomainService subjectCategoryDomainService;
 
+    /**
+     * 添加
+     *
+     * @param subjectCategoryDTO 主题类别dto
+     * @return {@link Result }<{@link Boolean }>
+     */
     @PostMapping("/add")
     public Result<Boolean> add(@RequestBody SubjectCategoryDTO subjectCategoryDTO) {
         try {
@@ -53,6 +59,12 @@ public class SubjectCategoryController {
     }
 
 
+    /**
+     * 更新类别
+     *
+     * @param subjectCategoryDTO 主题类别dto
+     * @return {@link Result }<{@link Boolean }>
+     */
     @PostMapping("/update")
     public Result<Boolean> update(@RequestBody SubjectCategoryDTO subjectCategoryDTO) {
         SubjectCategoryBO subjectCategoryBO = null;
@@ -71,6 +83,12 @@ public class SubjectCategoryController {
         }
     }
 
+    /**
+     * 查询大类类别
+     *
+     * @param subjectCategoryDTO 主题类别dto
+     * @return {@link Result }<{@link List }<{@link SubjectCategoryDTO }>>
+     */
     @GetMapping("/queryPrimaryCategory")
     public Result<List<SubjectCategoryDTO>> queryPrimaryCategory(@RequestBody SubjectCategoryDTO subjectCategoryDTO) {
 
@@ -91,6 +109,12 @@ public class SubjectCategoryController {
         }
     }
 
+    /**
+     * 按大类分类查询分类
+     *
+     * @param subjectCategoryDTO 主题类别dto
+     * @return {@link Result }<{@link List }<{@link SubjectCategoryDTO }>>
+     */
     @GetMapping("/queryCategoryByPrimary")
     public Result<List<SubjectCategoryDTO>> queryCategoryByPrimary(@RequestBody SubjectCategoryDTO subjectCategoryDTO) {
 

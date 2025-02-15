@@ -5,11 +5,12 @@ import lombok.Data;
 import java.util.Date;
 import java.io.Serializable;
 
+
 /**
- * 题目信息表(SubjectInfo)实体类
+ * 题目信息
  *
- * @author makejava
- * @since 2025-01-01 23:11:17
+ * @author cccs7 - csq020611@gmail.com
+ * @date 2025/02/05
  */
 @Data
 public class SubjectInfo implements Serializable {

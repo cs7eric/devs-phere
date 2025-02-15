@@ -5,6 +5,12 @@ import lombok.Data;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * 主题类别dto
+ *
+ * @author cccs7 - csq020611@gmail.com
+ * @date 2025/02/05
+ */
 @Data
 public class SubjectCategoryDTO implements Serializable {
 
