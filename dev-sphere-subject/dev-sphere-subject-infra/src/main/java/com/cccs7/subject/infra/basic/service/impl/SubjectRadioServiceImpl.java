@@ -6,6 +6,7 @@ import com.cccs7.subject.infra.basic.service.SubjectRadioService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 单选题信息表(SubjectRadio)表服务实现类
@@ -27,6 +28,11 @@ public class SubjectRadioServiceImpl implements SubjectRadioService {
     @Override
     public SubjectRadio queryById(Long id) {
         return this.subjectRadioDao.queryById(id);
+    }
+
+    @Override
+    public void batchInsert(List<SubjectRadio> subjectRadioList) {
+        subjectRadioDao.insertBatch(subjectRadioList);
     }
 
     /**

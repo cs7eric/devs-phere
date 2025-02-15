@@ -2,6 +2,8 @@ package com.cccs7.subject.infra.basic.service;
 
 import com.cccs7.subject.infra.basic.entity.SubjectMapping;
 
+import java.util.List;
+
 /**
  * 题目分类关系表(SubjectMapping)表服务接口
  *
@@ -26,6 +28,13 @@ public interface SubjectMappingService {
      * @return 实例对象
      */
     SubjectMapping insert(SubjectMapping subjectMapping);
+
+    /**
+     * 批量新增数据
+     *
+     * @param subjectMappingList 题目映射列表
+     */
+    void batchInsert(List<SubjectMapping> subjectMappingList);
 
     /**
      * 修改数据

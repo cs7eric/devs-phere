@@ -6,6 +6,7 @@ import com.cccs7.subject.infra.basic.service.SubjectMappingService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 题目分类关系表(SubjectMapping)表服务实现类
@@ -39,6 +40,16 @@ public class SubjectMappingServiceImpl implements SubjectMappingService {
     public SubjectMapping insert(SubjectMapping subjectMapping) {
         this.subjectMappingDao.insert(subjectMapping);
         return subjectMapping;
+    }
+
+    /**
+     * 批量插入
+     *
+     * @param subjectMappingList 题目映射列表
+     */
+    @Override
+    public void batchInsert(List<SubjectMapping> subjectMappingList) {
+        subjectMappingDao.insertBatch(subjectMappingList);
     }
 
     /**
