@@ -2,6 +2,7 @@ package com.cccs7.subject.domain.handler.subject;
 
 import com.cccs7.subject.common.enums.SubjectInfoTypeEnum;
 import com.cccs7.subject.domain.entity.SubjectInfoBO;
+import com.cccs7.subject.domain.entity.SubjectOptionBO;
 
 
 /**
@@ -23,4 +24,12 @@ public interface SubjectTypeHandler {
      * 实际的题目插入
      */
     void add(SubjectInfoBO subjecInfoBo);
+
+    /**
+     * 实际的题目查询
+     *
+     * @param subjectId 题目id
+     * @return {@link SubjectOptionBO }
+     */
+    SubjectOptionBO query(int subjectId);
 }

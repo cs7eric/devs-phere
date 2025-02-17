@@ -1,8 +1,8 @@
 package com.cccs7.subject.domain.convert;
 
 import com.cccs7.subject.domain.entity.SubjectInfoBO;
+import com.cccs7.subject.domain.entity.SubjectOptionBO;
 import com.cccs7.subject.infra.basic.entity.SubjectInfo;
-import com.cccs7.subject.infra.basic.entity.SubjectLabel;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -22,11 +22,15 @@ public interface SubjectInfoConverter {
 
     SubjectInfo bo2po(SubjectInfoBO subjectLabelBO);
 
-    SubjectInfo po2bo(SubjectLabel subjectLabel);
+    SubjectInfoBO po2bo(SubjectInfo subjectInfo);
+
+    SubjectInfoBO optionAndInfo2bo(SubjectOptionBO subjectOptionBO, SubjectInfo subjectInfo);
 
     List<SubjectInfoBO> pos2bos(List<SubjectInfo> subjectLabelDTOList);
 
     List<SubjectInfo> bos2pos(List<SubjectInfoBO> SubjectInfoBOList);
+
+
 
 
 }

@@ -6,7 +6,7 @@ spring:
     username: cccs7
     password: C020611.
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.83.130/dev-sphere?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://1.92.68.100/dev-sphere?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       initial-size: 20

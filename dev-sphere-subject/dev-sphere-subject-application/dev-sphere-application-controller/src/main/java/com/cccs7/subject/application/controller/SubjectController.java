@@ -3,18 +3,17 @@ package com.cccs7.subject.application.controller;
 import com.cccs7.subject.application.convert.SubjectAnswerDTOConverter;
 import com.cccs7.subject.application.convert.SubjectInfoDTOConverter;
 import com.cccs7.subject.application.dto.SubjectInfoDTO;
+import com.cccs7.subject.common.entity.PageResult;
 import com.cccs7.subject.common.entity.Result;
 import com.cccs7.subject.domain.entity.SubjectAnswerBO;
 import com.cccs7.subject.domain.entity.SubjectInfoBO;
 import com.cccs7.subject.domain.service.SubjectInfoDomainService;
+import com.cccs7.subject.infra.basic.entity.SubjectInfo;
 import com.google.common.base.Preconditions;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -66,6 +65,58 @@ public class SubjectController {
         } catch (Exception e) {
             log.error("subjectCategoryController.add.error:{}", e.getMessage());
             return Result.fail(false);
+        }
+    }
+
+
+    /**
+     * 查询题目列表
+     *
+     * @param subjectInfoDTO 题目信息dto
+     * @return {@link Result }<{@link PageResult }<{@link SubjectInfo }>>
+     */
+    @GetMapping("/getSubjectPage")
+    public Result<PageResult<SubjectInfoDTO>> getSubjectPage(@RequestBody SubjectInfoDTO subjectInfoDTO) {
+        try {
+            if (log.isInfoEnabled()) {
+                log.info("SubjectCategoryController.getSubjectPage.dto:{}", subjectInfoDTO);
+            }
+
+            Preconditions.checkNotNull(subjectInfoDTO.getLabelId(), "标签ID不能为空");
+            Preconditions.checkNotNull(subjectInfoDTO.getCategoryId(), "分类ID不能为空");
+
+            SubjectInfoBO subjectInfoBO = SubjectInfoDTOConverter.INSTANCE.dto2bo(subjectInfoDTO);
+            PageResult<SubjectInfoBO> boPageResult = subjectInfoDomainService.getSubjectPage(subjectInfoBO);
+
+            return Result.ok(boPageResult);
+        } catch (Exception e) {
+            log.error("subjectCategoryController.getSubjectPage.error:{}", e.getMessage());
+            return Result.fail(null);
+        }
+    }
+
+    /**
+     * 查询题目信息
+     *
+     * @param subjectInfoDTO 题目信息dto
+     * @return {@link Result }<{@link SubjectInfoDTO }>
+     */
+    @GetMapping("/getSubjectInfo")
+    public Result<SubjectInfoDTO> getSubjectInfo(@RequestBody SubjectInfoDTO subjectInfoDTO) {
+        try {
+            if (log.isInfoEnabled()) {
+                log.info("SubjectCategoryController.getSubjectPage.dto:{}", subjectInfoDTO);
+            }
+
+            Preconditions.checkNotNull(subjectInfoDTO.getId(), "题目id不能为空");
+
+            SubjectInfoBO subjectInfoBO = SubjectInfoDTOConverter.INSTANCE.dto2bo(subjectInfoDTO);
+            SubjectInfoBO boResult = subjectInfoDomainService.querySubjectInfo(subjectInfoBO);
+            SubjectInfoDTO infoDTO = SubjectInfoDTOConverter.INSTANCE.bo2dto(boResult);
+            return Result.ok(infoDTO);
+        } catch (Exception e) {
+            log.error("subjectCategoryController.getSubjectPage.error:{}", e.getMessage());
+            return Result.fail("查询题目详情失败");
         }
     }
 

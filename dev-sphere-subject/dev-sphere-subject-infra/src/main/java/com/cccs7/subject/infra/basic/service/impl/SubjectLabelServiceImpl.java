@@ -83,8 +83,25 @@ public class SubjectLabelServiceImpl implements SubjectLabelService {
 
     }
 
+    /**
+     * 通过分类id查询标签
+     *
+     * @param subjectLabel 题目标签
+     * @return {@link List }<{@link SubjectLabel }>
+     */
     @Override
     public List<SubjectLabel> queryLabelByCategoryId(SubjectLabel subjectLabel) {
         return subjectLabelDao.queryLabelByCategoryId(subjectLabel);
+    }
+
+    /**
+     * 按id批量查询
+     *
+     * @param labelIdList 标签id列表
+     * @return {@link List }<{@link SubjectLabel }>
+     */
+    @Override
+    public List<SubjectLabel> batchQueryById(List<Long> labelIdList) {
+        return this.subjectLabelDao.batchQueryById(labelIdList);
     }
 }

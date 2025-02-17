@@ -2,14 +2,19 @@ package com.cccs7.subject.domain.service.impl;
 
 
 import com.alibaba.fastjson.JSON;
+import com.cccs7.subject.common.entity.PageResult;
+import com.cccs7.subject.common.enums.IsDeletedFlagEnum;
 import com.cccs7.subject.domain.convert.SubjectInfoConverter;
 import com.cccs7.subject.domain.entity.SubjectInfoBO;
+import com.cccs7.subject.domain.entity.SubjectOptionBO;
 import com.cccs7.subject.domain.handler.subject.SubjectTypeHandler;
 import com.cccs7.subject.domain.handler.subject.SubjectTypeHandlerFactory;
 import com.cccs7.subject.domain.service.SubjectInfoDomainService;
 import com.cccs7.subject.infra.basic.entity.SubjectInfo;
+import com.cccs7.subject.infra.basic.entity.SubjectLabel;
 import com.cccs7.subject.infra.basic.entity.SubjectMapping;
 import com.cccs7.subject.infra.basic.service.SubjectInfoService;
+import com.cccs7.subject.infra.basic.service.SubjectLabelService;
 import com.cccs7.subject.infra.basic.service.SubjectMappingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,6 +22,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * subjectInfo.bo.service
@@ -37,6 +43,10 @@ public class SubjectInfoDomainServiceImpl
 
     @Resource
     private SubjectMappingService subjectMappingService;
+
+    @Resource
+    private SubjectLabelService subjectLabelService;
+
 
     @Override
     public void add(SubjectInfoBO subjectInfoBO) {
@@ -63,7 +73,67 @@ public class SubjectInfoDomainServiceImpl
         });
 
         subjectMappingService.batchInsert(mappingList);
+    }
 
 
+    /**
+     * 分页查询题目列表
+     *
+     * @param subjectInfoBO 题目信息薄
+     * @return {@link PageResult }<{@link SubjectInfoBO }>
+     */
+    @Override
+    public PageResult<SubjectInfoBO> getSubjectPage(SubjectInfoBO subjectInfoBO) {
+        PageResult<SubjectInfoBO> pageResult = new PageResult<>();
+        pageResult.setPageNo(subjectInfoBO.getPageNo());
+        pageResult.setPageSize(subjectInfoBO.getPageSize());
+        int start = (subjectInfoBO.getPageNo() - 1) * subjectInfoBO.getPageSize();
+        SubjectInfo subjectInfo = SubjectInfoConverter.INSTANCE.bo2po(subjectInfoBO);
+        int count = subjectInfoService.countByCondition(subjectInfo,
+                subjectInfoBO.getLabelId(),
+                subjectInfoBO.getCategoryId());
+
+        if (count == 0) {
+            return pageResult;
+        }
+        List<SubjectInfo> subjectInfoList = subjectInfoService.queryPage(subjectInfo, subjectInfoBO.getLabelId(),
+                subjectInfoBO.getCategoryId(), start, subjectInfoBO.getPageSize());
+
+        List<SubjectInfoBO> subjectInfoBOList = SubjectInfoConverter.INSTANCE.pos2bos(subjectInfoList);
+        pageResult.setTotal(count);
+        pageResult.setRecords(subjectInfoBOList);
+        return pageResult;
+    }
+
+    /**
+     * 查询题目信息
+     *
+     * @param subjectInfoBO 题目信息薄
+     * @return {@link SubjectInfoBO }
+     */
+    @Override
+    public SubjectInfoBO querySubjectInfo(SubjectInfoBO subjectInfoBO) {
+
+        SubjectInfo subjectInfo = subjectInfoService.queryById(subjectInfoBO.getId());
+        SubjectTypeHandler handler = subjectTypeHandlerFactory.getHandler(subjectInfo.getSubjectType());
+        SubjectOptionBO optionBO = handler.query(subjectInfo.getId().intValue());
+        SubjectInfoBO bo = SubjectInfoConverter.INSTANCE.optionAndInfo2bo(optionBO, subjectInfo);
+        SubjectMapping subjectMapping = new SubjectMapping();
+        subjectMapping.setSubjectId(subjectInfo.getId());
+        subjectMapping.setIsDeleted(IsDeletedFlagEnum.UN_DELETED.getCode());
+        List<SubjectMapping> mappingList = subjectMappingService.queryLabelId(subjectMapping);
+        List<Long> labelIdList
+                = mappingList.stream()
+                .map(SubjectMapping::getLabelId)
+                .collect(Collectors.toList());
+        List<SubjectLabel> labelList = subjectLabelService.batchQueryById(labelIdList);
+        List<String> labelNameList
+                = labelList.stream()
+                .map(SubjectLabel::getLabelName)
+                .collect(Collectors.toList());
+        bo.setLabelName(labelNameList);
+        return bo;
     }
 }
+
+

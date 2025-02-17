@@ -15,6 +15,9 @@ public interface SubjectInfoDTOConverter {
 
     SubjectInfoBO dto2bo(SubjectInfoDTO subjectInfoDTO);
 
+    SubjectInfoDTO bo2dto(SubjectInfoBO subjectInfoBO);
+
+
     List<SubjectInfoBO> dtos2bos(List<SubjectCategoryDTO> dtoList);
 
     List<SubjectInfoDTO> bos2dtos(List<SubjectInfoBO> boList);

@@ -1,6 +1,9 @@
 package com.cccs7.subject.infra.basic.service;
 
 import com.cccs7.subject.infra.basic.entity.SubjectInfo;
+
+import java.util.List;
+
 /**
  * 题目信息表(SubjectInfo)表服务接口
  *
@@ -41,4 +44,17 @@ public interface SubjectInfoService {
      */
     boolean deleteById(Long id);
 
+    int countByCondition(SubjectInfo subjectInfo, Long labelId, Long categoryId);
+
+    /**
+     * 分页查询
+     *
+     * @param subjectInfo 题目信息
+     * @param labelId     标签id
+     * @param categoryId  分类id
+     * @param start       开始
+     * @param pageSize    页面大小
+     * @return {@link List }<{@link SubjectInfo }>
+     */
+    List<SubjectInfo> queryPage(SubjectInfo subjectInfo, Long labelId, Long categoryId, int start, Integer pageSize);
 }

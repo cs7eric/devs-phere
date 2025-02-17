@@ -74,4 +74,15 @@ public class SubjectMappingServiceImpl implements SubjectMappingService {
     public boolean deleteById(Long id) {
         return this.subjectMappingDao.deleteById(id) > 0;
     }
+
+    /**
+     * 查询标签id
+     *
+     * @param subjectMapping 题目映射
+     * @return {@link List }<{@link SubjectMapping }>
+     */
+    @Override
+    public List<SubjectMapping> queryLabelId(SubjectMapping subjectMapping) {
+        return this.subjectMappingDao.queryDistinctLabelId(subjectMapping);
+    }
 }

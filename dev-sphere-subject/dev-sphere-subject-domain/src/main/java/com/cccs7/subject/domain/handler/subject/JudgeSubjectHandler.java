@@ -2,6 +2,7 @@ package com.cccs7.subject.domain.handler.subject;
 
 import com.cccs7.subject.common.enums.SubjectInfoTypeEnum;
 import com.cccs7.subject.domain.entity.SubjectInfoBO;
+import com.cccs7.subject.domain.entity.SubjectOptionBO;
 import org.springframework.stereotype.Component;
 
 /**
@@ -21,5 +22,11 @@ public class JudgeSubjectHandler implements SubjectTypeHandler{
     @Override
     public void add(SubjectInfoBO subjecInfoBo) {
         //实际的插入处理
+    }
+
+
+    @Override
+    public SubjectOptionBO query(int subjectId) {
+        return null;
     }
 }

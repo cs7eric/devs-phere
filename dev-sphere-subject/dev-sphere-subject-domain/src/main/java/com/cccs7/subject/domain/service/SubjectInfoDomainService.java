@@ -1,5 +1,6 @@
 package com.cccs7.subject.domain.service;
 
+import com.cccs7.subject.common.entity.PageResult;
 import com.cccs7.subject.domain.entity.SubjectInfoBO;
 
 /**
@@ -17,4 +18,20 @@ public interface SubjectInfoDomainService {
      * @param subjectInfoBO 题目信息
      */
     void add(SubjectInfoBO subjectInfoBO);
+
+    /**
+     * 分页查询题目列表
+     *
+     * @param subjectInfoBO 题目信息薄
+     * @return {@link PageResult }<{@link SubjectInfoBO }>
+     */
+    PageResult<SubjectInfoBO> getSubjectPage(SubjectInfoBO subjectInfoBO);
+
+    /**
+     * 查询题目信息
+     *
+     * @param subjectInfoBO 题目信息薄
+     * @return {@link SubjectInfoBO }
+     */
+    SubjectInfoBO querySubjectInfo(SubjectInfoBO subjectInfoBO);
 }

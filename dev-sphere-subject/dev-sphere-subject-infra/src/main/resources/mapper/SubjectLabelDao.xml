@@ -16,8 +16,15 @@
 
     <!--查询单个-->
     <select id="queryById" resultMap="SubjectLabelMap">
-        select
-id, label_name, sort_num, category_id, created_by, created_time, update_by, update_time, is_deleted
+        select id,
+               label_name,
+               sort_num,
+               category_id,
+               created_by,
+               created_time,
+               update_by,
+               update_time,
+               is_deleted
         from subject_label
         where id = #{id}
     </select>
@@ -25,7 +32,7 @@ id, label_name, sort_num, category_id, created_by, created_time, update_by, upda
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="SubjectLabelMap">
         select
-id, label_name, sort_num, category_id, created_by, created_time, update_by, update_time, is_deleted
+        id, label_name, sort_num, category_id, created_by, created_time, update_by, update_time, is_deleted
         from subject_label
         <where>
             <if test="id != null">
@@ -97,48 +104,72 @@ id, label_name, sort_num, category_id, created_by, created_time, update_by, upda
     <!--根据 分类ID查询标签-->
     <select id="queryLabelByCategoryId" resultType="com.cccs7.subject.infra.basic.entity.SubjectLabel">
         SELECT id,
-            label_name   AS label_name,
-            sort_num     AS sort_num,
-            category_id  AS category_id,
-            created_by   AS created_by,
-            created_time AS created_time,
-            update_by    AS update_by,
-            update_time  AS update_time,
-            is_deleted   AS is_deleted
+               label_name   AS label_name,
+               sort_num     AS sort_num,
+               category_id  AS category_id,
+               created_by   AS created_by,
+               created_time AS created_time,
+               update_by    AS update_by,
+               update_time  AS update_time,
+               is_deleted   AS is_deleted
         FROM subject_label
         WHERE category_id = #{categoryId}
-        AND is_deleted = 0
+          AND is_deleted = 0
+    </select>
+
+    <!--  按ID批量查询  -->
+    <select id="batchQueryById" resultMap="SubjectLabelMap">
+        select id,
+        label_name,
+        sort_num,
+        category_id,
+        created_by,
+        created_time,
+        update_by,
+        is_deleted,
+        update_time
+        from subject_label
+        where id in
+        <foreach collection="list" open="(" close=")" item="id" separator=",">
+            #{id}
+        </foreach>
     </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into subject_label(label_name, sort_num, category_id, created_by, created_time, update_by, update_time, is_deleted)
-        values (#{labelName}, #{sortNum}, #{categoryId}, #{createdBy}, #{createdTime}, #{updateBy}, #{updateTime}, #{isDeleted})
+        insert into subject_label(label_name, sort_num, category_id, created_by, created_time, update_by, update_time,
+                                  is_deleted)
+        values (#{labelName}, #{sortNum}, #{categoryId}, #{createdBy}, #{createdTime}, #{updateBy}, #{updateTime},
+                #{isDeleted})
     </insert>
 
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into subject_label(label_name, sort_num, category_id, created_by, created_time, update_by, update_time, is_deleted)
+        insert into subject_label(label_name, sort_num, category_id, created_by, created_time, update_by, update_time,
+        is_deleted)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.labelName}, #{entity.sortNum}, #{entity.categoryId}, #{entity.createdBy}, #{entity.createdTime}, #{entity.updateBy}, #{entity.updateTime}, #{entity.isDeleted})
+            (#{entity.labelName}, #{entity.sortNum}, #{entity.categoryId}, #{entity.createdBy}, #{entity.createdTime},
+            #{entity.updateBy}, #{entity.updateTime}, #{entity.isDeleted})
         </foreach>
     </insert>
 
     <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into subject_label(label_name, sort_num, category_id, created_by, created_time, update_by, update_time, is_deleted)
+        insert into subject_label(label_name, sort_num, category_id, created_by, created_time, update_by, update_time,
+        is_deleted)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.labelName}, #{entity.sortNum}, #{entity.categoryId}, #{entity.createdBy}, #{entity.createdTime}, #{entity.updateBy}, #{entity.updateTime}, #{entity.isDeleted})
+            (#{entity.labelName}, #{entity.sortNum}, #{entity.categoryId}, #{entity.createdBy}, #{entity.createdTime},
+            #{entity.updateBy}, #{entity.updateTime}, #{entity.isDeleted})
         </foreach>
         on duplicate key update
-label_name = values(label_name),
-sort_num = values(sort_num),
-category_id = values(category_id),
-created_by = values(created_by),
-created_time = values(created_time),
-update_by = values(update_by),
-update_time = values(update_time),
-is_deleted = values(is_deleted)
+        label_name = values(label_name),
+        sort_num = values(sort_num),
+        category_id = values(category_id),
+        created_by = values(created_by),
+        created_time = values(created_time),
+        update_by = values(update_by),
+        update_time = values(update_time),
+        is_deleted = values(is_deleted)
     </insert>
 
     <!--通过主键修改数据-->
@@ -175,7 +206,9 @@ is_deleted = values(is_deleted)
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from subject_label where id = #{id}
+        delete
+        from subject_label
+        where id = #{id}
     </delete>
 
 </mapper>

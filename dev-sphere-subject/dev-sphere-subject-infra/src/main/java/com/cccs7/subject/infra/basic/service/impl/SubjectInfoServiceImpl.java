@@ -6,6 +6,7 @@ import com.cccs7.subject.infra.basic.service.SubjectInfoService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 题目信息表(SubjectInfo)表服务实现类
@@ -63,5 +64,34 @@ public class SubjectInfoServiceImpl implements SubjectInfoService {
     @Override
     public boolean deleteById(Long id) {
         return this.subjectInfoDao.deleteById(id) > 0;
+    }
+
+    /**
+     * 按条件查询
+     *
+     * @param subjectInfo 题目信息
+     * @param labelId     标签id
+     * @param categoryId  分类id
+     * @return int
+     */
+    @Override
+    public int countByCondition(SubjectInfo subjectInfo, Long labelId, Long categoryId) {
+        return this.subjectInfoDao.countByCondition(subjectInfo, labelId, categoryId);
+    }
+
+
+    /**
+     * 分页查询
+     *
+     * @param subjectInfo 题目信息
+     * @param labelId     标签id
+     * @param categoryId  分类id
+     * @param start       开始
+     * @param pageSize    分页大小
+     * @return {@link List }<{@link SubjectInfo }>
+     */
+    @Override
+    public List<SubjectInfo> queryPage(SubjectInfo subjectInfo, Long labelId, Long categoryId, int start, Integer pageSize) {
+        return this.subjectInfoDao.queryPage(subjectInfo,labelId,categoryId,start,pageSize);
     }
 }

@@ -76,5 +76,13 @@ public interface SubjectLabelDao {
      * @return {@link List }<{@link SubjectLabel }>
      */
     List<SubjectLabel> queryLabelByCategoryId(SubjectLabel subjectLabel);
+
+    /**
+     * 按id批量查询
+     *
+     * @param labelIdList 标签id列表
+     * @return {@link List }<{@link SubjectLabel }>
+     */
+    List<SubjectLabel> batchQueryById(List<Long> labelIdList);
 }
 

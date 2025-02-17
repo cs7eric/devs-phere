@@ -3,6 +3,7 @@ package com.cccs7.subject.domain.handler.subject;
 import com.cccs7.subject.common.enums.SubjectInfoTypeEnum;
 import com.cccs7.subject.domain.convert.RadioSubjectConverter;
 import com.cccs7.subject.domain.entity.SubjectInfoBO;
+import com.cccs7.subject.domain.entity.SubjectOptionBO;
 import com.cccs7.subject.infra.basic.entity.SubjectRadio;
 import com.cccs7.subject.infra.basic.service.SubjectRadioService;
 import org.springframework.stereotype.Component;
@@ -37,5 +38,17 @@ public class RadioSubjectHandler implements SubjectTypeHandler{
             subjectRadioList.add(radio);
         });
         subjectRadioService.batchInsert(subjectRadioList);
+    }
+
+    /**
+     * 实际的题目查询
+     *
+     * @param subjectId 题目id
+     * @return {@link SubjectOptionBO }
+     */
+    @Override
+    public SubjectOptionBO query(int subjectId) {
+
+        return null;
     }
 }

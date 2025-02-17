@@ -52,4 +52,11 @@ public interface SubjectMappingService {
      */
     boolean deleteById(Long id);
 
+    /**
+     * 按ID查询标签
+     *
+     * @param subjectMapping 题目映射
+     * @return {@link List }<{@link SubjectMapping }>
+     */
+    List<SubjectMapping> queryLabelId(SubjectMapping subjectMapping);
 }
