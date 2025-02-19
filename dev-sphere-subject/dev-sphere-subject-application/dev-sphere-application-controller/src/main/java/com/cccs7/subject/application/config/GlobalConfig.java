@@ -1,5 +1,6 @@
 package com.cccs7.subject.application.config;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +10,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 
 import java.util.List;
 
+/**
+ * MVC全局处理
+ *
+ * @author cccs7 - csq020611@gmail.com
+ * @date 2025/02/19
+ */
 @Configuration
 public class GlobalConfig extends WebMvcConfigurationSupport {
 
@@ -22,8 +29,8 @@ public class GlobalConfig extends WebMvcConfigurationSupport {
     private MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-        return converter;
+        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        return new MappingJackson2HttpMessageConverter(objectMapper);
 
     }
 
