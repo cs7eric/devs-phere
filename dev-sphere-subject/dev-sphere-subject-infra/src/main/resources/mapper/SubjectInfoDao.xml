@@ -122,8 +122,15 @@ id, subject_name, subject_difficult, settle_name, subject_type, subject_score, s
             and mapping.label_id = #{labelId}
             and info.is_deleted = 0
             and mapping.is_deleted = 0
-
+        <if test="subjectInfo.subjectDifficult != null">
+            and info.subject_difficult = #{subjectInfo.subjectDifficult}
+        </if>
+        <if test="subjectInfo.subjectType != null">
+            and info.subject_type = #{subjectType}
+        </if>
     </select>
+
+
     <select id="queryPage" resultMap="SubjectInfoMap">
         select a.id,
         a.subject_name,
