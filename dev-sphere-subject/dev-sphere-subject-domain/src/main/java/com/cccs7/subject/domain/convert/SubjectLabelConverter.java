@@ -7,11 +7,17 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
+/**
+ * 题目标签转换器
+ *
+ * @author Cs7er
+ * @date 2025/02/15
+ */
 @Mapper
 public interface SubjectLabelConverter {
 
 
-    SubjectLabelConverter INSTANCE =  Mappers.getMapper(SubjectLabelConverter.class);
+    SubjectLabelConverter INSTANCE = Mappers.getMapper(SubjectLabelConverter.class);
 
     SubjectLabel bo2po(SubjectLabelBO subjectLabelBO);
 
