@@ -5,30 +5,39 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.cccs7</groupId>
-    <artifactId>dev-sphere-subject</artifactId>
+    <artifactId>dev-sphere-oss</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
-    <description>devsphere 题目服务</description>
-    <modules>
-        <module>dev-sphere-subject-api</module>
-        <module>dev-sphere-subject-application</module>
-        <module>dev-sphere-subject-domain</module>
-        <module>dev-sphere-subject-common</module>
-        <module>dev-sphere-subject-infra</module>
-        <module>dev-sphere-subject-starter</module>
-    </modules>
+    <description>oss服务</description>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>2.4.2</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>2.4.2</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                    <groupId>org.springframework.boot</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-dependencies</artifactId>
+            <version>2.4.2</version> <!-- 替换为你需要的版本 -->
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+            <version>8.2.0</version>
+        </dependency>
+
+    </dependencies>
 
     <repositories>
         <repository>
@@ -44,7 +53,6 @@
             </snapshots>
         </repository>
     </repositories>
-
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
