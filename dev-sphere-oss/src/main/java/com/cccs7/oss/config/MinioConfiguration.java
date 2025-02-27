@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
  * @date 2025/02/22
  */
 @Configuration
-public class MinioConfig {
+public class MinioConfiguration {
 
     /**
      * minioUrl

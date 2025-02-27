@@ -1,24 +1,66 @@
 package com.cccs7.oss.controller;
 
+import com.cccs7.oss.entity.Result;
+import com.cccs7.oss.service.FileService;
 import com.cccs7.oss.util.MinioUtil;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.List;
 
-@RestController()
+@RestController
 public class FileController {
 
 
     @Resource
+    private FileService fileService;
+
+    @Resource
     private MinioUtil minioUtil;
 
+    /**
+     * 测试获得所有桶
+     *
+     * @return {@link String }
+     * @throws Exception 异常
+     */
     @RequestMapping("/testGetAllBucket")
     public String testGetAllBucket() throws Exception {
 
         List<String> allBucket = minioUtil.getAllBucket();
         return allBucket.get(0);
+    }
+
+
+    /**
+     * 获取url
+     *
+     * @param bucketName 桶名字
+     * @param objectName 对象名称
+     * @return {@link String }
+     */
+    @RequestMapping("/getUrl")
+    public String getUrl(String bucketName, String objectName){
+
+        return fileService.getUrl(bucketName, objectName);
+    }
+
+    /**
+     * 上传文件
+     *
+     * @param uploadFile 上传文件
+     * @param bucket     桶
+     * @param objectName 对象名称
+     * @return {@link Result }
+     */
+    @PostMapping("/upload")
+    public Result uploadFile(MultipartFile uploadFile, String bucket, String objectName){
+
+        String url = fileService.uploadFile(uploadFile, bucket, objectName);
+        return Result.ok(url);
     }
 
 }

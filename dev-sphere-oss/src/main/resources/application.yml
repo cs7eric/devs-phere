@@ -6,3 +6,6 @@ minio:
   accessKey: cccs7-minio
   secretKey: C020611.
 
+storage:
+  service:
+    type: minio
