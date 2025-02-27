@@ -4,6 +4,8 @@ import com.cccs7.oss.adapter.StorageAdapter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 /**
  * 文件存储服务
  *
@@ -42,5 +44,9 @@ public class FileService {
         storageAdapter.uploadFile(uploadFile, bucket, objectName);
         objectName = objectName + "/" + uploadFile.getOriginalFilename();
         return storageAdapter.getUrl(bucket, objectName);
+    }
+
+    public List<String> getAllBucket() {
+        return storageAdapter.getAllBucket();
     }
 }

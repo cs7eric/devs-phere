@@ -1,8 +1,10 @@
 package com.cccs7.oss.controller;
 
+import com.alibaba.nacos.api.config.annotation.NacosValue;
 import com.cccs7.oss.entity.Result;
 import com.cccs7.oss.service.FileService;
 import com.cccs7.oss.util.MinioUtil;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +13,12 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import java.util.List;
 
+/**
+ * 文件controller
+ *
+ * @author cccs7 - csq020611@gmail.com
+ * @date 2025/02/27
+ */
 @RestController
 public class FileController {
 
@@ -21,6 +29,10 @@ public class FileController {
     @Resource
     private MinioUtil minioUtil;
 
+
+    @NacosValue(value = "${storage.service.type}", autoRefreshed = true)
+    private String storageType;
+
     /**
      * 测试获得所有桶
      *
@@ -28,10 +40,10 @@ public class FileController {
      * @throws Exception 异常
      */
     @RequestMapping("/testGetAllBucket")
-    public String testGetAllBucket() throws Exception {
+    public Result testGetAllBucket() throws Exception {
 
-        List<String> allBucket = minioUtil.getAllBucket();
-        return allBucket.get(0);
+        List<String> allBucket = fileService.getAllBucket();
+        return Result.ok(allBucket);
     }
 
 
@@ -61,6 +73,11 @@ public class FileController {
 
         String url = fileService.uploadFile(uploadFile, bucket, objectName);
         return Result.ok(url);
+    }
+
+    @GetMapping("/testNacos")
+    public String testNacos(){
+        return storageType;
     }
 
 }

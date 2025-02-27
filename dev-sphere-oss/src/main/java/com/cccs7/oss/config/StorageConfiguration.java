@@ -4,6 +4,8 @@ import com.cccs7.oss.adapter.AliyunStorageAdapter;
 import com.cccs7.oss.adapter.MinioStorageAdapter;
 import com.cccs7.oss.adapter.StorageAdapter;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,6 +18,8 @@ import java.util.HashMap;
  * @date 2025/02/27
  */
 @Configuration
+@RefreshScope
+@EnableAutoConfiguration
 public class StorageConfiguration {
 
 
@@ -32,6 +36,7 @@ public class StorageConfiguration {
     }
 
     @Bean
+    @RefreshScope
     public StorageAdapter storageAdapter(){
 
         StorageAdapter adapter = adapterMap.get(storageType);
