@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: dev-sphere-auth-dev
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      config:
+        server-addr: http://124.220.92.21:8848
+        prefix: ${spring.application.name}
+        group: DEFAULT_GROUP
+        namespace:
+        file-extension: yaml
+      discovery:
+        enabled: true
+        server-addr: 124.220.92.21:8848
+
