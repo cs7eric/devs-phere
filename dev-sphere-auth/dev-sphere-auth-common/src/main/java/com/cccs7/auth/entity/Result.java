@@ -1,14 +1,8 @@
-package com.cccs7.subject.common.entity;
+package com.cccs7.auth.entity;
 
-import com.cccs7.subject.common.enums.ResultCodeEnum;
+import com.cccs7.auth.enums.ResultCodeEnum;
 import lombok.Data;
 
-/**
- * 结果
- *
- * @author cccs7 - csq020611@gmail.com
- * @date 2025/03/01
- */
 @Data
 public class Result<T> {
 

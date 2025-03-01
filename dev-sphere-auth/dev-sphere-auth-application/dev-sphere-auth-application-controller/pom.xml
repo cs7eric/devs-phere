@@ -37,6 +37,21 @@
             <artifactId>commons-pool2</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.cccs7</groupId>
+            <artifactId>dev-sphere-auth-infra</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.cccs7</groupId>
+            <artifactId>dev-sphere-auth-domain</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.cccs7</groupId>
+            <artifactId>dev-sphere-auth-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
 
     </dependencies>

@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>dev-sphere-application-job</artifactId>
+    <artifactId>dev-sphere-subject-application-job</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

@@ -26,7 +26,7 @@
 
         <dependency>
             <groupId>com.cccs7</groupId>
-            <artifactId>dev-sphere-application-controller</artifactId>
+            <artifactId>dev-sphere-subject-application-controller</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>

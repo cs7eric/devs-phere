@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>dev-sphere-application-controller</artifactId>
+    <artifactId>dev-sphere-subject-application-controller</artifactId>
 
     <dependencies>
         <dependency>
