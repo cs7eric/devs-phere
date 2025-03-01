@@ -2,6 +2,8 @@ package com.cccs7.auth.basic.service;
 
 import com.cccs7.auth.basic.entity.AuthUser;
 
+import java.util.List;
+
 /**
  * 用户信息表(AuthUser)表服务接口
  *
@@ -34,7 +36,7 @@ public interface AuthUserService {
      * @param authUser 实例对象
      * @return 实例对象
      */
-    AuthUser update(AuthUser authUser);
+    Integer update(AuthUser authUser);
 
     /**
      * 通过主键删除数据
@@ -44,4 +46,35 @@ public interface AuthUserService {
      */
     boolean deleteById(Long id);
 
+    /**
+     * 按用户名更新
+     *
+     * @param authUser 身份验证用户
+     * @return {@link Integer }
+     */
+    Integer updateByUserName(AuthUser authUser);
+
+    /**
+     * 删除用户 - 逻辑删除
+     *
+     * @param authUser 身份验证用户
+     * @return {@link Integer }
+     */
+    Integer delete(AuthUser authUser);
+
+    /**
+     * 用户启用/禁用
+     *
+     * @param authUser 身份验证用户
+     * @return {@link Integer }
+     */
+    Integer changeStatus(AuthUser authUser);
+
+    /**
+     * 按条件查询
+     *
+     * @param authUser 身份验证用户
+     * @return {@link List }<{@link AuthUser }>
+     */
+    List<AuthUser> queryByCondition(AuthUser authUser);
 }

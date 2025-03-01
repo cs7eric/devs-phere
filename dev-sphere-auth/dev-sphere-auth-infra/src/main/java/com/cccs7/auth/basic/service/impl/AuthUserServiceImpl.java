@@ -6,6 +6,7 @@ import com.cccs7.auth.basic.service.AuthUserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 用户信息表(AuthUser)表服务实现类
@@ -48,9 +49,8 @@ public class AuthUserServiceImpl implements AuthUserService {
      * @return 实例对象
      */
     @Override
-    public AuthUser update(AuthUser authUser) {
-        this.authUserDao.update(authUser);
-        return this.queryById(authUser.getId());
+    public Integer update(AuthUser authUser) {
+        return this.authUserDao.update(authUser);
     }
 
     /**
@@ -62,5 +62,50 @@ public class AuthUserServiceImpl implements AuthUserService {
     @Override
     public boolean deleteById(Long id) {
         return this.authUserDao.deleteById(id) > 0;
+    }
+
+    /**
+     * 按用户名更新
+     *
+     * @param authUser 身份验证用户
+     * @return {@link Integer }
+     */
+    @Override
+    public Integer updateByUserName(AuthUser authUser) {
+        return this.authUserDao.updateByUserName(authUser);
+    }
+
+
+    /**
+     * 删除
+     *
+     * @param authUser 身份验证用户
+     * @return {@link Integer }
+     */
+    @Override
+    public Integer delete(AuthUser authUser) {
+        return this.authUserDao.update(authUser);
+    }
+
+    /**
+     * 用户启用/禁用
+     *
+     * @param authUser 身份验证用户
+     * @return {@link Integer }
+     */
+    @Override
+    public Integer changeStatus(AuthUser authUser) {
+        return this.authUserDao.update(authUser);
+    }
+
+    /**
+     * 按条件查询
+     *
+     * @param authUser 身份验证用户
+     * @return {@link List }<{@link AuthUser }>
+     */
+    @Override
+    public List<AuthUser> queryByCondition(AuthUser authUser) {
+        return this.authUserDao.queryByCondition(authUser);
     }
 }

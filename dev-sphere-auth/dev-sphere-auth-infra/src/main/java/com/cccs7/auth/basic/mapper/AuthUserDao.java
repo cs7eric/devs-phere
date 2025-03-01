@@ -71,5 +71,20 @@ public interface AuthUserDao {
      */
     int deleteById(Long id);
 
+    /**
+     * 按用户名更新
+     *
+     * @param authUser 身份验证用户
+     * @return {@link Integer }
+     */
+    Integer updateByUserName(AuthUser authUser);
+
+    /**
+     * 按条件查询
+     *
+     * @param authUser 身份验证用户
+     * @return {@link List }<{@link AuthUser }>
+     */
+    List<AuthUser> queryByCondition(AuthUser authUser);
 }
 
