@@ -70,4 +70,10 @@ public class AuthRoleServiceImpl implements AuthRoleService {
     public int add(AuthRole authRole) {
         return this.authRoleDao.insert(authRole);
     }
+
+
+    @Override
+    public AuthRole queryByCondition(AuthRole authRole) {
+        return this.authRoleDao.queryByCondition(authRole);
+    }
 }

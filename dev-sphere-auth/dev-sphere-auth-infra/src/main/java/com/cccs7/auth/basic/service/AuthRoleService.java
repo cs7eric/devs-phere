@@ -51,4 +51,12 @@ public interface AuthRoleService {
      * @return int
      */
     int add(AuthRole authRole);
+
+    /**
+     * 按条件查询
+     *
+     * @param authRole 身份验证作用
+     * @return {@link AuthRole }
+     */
+    AuthRole queryByCondition(AuthRole authRole);
 }

@@ -1,17 +1,24 @@
 package com.cccs7.auth.service.impl;
 
+import com.cccs7.auth.basic.entity.AuthRole;
 import com.cccs7.auth.basic.entity.AuthUser;
+import com.cccs7.auth.basic.entity.AuthUserRole;
+import com.cccs7.auth.basic.redis.RedisUtil;
+import com.cccs7.auth.basic.service.AuthRoleService;
+import com.cccs7.auth.basic.service.AuthUserRoleService;
 import com.cccs7.auth.basic.service.AuthUserService;
+import com.cccs7.auth.constants.AuthConstant;
 import com.cccs7.auth.convert.AuthUserBOConverter;
 import com.cccs7.auth.entity.AuthUserBO;
 import com.cccs7.auth.enums.AuthUserStatusEnum;
 import com.cccs7.auth.enums.IsDeletedFlagEnum;
 import com.cccs7.auth.service.AuthUserDomainService;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -26,6 +33,15 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
     @Resource
     private AuthUserService authUserService;
 
+    @Resource
+    private AuthRoleService authRoleService;
+
+    @Resource
+    private AuthUserRoleService authUserRoleService;
+
+    @Resource
+    private RedisUtil redisUtil;
+
     /**
      * 注册
      *
@@ -33,6 +49,8 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
      * @return {@link Boolean }
      */
     @Override
+    @SneakyThrows
+    @Transactional(rollbackFor = Exception.class)
     public Boolean register(AuthUserBO authUserBO) {
 
         AuthUser authUser = AuthUserBOConverter.INSTANCE.bo2po(authUserBO);
@@ -40,6 +58,18 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
         authUser.setIsDeleted(IsDeletedFlagEnum.UN_DELETED.getCode());
         Integer count = authUserService.insert(authUser);
         //建立一个初步的角色的关联
+        AuthRole authRole = new AuthRole();
+        authRole.setRoleKey(AuthConstant.NORMAL_USER);
+        AuthRole roleResult = authRoleService.queryByCondition(authRole);
+        Long roleID = roleResult.getId();
+        Long userId = authUser.getId();
+        AuthUserRole authUserRole = new AuthUserRole();
+        authUserRole.setUserId(userId);
+        authUserRole.setRoleId(roleID);
+        authUserRole.setIsDeleted(IsDeletedFlagEnum.UN_DELETED.getCode());
+        authUserRoleService.insert(authUserRole);
+
+
         //把当前用户的角色和权限都存到 redis 中
 
         return count > 0;
