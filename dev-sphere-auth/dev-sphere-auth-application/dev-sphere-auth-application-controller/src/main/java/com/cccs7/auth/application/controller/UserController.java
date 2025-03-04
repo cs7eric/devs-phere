@@ -49,15 +49,12 @@ public class UserController {
 
             Boolean registeredUser = authUserDomainService.register(authUserBO);
 
-            if (!registeredUser) {
-                return Result.fail("注册失败，请重新尝试");
-            }
+            return Result.ok(registeredUser);
 
         } catch (Exception e) {
             log.error("UserController.register.dto.error:{}", e.getMessage());
             return Result.fail("注册失败，请重新尝试");
         }
-        return Result.ok(true);
     }
 
 

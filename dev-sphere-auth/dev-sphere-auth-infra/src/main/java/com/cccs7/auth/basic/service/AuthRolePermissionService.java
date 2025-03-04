@@ -3,6 +3,7 @@ package com.cccs7.auth.basic.service;
 import com.cccs7.auth.basic.entity.AuthRolePermission;
 
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * 角色权限关联表(AuthRolePermission)表服务接口
@@ -52,4 +53,12 @@ public interface AuthRolePermissionService {
      * @return int
      */
     int batchInsert(LinkedList<AuthRolePermission> authRolePermissionList);
+
+    /**
+     * 按条件查询
+     *
+     * @param authRolePermission 身份验证角色权限
+     * @return {@link List }<{@link AuthRolePermission }>
+     */
+    List<AuthRolePermission> queryByCondition(AuthRolePermission authRolePermission);
 }

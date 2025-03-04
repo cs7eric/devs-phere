@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * 角色权限关联表(AuthRolePermission)表服务实现类
@@ -76,5 +77,17 @@ public class AuthRolePermissionServiceImpl implements AuthRolePermissionService 
     @Override
     public int batchInsert(LinkedList<AuthRolePermission> authRolePermissionList) {
         return this.authRolePermissionDao.insertBatch(authRolePermissionList);
+    }
+
+
+    /**
+     * 按条件查询
+     *
+     * @param authRolePermission 身份验证角色权限
+     * @return {@link List }<{@link AuthRolePermission }>
+     */
+    @Override
+    public List<AuthRolePermission> queryByCondition(AuthRolePermission authRolePermission) {
+        return this.authRolePermissionDao.queryByCondition(authRolePermission);
     }
 }

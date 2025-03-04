@@ -1,25 +1,24 @@
 package com.cccs7.auth.service.impl;
 
-import com.cccs7.auth.basic.entity.AuthRole;
-import com.cccs7.auth.basic.entity.AuthUser;
-import com.cccs7.auth.basic.entity.AuthUserRole;
+import com.cccs7.auth.basic.entity.*;
 import com.cccs7.auth.basic.redis.RedisUtil;
-import com.cccs7.auth.basic.service.AuthRoleService;
-import com.cccs7.auth.basic.service.AuthUserRoleService;
-import com.cccs7.auth.basic.service.AuthUserService;
+import com.cccs7.auth.basic.service.*;
 import com.cccs7.auth.constants.AuthConstant;
 import com.cccs7.auth.convert.AuthUserBOConverter;
 import com.cccs7.auth.entity.AuthUserBO;
 import com.cccs7.auth.enums.AuthUserStatusEnum;
 import com.cccs7.auth.enums.IsDeletedFlagEnum;
 import com.cccs7.auth.service.AuthUserDomainService;
+import com.google.gson.Gson;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 鉴权用户域服务实现类
@@ -30,6 +29,10 @@ import java.util.List;
 @Service
 public class AuthUserDomainServiceImpl implements AuthUserDomainService {
 
+
+    private final String AUTH_PERMISSION_PREFIX = "auth.permission";
+    private final String AUTH_ROLE_PREFIX = "auth.role";
+
     @Resource
     private AuthUserService authUserService;
 
@@ -38,6 +41,12 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
 
     @Resource
     private AuthUserRoleService authUserRoleService;
+
+    @Resource
+    private AuthRolePermissionService authRolePermissionService;
+
+    @Resource
+    private AuthPermissionService authPermissionService;
 
     @Resource
     private RedisUtil redisUtil;
@@ -61,16 +70,34 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
         AuthRole authRole = new AuthRole();
         authRole.setRoleKey(AuthConstant.NORMAL_USER);
         AuthRole roleResult = authRoleService.queryByCondition(authRole);
-        Long roleID = roleResult.getId();
+        Long roleId = roleResult.getId();
         Long userId = authUser.getId();
         AuthUserRole authUserRole = new AuthUserRole();
         authUserRole.setUserId(userId);
-        authUserRole.setRoleId(roleID);
+        authUserRole.setRoleId(roleId);
         authUserRole.setIsDeleted(IsDeletedFlagEnum.UN_DELETED.getCode());
         authUserRoleService.insert(authUserRole);
 
+        String roleKey = redisUtil.buildKey(AUTH_ROLE_PREFIX, authUser.getUserName());
+        LinkedList<AuthRole> roleList = new LinkedList<>();
+        roleList.add(authRole);
+        redisUtil.set(roleKey, new Gson().toJson(roleList));
+
+        AuthRolePermission authRolePermission = new AuthRolePermission();
+        authRolePermission.setRoleId(roleId);
+        List<AuthRolePermission> authRolePermissionsList
+                = authRolePermissionService.queryByCondition(authRolePermission);
+        List<Long> permissionIdList
+                = authRolePermissionsList.stream().map(AuthRolePermission::getPermissionId)
+                .collect(Collectors.toList());
 
         //把当前用户的角色和权限都存到 redis 中
+
+        List<AuthPermission> authPermissionList
+                = authPermissionService.queryByPermissionIdList(permissionIdList);
+        String permissionKey = redisUtil.buildKey(AUTH_PERMISSION_PREFIX, authUser.getUserName());
+        redisUtil.set(permissionKey, new Gson().toJson(authPermissionList));
+
 
         return count > 0;
     }
