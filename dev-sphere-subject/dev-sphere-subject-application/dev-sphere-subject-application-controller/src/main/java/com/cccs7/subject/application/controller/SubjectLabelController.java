@@ -105,7 +105,7 @@ public class SubjectLabelController {
      * @param subjectLabelDTO 题目标签
      * @return {@link Result }<{@link List }<{@link Label }>>
      */
-    @GetMapping("/queryLabelByCategoryId")
+    @PostMapping("/queryLabelByCategoryId")
     public Result<List<Label>> queryLabelByCategoryId(@RequestBody SubjectLabelDTO subjectLabelDTO) {
 
         try {

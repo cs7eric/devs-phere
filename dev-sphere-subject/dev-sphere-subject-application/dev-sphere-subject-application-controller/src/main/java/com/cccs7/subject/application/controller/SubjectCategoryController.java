@@ -89,7 +89,7 @@ public class SubjectCategoryController {
      * @param subjectCategoryDTO 主题类别dto
      * @return {@link Result }<{@link List }<{@link SubjectCategoryDTO }>>
      */
-    @GetMapping("/queryPrimaryCategory")
+    @PostMapping("/queryPrimaryCategory")
     public Result<List<SubjectCategoryDTO>> queryPrimaryCategory(@RequestBody SubjectCategoryDTO subjectCategoryDTO) {
 
         try {
@@ -115,7 +115,7 @@ public class SubjectCategoryController {
      * @param subjectCategoryDTO 主题类别dto
      * @return {@link Result }<{@link List }<{@link SubjectCategoryDTO }>>
      */
-    @GetMapping("/queryCategoryByPrimary")
+    @PostMapping("/queryCategoryByPrimary")
     public Result<List<SubjectCategoryDTO>> queryCategoryByPrimary(@RequestBody SubjectCategoryDTO subjectCategoryDTO) {
 
         try {

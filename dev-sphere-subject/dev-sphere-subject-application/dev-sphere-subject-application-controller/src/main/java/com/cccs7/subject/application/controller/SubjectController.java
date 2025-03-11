@@ -75,7 +75,7 @@ public class SubjectController {
      * @param subjectInfoDTO 题目信息dto
      * @return {@link Result }<{@link PageResult }<{@link SubjectInfo }>>
      */
-    @GetMapping("/getSubjectPage")
+    @PostMapping("/getSubjectPage")
     public Result<PageResult<SubjectInfoDTO>> getSubjectPage(@RequestBody SubjectInfoDTO subjectInfoDTO) {
         try {
             if (log.isInfoEnabled()) {
@@ -101,7 +101,7 @@ public class SubjectController {
      * @param subjectInfoDTO 题目信息dto
      * @return {@link Result }<{@link SubjectInfoDTO }>
      */
-    @GetMapping("/getSubjectInfo")
+    @PostMapping("/getSubjectInfo")
     public Result<SubjectInfoDTO> getSubjectInfo(@RequestBody SubjectInfoDTO subjectInfoDTO) {
         try {
             if (log.isInfoEnabled()) {

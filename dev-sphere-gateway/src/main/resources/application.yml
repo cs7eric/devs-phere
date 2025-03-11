@@ -3,6 +3,21 @@ server:
 spring:
   cloud:
     gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowed-origins:
+              - "http://localhost:5173"
+              - "http://localhost"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: true
+            maxAge: 3600
       routes:
         - id: oss
           uri: lb://dev-sphere-oss-dev
@@ -20,8 +35,9 @@ spring:
           uri: lb://dev-sphere-subject-dev
           predicates:
             - Path=/subject/**
-          filters:
-            - StripPrefix=1
+#          filters:
+#            - StripPrefix=1
+
   # redis 配置
   redis:
     # Redis数据库索引（默认为0）
