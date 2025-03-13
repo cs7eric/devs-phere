@@ -25,6 +25,15 @@ spring:
             - Path=/oss/**
           filters:
             - StripPrefix=1
+            - name: Retry
+              args:
+                retries: 3
+                statuses: SERVICE_UNAVAILABLE
+                methods: POST,GET
+                backoff:
+                  firstBackoff: 100ms
+                  maxBackoff: 1s
+                  factor: 2
         - id: auth
           uri: lb://dev-sphere-auth-dev
           predicates:

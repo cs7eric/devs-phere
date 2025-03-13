@@ -6,12 +6,12 @@ spring:
   cloud:
     nacos:
       config:
-        server-addr: http://124.220.92.21:8848
+        server-addr: http://14.103.134.185:8848
         prefix: ${spring.application.name}
         group: DEFAULT_GROUP
         namespace:
         file-extension: yaml
       discovery:
         enabled: true
-        server-addr: 124.220.92.21:8848
+        server-addr: 14.103.134.185:8848
 
