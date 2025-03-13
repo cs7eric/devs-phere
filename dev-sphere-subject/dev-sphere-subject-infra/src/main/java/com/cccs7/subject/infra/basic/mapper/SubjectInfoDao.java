@@ -96,5 +96,29 @@ public interface SubjectInfoDao {
                                 @Param("categoryId") Long categoryId,
                                 @Param("start") int start,
                                 @Param("pageSize") Integer pageSize);
+
+    /**
+     * 按场景类型计数
+     *
+     * @param subjectInfo 题目信息
+     * @param subjectType 题目类型
+     * @return int
+     */
+    int countBySceneType(@Param("subjectInfo") SubjectInfo subjectInfo,
+                         @Param("subjectType") Long subjectType);
+
+    /**
+     * 按页查询条件
+     *
+     * @param subjectInfo 题目信息
+     * @param subjectType 题目类型
+     * @param start       开始
+     * @param pageSize    页面大小
+     * @return {@link List }<{@link SubjectInfo }>
+     */
+    List<SubjectInfo> queryConditionByPage(@Param("subjectInfo") SubjectInfo subjectInfo,
+                                           @Param("subjectType") Integer subjectType,
+                                           @Param("start") int start,
+                                           @Param("pageSize") Integer pageSize);
 }
 

@@ -94,4 +94,23 @@ public class SubjectInfoServiceImpl implements SubjectInfoService {
     public List<SubjectInfo> queryPage(SubjectInfo subjectInfo, Long labelId, Long categoryId, int start, Integer pageSize) {
         return this.subjectInfoDao.queryPage(subjectInfo,labelId,categoryId,start,pageSize);
     }
+
+
+    /**
+     * 按场景类型计数
+     *
+     * @param subjectInfo 题目信息
+     * @param subjectType 题目类型
+     * @return int
+     */
+    @Override
+    public int countBySceneType(SubjectInfo subjectInfo, Long subjectType) {
+        return this.subjectInfoDao.countBySceneType(subjectInfo, subjectType);
+    }
+
+
+    @Override
+    public List<SubjectInfo> queryConditionByPage(SubjectInfo subjectInfo,Integer subjectType , int start, Integer pageSize) {
+        return this.subjectInfoDao.queryConditionByPage(subjectInfo, subjectType, start, pageSize);
+    }
 }

@@ -57,4 +57,25 @@ public interface SubjectInfoService {
      * @return {@link List }<{@link SubjectInfo }>
      */
     List<SubjectInfo> queryPage(SubjectInfo subjectInfo, Long labelId, Long categoryId, int start, Integer pageSize);
+
+    /**
+     * 按场景题类型计数
+     *
+     * @param subjectInfo 题目信息
+     * @param subjectType 题目类型
+     * @return int
+     */
+    int countBySceneType(SubjectInfo subjectInfo, Long subjectType);
+
+
+    /**
+     * 按页查询条件
+     *
+     * @param subjectInfo 题目信息
+     * @param subjectType 题目类型
+     * @param start       开始
+     * @param pageSize    页面大小
+     * @return {@link List }<{@link SubjectInfo }>
+     */
+    List<SubjectInfo> queryConditionByPage(SubjectInfo subjectInfo, Integer subjectType, int start, Integer pageSize);
 }

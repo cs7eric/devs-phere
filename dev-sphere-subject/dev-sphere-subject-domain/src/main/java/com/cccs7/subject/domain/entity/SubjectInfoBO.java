@@ -69,6 +69,9 @@ public class SubjectInfoBO extends PageInfo implements Serializable {
      */
     private List<String> labelName;
 
+
+    private List<SubjectSceneBO> suggestList;
+
     private Long categoryId;
 
     private Long labelId;

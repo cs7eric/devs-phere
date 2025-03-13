@@ -34,4 +34,12 @@ public interface SubjectInfoDomainService {
      * @return {@link SubjectInfoBO }
      */
     SubjectInfoBO querySubjectInfo(SubjectInfoBO subjectInfoBO);
+
+    /**
+     * 查询场景题目页面
+     *
+     * @param subjectInfoBO 题目信息薄
+     * @return {@link PageResult }<{@link SubjectInfoBO }>
+     */
+    PageResult<SubjectInfoBO> getSceneSubjectPage(SubjectInfoBO subjectInfoBO);
 }

@@ -120,4 +120,27 @@ public class SubjectController {
         }
     }
 
+    /**
+     * 查询场景题目列表
+     *
+     * @param subjectInfoDTO 题目信息dto
+     * @return {@link Result }<{@link PageResult }<{@link SubjectInfo }>>
+     */
+    @PostMapping("/getSceneSubjectPage")
+    public Result<PageResult<SubjectInfoDTO>> getSceneSubjectPage(@RequestBody SubjectInfoDTO subjectInfoDTO) {
+        try {
+            if (log.isInfoEnabled()) {
+                log.info("SubjectCategoryController.getSceneSubjectPage.dto:{}", subjectInfoDTO);
+            }
+
+            SubjectInfoBO subjectInfoBO = SubjectInfoDTOConverter.INSTANCE.dto2bo(subjectInfoDTO);
+            PageResult<SubjectInfoBO> boPageResult = subjectInfoDomainService.getSceneSubjectPage(subjectInfoBO);
+
+            return Result.ok(boPageResult);
+        } catch (Exception e) {
+            log.error("subjectCategoryController.getSceneSubjectPage.error:{}", e.getMessage());
+            return Result.fail(null);
+        }
+    }
+
 }

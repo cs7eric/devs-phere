@@ -29,12 +29,12 @@ public class RadioSubjectHandler implements SubjectTypeHandler{
     }
 
     @Override
-    public void add(SubjectInfoBO subjecInfoBo) {
+    public void add(SubjectInfoBO subjectInfoBo) {
         //实际的插入处理
         LinkedList<SubjectRadio> subjectRadioList = new LinkedList<>();
-        subjecInfoBo.getOptionList().forEach(option -> {
+        subjectInfoBo.getOptionList().forEach(option -> {
             SubjectRadio radio = RadioSubjectConverter.INSTANCE.bo2po(option);
-            radio.setSubjectId(subjecInfoBo.getId());
+            radio.setSubjectId(subjectInfoBo.getId());
             subjectRadioList.add(radio);
         });
         subjectRadioService.batchInsert(subjectRadioList);

@@ -16,6 +16,7 @@ public enum SubjectInfoTypeEnum {
     MULTIPLE(2,"多选"),
     JUDGE(3,"判断"),
     BRIEF(4,"简答"),
+    SCENE(5,"场景题"),
     ;
 
     public int code;

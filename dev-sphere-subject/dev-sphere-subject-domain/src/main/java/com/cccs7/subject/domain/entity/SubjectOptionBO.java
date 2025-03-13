@@ -23,4 +23,10 @@ public class SubjectOptionBO {
      */
     private List<SubjectAnswerBO> optionList;
 
+    /**
+     * 提示列表
+     */
+    private List<SubjectSceneBO> suggestList;
+
+
 }

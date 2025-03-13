@@ -4,6 +4,7 @@ package com.cccs7.subject.domain.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.cccs7.subject.common.entity.PageResult;
 import com.cccs7.subject.common.enums.IsDeletedFlagEnum;
+import com.cccs7.subject.common.enums.SubjectInfoTypeEnum;
 import com.cccs7.subject.domain.convert.SubjectInfoConverter;
 import com.cccs7.subject.domain.entity.SubjectInfoBO;
 import com.cccs7.subject.domain.entity.SubjectOptionBO;
@@ -51,12 +52,13 @@ public class SubjectInfoDomainServiceImpl
     @Override
     public void add(SubjectInfoBO subjectInfoBO) {
         if (log.isInfoEnabled()) {
-            log.info("SujectInfoDomainService.add.bo:{}", JSON.toJSONString(subjectInfoBO));
+            log.info("SubjectInfoDomainService.add.bo:{}", JSON.toJSONString(subjectInfoBO));
         }
         SubjectInfo subjectInfo = SubjectInfoConverter.INSTANCE.bo2po(subjectInfoBO);
         subjectInfoService.insert(subjectInfo);
 
         SubjectTypeHandler handler = subjectTypeHandlerFactory.getHandler(subjectInfo.getSubjectType());
+        subjectInfoBO.setId(subjectInfo.getId());
         handler.add(subjectInfoBO);
         List<Integer> categoryIds = subjectInfoBO.getCategoryIds();
         List<Integer> labelIds = subjectInfoBO.getLabelIds();
@@ -68,6 +70,7 @@ public class SubjectInfoDomainServiceImpl
                 subjectMapping.setSubjectId(subjectInfo.getId());
                 subjectMapping.setLabelId(Long.valueOf(labelId));
                 subjectMapping.setCategoryId(Long.valueOf(categoryId));
+                subjectMapping.setIsDeleted(IsDeletedFlagEnum.UN_DELETED.getCode());
                 mappingList.add(subjectMapping);
             });
         });
@@ -133,6 +136,27 @@ public class SubjectInfoDomainServiceImpl
                 .collect(Collectors.toList());
         bo.setLabelName(labelNameList);
         return bo;
+    }
+
+    @Override
+    public PageResult<SubjectInfoBO> getSceneSubjectPage(SubjectInfoBO subjectInfoBO) {
+
+        PageResult<SubjectInfoBO> pageResult = new PageResult<>();
+        pageResult.setPageNo(subjectInfoBO.getPageNo());
+        pageResult.setPageSize(subjectInfoBO.getPageSize());
+        int start = (subjectInfoBO.getPageNo() - 1) * subjectInfoBO.getPageSize();
+        SubjectInfo subjectInfo = SubjectInfoConverter.INSTANCE.bo2po(subjectInfoBO);
+        int count = subjectInfoService.countBySceneType(subjectInfo, (long) SubjectInfoTypeEnum.SCENE.code);
+
+        if (count == 0) {
+            return pageResult;
+        }
+        List<SubjectInfo> subjectInfoList = subjectInfoService.queryConditionByPage(subjectInfo, SubjectInfoTypeEnum.SCENE.code, start, subjectInfoBO.getPageSize());
+
+        List<SubjectInfoBO> subjectInfoBOList = SubjectInfoConverter.INSTANCE.pos2bos(subjectInfoList);
+        pageResult.setTotal(count);
+        pageResult.setRecords(subjectInfoBOList);
+        return pageResult;
     }
 }
 

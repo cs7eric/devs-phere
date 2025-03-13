@@ -1,6 +1,7 @@
 package com.cccs7.subject.application.dto;
 
 import com.cccs7.subject.common.entity.PageInfo;
+import com.cccs7.subject.domain.entity.SubjectSceneBO;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -74,6 +75,8 @@ public class SubjectInfoDTO extends PageInfo implements Serializable {
     private Long labelId;
 
     private String keyWord;
+
+    private List<SubjectSceneBO> suggestList;
 
     /**
      * 创建人昵称
