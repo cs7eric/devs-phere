@@ -1,5 +1,9 @@
 package com.cccs7.auth.service.impl;
 
+import cn.dev33.satoken.secure.SaSecureUtil;
+import cn.dev33.satoken.stp.SaTokenInfo;
+import cn.dev33.satoken.stp.StpUtil;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.cccs7.auth.basic.entity.*;
 import com.cccs7.auth.basic.redis.RedisUtil;
 import com.cccs7.auth.basic.service.*;
@@ -28,10 +32,10 @@ import java.util.stream.Collectors;
  */
 @Service
 public class AuthUserDomainServiceImpl implements AuthUserDomainService {
-
-
+    private String salt = "cccs7";
     private final String AUTH_PERMISSION_PREFIX = "auth.permission";
     private final String AUTH_ROLE_PREFIX = "auth.role";
+    private final String LOGIN_PREFIX = "loginCode";
 
     @Resource
     private AuthUserService authUserService;
@@ -62,7 +66,22 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
     @Transactional(rollbackFor = Exception.class)
     public Boolean register(AuthUserBO authUserBO) {
 
+        AuthUser existAuthUser = new AuthUser();
+        existAuthUser.setUserName(authUserBO.getUserName());
+        List<AuthUser> existUser = authUserService.queryByCondition(existAuthUser);
+        if (existUser.size() > 0) {
+            return true;
+        }
         AuthUser authUser = AuthUserBOConverter.INSTANCE.bo2po(authUserBO);
+        if (org.apache.commons.lang3.StringUtils.isNotBlank(authUser.getPassword())) {
+            authUser.setPassword(SaSecureUtil.md5BySalt(authUser.getPassword(), salt));
+        }
+        if (org.apache.commons.lang3.StringUtils.isBlank(authUser.getAvatar())) {
+            authUser.setAvatar("https://cs7eric-image.oss-cn-hangzhou.aliyuncs.com/images/image-20250314220820953.png");
+        }
+        if (org.apache.commons.lang3.StringUtils.isBlank(authUser.getNickName())) {
+            authUser.setNickName("用户" + authUser.getUserName());
+        }
         authUser.setStatus(AuthUserStatusEnum.OPEN.getCode());
         authUser.setIsDeleted(IsDeletedFlagEnum.UN_DELETED.getCode());
         Integer count = authUserService.insert(authUser);
@@ -140,5 +159,18 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
         if (CollectionUtils.isEmpty(authUserList)) return new AuthUserBO();
         AuthUser user = authUserList.get(0);
         return AuthUserBOConverter.INSTANCE.po2bo(user);
+    }
+
+
+    @Override
+    public SaTokenInfo doLogin(String validCode) {
+        String loginKey = redisUtil.buildKey(LOGIN_PREFIX, validCode);
+        String openId = redisUtil.get(loginKey);
+        if (StringUtils.isBlank(openId)) return null;
+        AuthUserBO authUserBO = new AuthUserBO();
+        authUserBO.setUserName(openId);
+        this.register(authUserBO);
+        StpUtil.login(openId);
+        return StpUtil.getTokenInfo();
     }
 }

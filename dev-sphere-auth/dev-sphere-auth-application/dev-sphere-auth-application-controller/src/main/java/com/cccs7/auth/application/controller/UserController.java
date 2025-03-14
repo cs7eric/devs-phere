@@ -1,5 +1,6 @@
 package com.cccs7.auth.application.controller;
 
+import cn.dev33.satoken.stp.SaTokenInfo;
 import com.alibaba.fastjson.JSON;
 import com.cccs7.auth.application.convert.AuthUserDTOConverter;
 import com.cccs7.auth.application.dto.AuthUserDTO;
@@ -21,7 +22,7 @@ import javax.annotation.Resource;
  */
 @Slf4j
 @RestController
-@RequestMapping("/user/")
+@RequestMapping("/auth/user/")
 public class UserController {
 
     @Resource
@@ -158,11 +159,29 @@ public class UserController {
     }
 
 
+    /**
+     * 登录
+     *
+     * @param validCode 有效代码
+     * @return {@link Result }<{@link SaTokenInfo }>
+     */
+    @GetMapping("doLogin")
+    public Result<SaTokenInfo> doLogin(@RequestParam("validCode") String validCode) {
+
+        try {
+            Preconditions.checkArgument(!StringUtils.isBlank(validCode));
+            return Result.ok(authUserDomainService.doLogin(validCode));
+        } catch (Exception e) {
+            log.error("UserController.doLogin.dto.error:{}", e.getMessage(), e);
+            return Result.fail("登录失败，请重新尝试");
+        }
+
+    }
+
 
     public void checkUserInfo(AuthUserDTO authUserDTO){
 
         Preconditions.checkArgument(!StringUtils.isBlank(authUserDTO.getUserName()), "用户名不能为空");
     }
-
 
 }

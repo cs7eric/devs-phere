@@ -1,5 +1,6 @@
 package com.cccs7.auth.service;
 
+import cn.dev33.satoken.stp.SaTokenInfo;
 import com.cccs7.auth.entity.AuthUserBO;
 import org.springframework.stereotype.Service;
 
@@ -52,4 +53,12 @@ public interface AuthUserDomainService {
      * @return {@link AuthUserBO }
      */
     AuthUserBO getUserInfo(AuthUserBO authUserBO);
+
+    /**
+     * 登录
+     *
+     * @param validCode 有效代码
+     * @return {@link SaTokenInfo }
+     */
+    SaTokenInfo doLogin(String validCode);
 }

@@ -23,29 +23,15 @@ spring:
           uri: lb://dev-sphere-oss-dev
           predicates:
             - Path=/oss/**
-          filters:
-            - StripPrefix=1
-            - name: Retry
-              args:
-                retries: 3
-                statuses: SERVICE_UNAVAILABLE
-                methods: POST,GET
-                backoff:
-                  firstBackoff: 100ms
-                  maxBackoff: 1s
-                  factor: 2
         - id: auth
           uri: lb://dev-sphere-auth-dev
           predicates:
             - Path=/auth/**
-          filters:
-            - StripPrefix=1
         - id: subject
           uri: lb://dev-sphere-subject-dev
           predicates:
             - Path=/subject/**
-#          filters:
-#            - StripPrefix=1
+
 
   # redis 配置
   redis:
