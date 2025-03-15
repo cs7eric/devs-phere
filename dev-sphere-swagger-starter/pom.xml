@@ -15,7 +15,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <version>2.4.2</version>
-            <scope>provided</scope> <!-- 微服务中已有该依赖 -->
+            <scope>compile</scope> <!-- 微服务中已有该依赖 -->
         </dependency>
         <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
         <dependency>
