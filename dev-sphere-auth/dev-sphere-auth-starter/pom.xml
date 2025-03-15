@@ -104,7 +104,7 @@
                 </executions>
                 <configuration>
                     <includeSystemScope>true</includeSystemScope>
-                    <mainClass>com.cccs7.subject.AuthApplication</mainClass>
+                    <mainClass>com.cccs7.auth.AuthApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>

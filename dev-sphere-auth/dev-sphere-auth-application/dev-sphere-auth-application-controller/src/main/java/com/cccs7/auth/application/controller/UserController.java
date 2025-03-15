@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Objects;
 
 /**
  * 用户controller
@@ -170,7 +171,9 @@ public class UserController {
 
         try {
             Preconditions.checkArgument(!StringUtils.isBlank(validCode));
-            return Result.ok(authUserDomainService.doLogin(validCode));
+            SaTokenInfo userInfo = authUserDomainService.doLogin(validCode);
+            if (Objects.isNull(userInfo)) return Result.fail("验证码错误");
+            return Result.ok(userInfo);
         } catch (Exception e) {
             log.error("UserController.doLogin.dto.error:{}", e.getMessage(), e);
             return Result.fail("登录失败，请重新尝试");

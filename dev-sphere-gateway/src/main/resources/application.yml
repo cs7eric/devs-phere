@@ -1,8 +1,15 @@
 server:
   port: 5000
+  tomcat:
+    threads:
+      max: 200
 spring:
   cloud:
     gateway:
+      httpclient:
+        pool:
+          max-connections: 1000
+          max-idle-time: 10000
       globalcors:
         cors-configurations:
           '[/**]':
@@ -23,14 +30,29 @@ spring:
           uri: lb://dev-sphere-oss-dev
           predicates:
             - Path=/oss/**
+          filters:
+            - name: Retry
+              args:
+                retries: 3
+                statuses: BAD_GATEWAY,  REQUEST_TIMEOUT
         - id: auth
           uri: lb://dev-sphere-auth-dev
           predicates:
             - Path=/auth/**
+          filters:
+            - name: Retry
+              args:
+                retries: 3
+                statuses: BAD_GATEWAY,  REQUEST_TIMEOUT
         - id: subject
           uri: lb://dev-sphere-subject-dev
           predicates:
             - Path=/subject/**
+          filters:
+            - name: Retry
+              args:
+                retries: 3
+                statuses: BAD_GATEWAY,  REQUEST_TIMEOUT
 
 
   # redis 配置
