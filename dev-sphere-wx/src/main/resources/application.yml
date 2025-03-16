@@ -17,7 +17,7 @@ spring:
     password: C020611.
     # 连接超时时间
     timeout: 5s
-    lettuce:
+    jedis:
       pool:
         # 连接池最大连接数
         max-active: 200
