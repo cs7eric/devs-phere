@@ -7,9 +7,11 @@ spring:
   cloud:
     gateway:
       httpclient:
+        response-timeout: 10s
         pool:
           max-connections: 1000
-          max-idle-time: 10000
+          max-idle-time: 5000
+          acquire-timeout: 5000
       globalcors:
         cors-configurations:
           '[/**]':
@@ -34,7 +36,7 @@ spring:
             - name: Retry
               args:
                 retries: 3
-                statuses: BAD_GATEWAY,  REQUEST_TIMEOUT
+                statuses: BAD_GATEWAY,  REQUEST_TIMEOUT, SERVICE_UNAVAILABLE, INTERNAL_SERVER_ERROR
         - id: auth
           uri: lb://dev-sphere-auth-dev
           predicates:
@@ -43,7 +45,7 @@ spring:
             - name: Retry
               args:
                 retries: 3
-                statuses: BAD_GATEWAY,  REQUEST_TIMEOUT
+                statuses: BAD_GATEWAY,  REQUEST_TIMEOUT, SERVICE_UNAVAILABLE, INTERNAL_SERVER_ERROR
         - id: subject
           uri: lb://dev-sphere-subject-dev
           predicates:
@@ -52,15 +54,16 @@ spring:
             - name: Retry
               args:
                 retries: 3
-                statuses: BAD_GATEWAY,  REQUEST_TIMEOUT
+                statuses: BAD_GATEWAY,  REQUEST_TIMEOUT, SERVICE_UNAVAILABLE, INTERNAL_SERVER_ERROR
+      enabled: true
 
 
   # redis 配置
   redis:
     # Redis数据库索引（默认为0）
-    database: 1
+    database: 0
     # Redis服务器地址
-    host: 1.92.68.100
+    host: 14.103.134.185
     # Redis服务器连接端口
     port: 6379
     # Redis服务器连接密码（默认为空）
@@ -70,13 +73,13 @@ spring:
     lettuce:
       pool:
         # 连接池最大连接数
-        max-active: 200
+        max-active: 500
         # 连接池最大阻塞等待时间（使用负值表示没有限制）
-        max-wait: -1ms
+        max-wait: 1000ms
         # 连接池中的最大空闲连接
-        max-idle: 10
+        max-idle: 50
         # 连接池中的最小空闲连接
-        min-idle: 0
+        min-idle: 20
 sa-token:
   token-prefix: cccs7
   # token 名称（同时也是 cookie 名称）

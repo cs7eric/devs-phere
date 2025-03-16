@@ -41,13 +41,13 @@ public class SaTokenConfigure {
                             .free(r -> System.out.println("--------OPTIONS预检请求，不做处理"))
                             .back();
 
-                });
-//                .setAuth(obj -> {
-//                    System.out.println("-------- 前端访问path：" + SaHolder.getRequest().getRequestPath());
-//
-//                    // 放行登录接口
-//                    SaRouter.match("/auth/user/doLogin").free(r -> {
-//                    });
+                })
+                .setAuth(obj -> {
+                    System.out.println("-------- 前端访问path：" + SaHolder.getRequest().getRequestPath());
+
+                    // 放行登录接口
+                    SaRouter.match("/auth/user/doLogin").free(r -> {
+                    });
 //
 //                    // 其他接口鉴权
 //                    SaRouter.match("/auth/**", r -> StpUtil.checkRole("admin"));
@@ -55,5 +55,7 @@ public class SaTokenConfigure {
 //                    SaRouter.match("/subject/subject/add", r -> StpUtil.checkPermission("subject:add"));
 //                    SaRouter.match("/subject/**", r -> StpUtil.checkLogin());
 //                });
+                });
     }
+
 }

@@ -138,7 +138,7 @@ public class UserController {
      * @param authUserDTO 授权用户dto
      * @return {@link Result }
      */
-    @GetMapping("getUserInfo")
+    @PostMapping("getUserInfo")
     public Result<AuthUserDTO> getUserInfo(@RequestBody AuthUserDTO authUserDTO) {
 
         try {
@@ -146,7 +146,7 @@ public class UserController {
                 log.info("UserController.getUserInfo.dto:{}", JSON.toJSONString(authUserDTO));
             }
 
-            Preconditions.checkArgument(!StringUtils.isBlank(authUserDTO.getId().toString()), "ID不能为空");
+            Preconditions.checkArgument(!StringUtils.isBlank(authUserDTO.getUserName()), "ID不能为空");
 
             AuthUserBO authUserBO = AuthUserDTOConverter.INSTANCE.dto2bo(authUserDTO);
 

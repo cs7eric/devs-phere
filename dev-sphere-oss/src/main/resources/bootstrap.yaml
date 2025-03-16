@@ -13,5 +13,6 @@ spring:
         file-extension: yaml
       discovery:
         enabled: true
+#        ip: 14.103.134.185  # 强制指定为服务器的公网 IP
         server-addr: 14.103.134.185:8848
 
