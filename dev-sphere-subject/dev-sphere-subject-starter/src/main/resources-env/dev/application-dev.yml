@@ -1,0 +1,36 @@
+server:
+  port: 8089
+  tomcat:
+    max-connections: 1024
+    connection-timeout: 10000
+
+spring:
+  datasource:
+    username: cccs7
+    password: C020611.
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://1.92.68.100/dev-sphere?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 20
+      min-idle: 20
+      max-active: 100
+      max-wait: 60000
+#      connectionProperties: config.decrypt=true;config.decrypt.key=${publicKey};
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        login-username: cccs7
+        login-password: C020611.
+      filter:
+        stat:
+          enabled: true
+          slow-sql-millis: 2000
+          log-slow-sql: true
+        wall:
+          enabled: true
+        config:
+          enabled: true
+
+logging:
+  config: classpath:log4j2-spring.xml

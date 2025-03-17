@@ -146,7 +146,7 @@ public class UserController {
                 log.info("UserController.getUserInfo.dto:{}", JSON.toJSONString(authUserDTO));
             }
 
-            Preconditions.checkArgument(!StringUtils.isBlank(authUserDTO.getUserName()), "ID不能为空");
+            Preconditions.checkArgument(!StringUtils.isBlank(authUserDTO.getUserName()), "UserName不能为空");
 
             AuthUserBO authUserBO = AuthUserDTOConverter.INSTANCE.dto2bo(authUserDTO);
 
