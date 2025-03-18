@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: dev-sphere-gateway
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      config:
+        server-addr: http://14.103.134.185:8848
+        prefix: ${spring.application.name}
+        group: DEFAULT_GROUP
+        namespace:
+        file-extension: yaml
+      discovery:
+        ip: 14.103.134.185  # 强制指定为服务器的公网 IP
+        enabled: true
+        server-addr: 14.103.134.185:8848
+
