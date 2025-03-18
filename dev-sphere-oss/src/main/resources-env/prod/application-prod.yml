@@ -1,0 +1,7 @@
+server:
+  port: 4000
+
+minio:
+  url: http://124.220.92.21:9000
+  accessKey: cccs7-minio
+  secretKey: C020611.

@@ -1,8 +1,8 @@
 spring:
   application:
-    name: dev-sphere-gateway
+    name: dev-sphere-gateway-dev
   profiles:
-    active: dev
+    active: prod
   cloud:
     nacos:
       config:
@@ -15,4 +15,7 @@ spring:
         ip: 14.103.134.185  # 强制指定为服务器的公网 IP
         enabled: true
         server-addr: 14.103.134.185:8848
+    inetutils:
+      preferred-networks: 14.103.134.185
+      ignored-interfaces: eth0
 
