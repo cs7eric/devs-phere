@@ -1,3 +1,0 @@
-spring:
-  profiles:
-    active: @profile.active@  # Maven 占位符，编译时替换（可选）
