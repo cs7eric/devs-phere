@@ -38,4 +38,13 @@ public interface SubjectCategoryDomainService {
      * @return {@link Boolean }
      */
     Boolean delete(SubjectCategoryBO subjectCategoryBO);
+
+
+    /**
+     * 查询分类和标签
+     *
+     * @param subjectCategoryBO 题目分类薄
+     * @return {@link List }<{@link SubjectCategoryBO }>
+     */
+    List<SubjectCategoryBO> queryCategoryAndLabel(SubjectCategoryBO subjectCategoryBO);
 }
