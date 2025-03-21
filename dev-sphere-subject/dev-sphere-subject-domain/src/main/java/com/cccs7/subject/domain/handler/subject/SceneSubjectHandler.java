@@ -53,13 +53,17 @@ public class SceneSubjectHandler implements SubjectTypeHandler {
     public SubjectOptionBO query(int subjectId) {
 
         // 查询场景题 的提示信息
-        List<SubjectScene> suggestList = subjectSceneService.queryByCondition(subjectId);
+        SubjectScene subjectScene = new SubjectScene();
+        subjectScene.setSubjectId((long) subjectId);
+        List<SubjectScene> suggestList = subjectSceneService.queryByCondition(subjectScene);
         List<SubjectSceneBO> suggestBOList = SceneSubjectConverter.INSTANCE.pos2bos(suggestList);
         SubjectOptionBO optionBO = new SubjectOptionBO();
         optionBO.setSuggestList(suggestBOList);
 
+        SubjectBrief paramSubjectBrief = new SubjectBrief();
+        paramSubjectBrief.setSubjectId(subjectId);
         // 查询题目答案
-        SubjectBrief subjectBrief = subjectBriefService.queryById((long) subjectId);
+        SubjectBrief subjectBrief = subjectBriefService.queryByCondition(paramSubjectBrief);
         String answer = subjectBrief.getSubjectAnswer();
         optionBO.setSubjectAnswer(answer);;
 

@@ -81,7 +81,7 @@ public class SubjectSceneServiceImpl implements SubjectSceneService {
      * @return {@link List }<{@link SubjectScene }>
      */
     @Override
-    public List<SubjectScene> queryByCondition(int subjectId) {
-        return this.subjectSceneDao.queryByCondition(subjectId);
+    public List<SubjectScene> queryByCondition(SubjectScene subjectScene) {
+        return this.subjectSceneDao.queryByCondition(subjectScene);
     }
 }

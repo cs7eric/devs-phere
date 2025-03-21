@@ -77,6 +77,6 @@ public interface SubjectSceneDao {
      * @param subjectId 题目ID
      * @return {@link List }<{@link SubjectScene }>
      */
-    List<SubjectScene> queryByCondition(int subjectId);
+    List<SubjectScene> queryByCondition(SubjectScene subjectScene);
 }
 

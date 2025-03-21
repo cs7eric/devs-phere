@@ -57,8 +57,8 @@ public interface SubjectSceneService {
     /**
      * 按条件查询
      *
-     * @param subjectId 题目ID
+     * @param subjectScene 题目场景
      * @return {@link List }<{@link SubjectScene }>
      */
-    List<SubjectScene> queryByCondition(int subjectId);
+    List<SubjectScene> queryByCondition(SubjectScene subjectScene);
 }
