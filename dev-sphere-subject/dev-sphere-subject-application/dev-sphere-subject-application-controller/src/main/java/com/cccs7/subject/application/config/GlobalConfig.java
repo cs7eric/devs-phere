@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
@@ -35,7 +36,6 @@ public class GlobalConfig extends WebMvcConfigurationSupport {
 
     }
 
-
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
         super.addResourceHandlers(registry);
@@ -46,4 +46,9 @@ public class GlobalConfig extends WebMvcConfigurationSupport {
                 .addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 
+    @Override
+    protected void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new LoginInterceotor())
+                .addPathPatterns("/**");
+    }
 }
