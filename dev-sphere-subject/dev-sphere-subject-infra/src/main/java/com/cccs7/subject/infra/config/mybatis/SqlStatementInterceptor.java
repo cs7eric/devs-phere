@@ -1,4 +1,4 @@
-package com.cccs7.subject.infra.config;
+package com.cccs7.subject.infra.config.mybatis;
 
 import org.apache.ibatis.cache.CacheKey;
 import org.apache.ibatis.executor.Executor;

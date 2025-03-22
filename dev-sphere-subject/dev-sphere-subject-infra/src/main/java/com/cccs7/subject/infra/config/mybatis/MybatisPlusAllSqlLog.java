@@ -1,4 +1,4 @@
-package com.cccs7.subject.infra.config;
+package com.cccs7.subject.infra.config.mybatis;
 
 import com.baomidou.mybatisplus.extension.plugins.inner.InnerInterceptor;
 import org.apache.ibatis.executor.Executor;

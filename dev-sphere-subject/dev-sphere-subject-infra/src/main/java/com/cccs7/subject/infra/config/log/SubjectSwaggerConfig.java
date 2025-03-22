@@ -1,4 +1,4 @@
-package com.cccs7.subject.infra.config;
+package com.cccs7.subject.infra.config.log;
 
 import com.cccs7.swagger.annotation.EnableCustomSwagger;
 import com.cccs7.swagger.config.BaseSwaggerConfig;

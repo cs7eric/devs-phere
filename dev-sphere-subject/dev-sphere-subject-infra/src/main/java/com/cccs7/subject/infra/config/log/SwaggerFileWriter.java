@@ -1,4 +1,4 @@
-package com.cccs7.subject.infra.config;
+package com.cccs7.subject.infra.config.log;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
