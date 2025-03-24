@@ -128,6 +128,8 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
                 = categoryBOList.stream().map((category) ->
                 CompletableFuture.supplyAsync(() -> getLabelBoList(category), labelThreadPool)
         ).collect(Collectors.toList());
+        
+        // 并发获取结果
         completableFutureList.forEach( future -> {
             try {
                 Map<Long, List<SubjectLabelBO>> resultMap = future.get();
@@ -136,6 +138,8 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
                 e.printStackTrace();
             }
         });
+        
+        // 组装数据
         categoryBOList.forEach(categoryBO -> {
             categoryBO.setLabelBOList(map.get(categoryBO.getId()));
         });
@@ -144,14 +148,20 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
 
     private Map<Long, List<SubjectLabelBO>> getLabelBoList(SubjectCategoryBO category) {
         Map<Long, List<SubjectLabelBO>> labelMap = new HashMap<>();
+        
+        // 查询分类-标签映射关系
         SubjectMapping subjectMapping = new SubjectMapping();
         subjectMapping.setCategoryId(category.getId());
         List<SubjectMapping> mappingList = subjectMappingService.queryLabelId(subjectMapping);
         if (CollectionUtils.isEmpty(mappingList)) {
             return null;
         }
+        
+        // 提取标签ID并批量查询标签信息
         List<Long> labelIdList = mappingList.stream().map(SubjectMapping::getLabelId).collect(Collectors.toList());
         List<SubjectLabel> labelList = subjectLabelService.batchQueryById(labelIdList);
+        
+        // 转换为BO对象
         List<SubjectLabelBO> labelBOList = new LinkedList<>();
         labelList.forEach(label -> {
             SubjectLabelBO subjectLabelBO = new SubjectLabelBO();
@@ -161,6 +171,8 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
             subjectLabelBO.setSortNum(label.getSortNum());
             labelBOList.add(subjectLabelBO);
         });
+        
+        // 建立分类ID与标签列表的映射
         labelMap.put(category.getId(), labelBOList);
         return labelMap;
     }

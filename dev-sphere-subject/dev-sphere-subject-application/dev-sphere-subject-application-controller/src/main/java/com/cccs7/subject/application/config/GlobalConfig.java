@@ -1,5 +1,6 @@
 package com.cccs7.subject.application.config;
 
+import com.cccs7.subject.application.interceptor.LoginInterceptor;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -48,7 +49,7 @@ public class GlobalConfig extends WebMvcConfigurationSupport {
 
     @Override
     protected void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LoginInterceotor())
+        registry.addInterceptor(new LoginInterceptor())
                 .addPathPatterns("/**");
     }
 }
