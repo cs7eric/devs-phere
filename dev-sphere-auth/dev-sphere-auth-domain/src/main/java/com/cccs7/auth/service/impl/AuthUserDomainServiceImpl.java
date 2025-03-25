@@ -35,7 +35,7 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
     private String salt = "cccs7";
     private final String AUTH_PERMISSION_PREFIX = "auth.permission";
     private final String AUTH_ROLE_PREFIX = "auth.role";
-    private final String LOGIN_PREFIX = "loginCode";
+    private static final String LOGIN_PREFIX = "loginCode";
 
     @Resource
     private AuthUserService authUserService;
