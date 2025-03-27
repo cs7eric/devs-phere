@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cccs7.practice.infra.basic.dao.ShareMomentDao">
+<mapper namespace="com.cccs7.practice.infra.basic.dao.PracticeSetDao">
 
-    <resultMap type="com.cccs7.practice.infra.basic.entity.ShareMoment" id="ShareMomentMap">
+    <resultMap type="com.cccs7.practice.infra.basic.entity.PracticeSet" id="PracticeSetMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
-        <result property="circleId" column="circle_id" jdbcType="INTEGER"/>
-        <result property="content" column="content" jdbcType="VARCHAR"/>
-        <result property="picUrls" column="pic_urls" jdbcType="VARCHAR"/>
-        <result property="replyCount" column="reply_count" jdbcType="INTEGER"/>
+        <result property="setName" column="set_name" jdbcType="VARCHAR"/>
+        <result property="setType" column="set_type" jdbcType="INTEGER"/>
+        <result property="setHeat" column="set_heat" jdbcType="INTEGER"/>
+        <result property="setDesc" column="set_desc" jdbcType="VARCHAR"/>
+        <result property="primaryCategoryId" column="primary_category_id" jdbcType="INTEGER"/>
         <result property="createdBy" column="created_by" jdbcType="VARCHAR"/>
         <result property="createdTime" column="created_time" jdbcType="TIMESTAMP"/>
         <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
@@ -16,33 +17,36 @@
     </resultMap>
 
     <!--查询单个-->
-    <select id="queryById" resultMap="ShareMomentMap">
+    <select id="queryById" resultMap="PracticeSetMap">
         select
-id, circle_id, content, pic_urls, reply_count, created_by, created_time, update_by, update_time, is_deleted
-        from share_moment
+id, set_name, set_type, set_heat, set_desc, primary_category_id, created_by, created_time, update_by, update_time, is_deleted
+        from practice_set
         where id = #{id}
     </select>
 
     <!--查询指定行数据-->
-    <select id="queryAllByLimit" resultMap="ShareMomentMap">
+    <select id="queryAllByLimit" resultMap="PracticeSetMap">
         select
-id, circle_id, content, pic_urls, reply_count, created_by, created_time, update_by, update_time, is_deleted
-        from share_moment
+id, set_name, set_type, set_heat, set_desc, primary_category_id, created_by, created_time, update_by, update_time, is_deleted
+        from practice_set
         <where>
             <if test="id != null">
                 and id = #{id}
             </if>
-            <if test="circleId != null">
-                and circle_id = #{circleId}
+            <if test="setName != null and setName != ''">
+                and set_name = #{setName}
             </if>
-            <if test="content != null and content != ''">
-                and content = #{content}
+            <if test="setType != null">
+                and set_type = #{setType}
             </if>
-            <if test="picUrls != null and picUrls != ''">
-                and pic_urls = #{picUrls}
+            <if test="setHeat != null">
+                and set_heat = #{setHeat}
             </if>
-            <if test="replyCount != null">
-                and reply_count = #{replyCount}
+            <if test="setDesc != null and setDesc != ''">
+                and set_desc = #{setDesc}
+            </if>
+            <if test="primaryCategoryId != null">
+                and primary_category_id = #{primaryCategoryId}
             </if>
             <if test="createdBy != null and createdBy != ''">
                 and created_by = #{createdBy}
@@ -66,22 +70,25 @@ id, circle_id, content, pic_urls, reply_count, created_by, created_time, update_
     <!--统计总行数-->
     <select id="count" resultType="java.lang.Long">
         select count(1)
-        from share_moment
+        from practice_set
         <where>
             <if test="id != null">
                 and id = #{id}
             </if>
-            <if test="circleId != null">
-                and circle_id = #{circleId}
+            <if test="setName != null and setName != ''">
+                and set_name = #{setName}
             </if>
-            <if test="content != null and content != ''">
-                and content = #{content}
+            <if test="setType != null">
+                and set_type = #{setType}
             </if>
-            <if test="picUrls != null and picUrls != ''">
-                and pic_urls = #{picUrls}
+            <if test="setHeat != null">
+                and set_heat = #{setHeat}
             </if>
-            <if test="replyCount != null">
-                and reply_count = #{replyCount}
+            <if test="setDesc != null and setDesc != ''">
+                and set_desc = #{setDesc}
+            </if>
+            <if test="primaryCategoryId != null">
+                and primary_category_id = #{primaryCategoryId}
             </if>
             <if test="createdBy != null and createdBy != ''">
                 and created_by = #{createdBy}
@@ -103,29 +110,30 @@ id, circle_id, content, pic_urls, reply_count, created_by, created_time, update_
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into share_moment(circle_id, content, pic_urls, reply_count, created_by, created_time, update_by, update_time, is_deleted)
-        values (#{circleId}, #{content}, #{picUrls}, #{replyCount}, #{createdBy}, #{createdTime}, #{updateBy}, #{updateTime}, #{isDeleted})
+        insert into practice_set(set_name, set_type, set_heat, set_desc, primary_category_id, created_by, created_time, update_by, update_time, is_deleted)
+        values (#{setName}, #{setType}, #{setHeat}, #{setDesc}, #{primaryCategoryId}, #{createdBy}, #{createdTime}, #{updateBy}, #{updateTime}, #{isDeleted})
     </insert>
 
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into share_moment(circle_id, content, pic_urls, reply_count, created_by, created_time, update_by, update_time, is_deleted)
+        insert into practice_set(set_name, set_type, set_heat, set_desc, primary_category_id, created_by, created_time, update_by, update_time, is_deleted)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.circleId}, #{entity.content}, #{entity.picUrls}, #{entity.replyCount}, #{entity.createdBy}, #{entity.createdTime}, #{entity.updateBy}, #{entity.updateTime}, #{entity.isDeleted})
+        (#{entity.setName}, #{entity.setType}, #{entity.setHeat}, #{entity.setDesc}, #{entity.primaryCategoryId}, #{entity.createdBy}, #{entity.createdTime}, #{entity.updateBy}, #{entity.updateTime}, #{entity.isDeleted})
         </foreach>
     </insert>
 
     <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into share_moment(circle_id, content, pic_urls, reply_count, created_by, created_time, update_by, update_time, is_deleted)
+        insert into practice_set(set_name, set_type, set_heat, set_desc, primary_category_id, created_by, created_time, update_by, update_time, is_deleted)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.circleId}, #{entity.content}, #{entity.picUrls}, #{entity.replyCount}, #{entity.createdBy}, #{entity.createdTime}, #{entity.updateBy}, #{entity.updateTime}, #{entity.isDeleted})
+            (#{entity.setName}, #{entity.setType}, #{entity.setHeat}, #{entity.setDesc}, #{entity.primaryCategoryId}, #{entity.createdBy}, #{entity.createdTime}, #{entity.updateBy}, #{entity.updateTime}, #{entity.isDeleted})
         </foreach>
         on duplicate key update
-circle_id = values(circle_id),
-content = values(content),
-pic_urls = values(pic_urls),
-reply_count = values(reply_count),
+set_name = values(set_name),
+set_type = values(set_type),
+set_heat = values(set_heat),
+set_desc = values(set_desc),
+primary_category_id = values(primary_category_id),
 created_by = values(created_by),
 created_time = values(created_time),
 update_by = values(update_by),
@@ -135,19 +143,22 @@ is_deleted = values(is_deleted)
 
     <!--通过主键修改数据-->
     <update id="update">
-        update share_moment
+        update practice_set
         <set>
-            <if test="circleId != null">
-                circle_id = #{circleId},
+            <if test="setName != null and setName != ''">
+                set_name = #{setName},
             </if>
-            <if test="content != null and content != ''">
-                content = #{content},
+            <if test="setType != null">
+                set_type = #{setType},
             </if>
-            <if test="picUrls != null and picUrls != ''">
-                pic_urls = #{picUrls},
+            <if test="setHeat != null">
+                set_heat = #{setHeat},
             </if>
-            <if test="replyCount != null">
-                reply_count = #{replyCount},
+            <if test="setDesc != null and setDesc != ''">
+                set_desc = #{setDesc},
+            </if>
+            <if test="primaryCategoryId != null">
+                primary_category_id = #{primaryCategoryId},
             </if>
             <if test="createdBy != null and createdBy != ''">
                 created_by = #{createdBy},
@@ -170,7 +181,7 @@ is_deleted = values(is_deleted)
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from share_moment where id = #{id}
+        delete from practice_set where id = #{id}
     </delete>
 
 </mapper>

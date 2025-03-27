@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cccs7.circle.infra.basic.dao.ShareCircleDao">
+<mapper namespace="com.cccs7.practice.infra.basic.dao.ShareCircleDao">
 
-    <resultMap type="com.cccs7.circle.infra.basic.entity.ShareCircle" id="ShareCircleMap">
+    <resultMap type="com.cccs7.practice.infra.basic.entity.ShareCircle" id="ShareCircleMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="parentId" column="parent_id" jdbcType="INTEGER"/>
         <result property="circleName" column="circle_name" jdbcType="VARCHAR"/>
