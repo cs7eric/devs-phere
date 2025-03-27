@@ -17,5 +17,6 @@ target/
 
 *.jar
 /log
-.log
+*.log
 /data
+*.gz
