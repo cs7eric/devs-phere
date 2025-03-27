@@ -1,13 +1,9 @@
 package com.cccs7.circle.infra.basic.service.impl;
 
-import com.cccs7.circle.infra.basic.dao.SensitiveWordsDao;
+import com.cccs7.circle.infra.basic.mapper.SensitiveWordsDao;
 import com.cccs7.circle.infra.basic.entity.SensitiveWords;
 import com.cccs7.circle.infra.basic.service.SensitiveWordsService;
 import org.springframework.stereotype.Service;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-
 import javax.annotation.Resource;
 
 /**

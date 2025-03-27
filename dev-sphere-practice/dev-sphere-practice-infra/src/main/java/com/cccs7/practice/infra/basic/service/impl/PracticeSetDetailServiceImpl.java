@@ -1,12 +1,9 @@
 package com.cccs7.practice.infra.basic.service.impl;
 
+import com.cccs7.practice.infra.basic.mapper.PracticeSetDetailDao;
 import com.cccs7.practice.infra.basic.entity.PracticeSetDetail;
-import com.cccs7.practice.infra.basic.dao.PracticeSetDetailDao;
 import com.cccs7.practice.infra.basic.service.PracticeSetDetailService;
 import org.springframework.stereotype.Service;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 
 import javax.annotation.Resource;
 

@@ -1,12 +1,9 @@
 package com.cccs7.circle.infra.basic.service.impl;
 
-import com.cccs7.circle.infra.basic.dao.ShareMessageDao;
+import com.cccs7.circle.infra.basic.mapper.ShareMessageDao;
 import com.cccs7.circle.infra.basic.entity.ShareMessage;
 import com.cccs7.circle.infra.basic.service.ShareMessageService;
 import org.springframework.stereotype.Service;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 
 import javax.annotation.Resource;
 

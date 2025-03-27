@@ -1,8 +1,7 @@
-package com.cccs7.circle.infra.basic.dao;
+package com.cccs7.circle.infra.basic.mapper;
 
 import com.cccs7.circle.infra.basic.entity.ShareCircle;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 /**
@@ -21,14 +20,6 @@ public interface ShareCircleDao {
      */
     ShareCircle queryById(Long id);
 
-    /**
-     * 查询指定行数据
-     *
-     * @param shareCircle 查询条件
-     * @param pageable         分页对象
-     * @return 对象列表
-     */
-    List<ShareCircle> queryAllByLimit(ShareCircle shareCircle, @Param("pageable") Pageable pageable);
 
     /**
      * 统计总行数
