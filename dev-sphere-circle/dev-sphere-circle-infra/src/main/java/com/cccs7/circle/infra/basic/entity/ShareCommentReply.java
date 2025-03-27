@@ -1,4 +1,4 @@
-package com.cccs7.practice.infra.basic.entity;
+package com.cccs7.circle.infra.basic.entity;
 
 import java.util.Date;
 import java.io.Serializable;

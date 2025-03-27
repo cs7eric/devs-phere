@@ -1,6 +1,6 @@
-package com.cccs7.practice.infra.basic.service;
+package com.cccs7.circle.infra.basic.service;
 
-import com.cccs7.practice.infra.basic.entity.ShareCommentReply;
+import com.cccs7.circle.infra.basic.entity.ShareCommentReply;
 
 /**
  * 评论及回复信息(ShareCommentReply)表服务接口

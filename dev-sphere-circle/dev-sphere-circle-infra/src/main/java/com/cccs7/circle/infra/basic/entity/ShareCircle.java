@@ -1,36 +1,32 @@
-package com.cccs7.practice.infra.basic.entity;
+package com.cccs7.circle.infra.basic.entity;
 
 import java.util.Date;
 import java.io.Serializable;
 
 /**
- * 消息表(ShareMessage)实体类
+ * 圈子信息(ShareCircle)实体类
  *
  * @author cccs7 - csq020611@gmail.com
  * @since 2025-03-27 23:34:16
  */
-public class ShareMessage implements Serializable {
-    private static final long serialVersionUID = 701449545871106351L;
+public class ShareCircle implements Serializable {
+    private static final long serialVersionUID = 871670322665286809L;
 /**
-     * 主键
+     * 圈子ID
      */
-    private Integer id;
+    private Long id;
 /**
-     * 来自人
+     * 父级ID,-1为大类
      */
-    private String fromId;
+    private Long parentId;
 /**
-     * 送达人
+     * 圈子名称
      */
-    private String toId;
+    private String circleName;
 /**
-     * 消息内容
+     * 圈子图片
      */
-    private String content;
-/**
-     * 是否被阅读 1是 2否
-     */
-    private Integer isRead;
+    private String icon;
 /**
      * 创建人
      */
@@ -53,44 +49,36 @@ public class ShareMessage implements Serializable {
     private Integer isDeleted;
 
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getFromId() {
-        return fromId;
+    public Long getParentId() {
+        return parentId;
     }
 
-    public void setFromId(String fromId) {
-        this.fromId = fromId;
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
     }
 
-    public String getToId() {
-        return toId;
+    public String getCircleName() {
+        return circleName;
     }
 
-    public void setToId(String toId) {
-        this.toId = toId;
+    public void setCircleName(String circleName) {
+        this.circleName = circleName;
     }
 
-    public String getContent() {
-        return content;
+    public String getIcon() {
+        return icon;
     }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public Integer getIsRead() {
-        return isRead;
-    }
-
-    public void setIsRead(Integer isRead) {
-        this.isRead = isRead;
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     public String getCreatedBy() {

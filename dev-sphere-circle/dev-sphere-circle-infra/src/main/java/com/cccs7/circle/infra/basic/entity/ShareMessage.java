@@ -1,36 +1,36 @@
-package com.cccs7.practice.infra.basic.entity;
+package com.cccs7.circle.infra.basic.entity;
 
 import java.util.Date;
 import java.io.Serializable;
 
 /**
- * 动态信息(ShareMoment)实体类
+ * 消息表(ShareMessage)实体类
  *
  * @author cccs7 - csq020611@gmail.com
  * @since 2025-03-27 23:34:16
  */
-public class ShareMoment implements Serializable {
-    private static final long serialVersionUID = 319647645845630001L;
+public class ShareMessage implements Serializable {
+    private static final long serialVersionUID = 701449545871106351L;
 /**
-     * 动态ID
+     * 主键
      */
-    private Long id;
+    private Integer id;
 /**
-     * 圈子ID
+     * 来自人
      */
-    private Long circleId;
+    private String fromId;
 /**
-     * 动态内容
+     * 送达人
+     */
+    private String toId;
+/**
+     * 消息内容
      */
     private String content;
 /**
-     * 动态图片内容
+     * 是否被阅读 1是 2否
      */
-    private String picUrls;
-/**
-     * 回复数
-     */
-    private Integer replyCount;
+    private Integer isRead;
 /**
      * 创建人
      */
@@ -53,20 +53,28 @@ public class ShareMoment implements Serializable {
     private Integer isDeleted;
 
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getCircleId() {
-        return circleId;
+    public String getFromId() {
+        return fromId;
     }
 
-    public void setCircleId(Long circleId) {
-        this.circleId = circleId;
+    public void setFromId(String fromId) {
+        this.fromId = fromId;
+    }
+
+    public String getToId() {
+        return toId;
+    }
+
+    public void setToId(String toId) {
+        this.toId = toId;
     }
 
     public String getContent() {
@@ -77,20 +85,12 @@ public class ShareMoment implements Serializable {
         this.content = content;
     }
 
-    public String getPicUrls() {
-        return picUrls;
+    public Integer getIsRead() {
+        return isRead;
     }
 
-    public void setPicUrls(String picUrls) {
-        this.picUrls = picUrls;
-    }
-
-    public Integer getReplyCount() {
-        return replyCount;
-    }
-
-    public void setReplyCount(Integer replyCount) {
-        this.replyCount = replyCount;
+    public void setIsRead(Integer isRead) {
+        this.isRead = isRead;
     }
 
     public String getCreatedBy() {

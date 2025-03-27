@@ -1,17 +1,17 @@
-package com.cccs7.practice.infra.basic.dao;
+package com.cccs7.circle.infra.basic.dao;
 
-import com.cccs7.practice.infra.basic.entity.SensitiveWords;
+import com.cccs7.circle.infra.basic.entity.ShareMoment;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 /**
- * 敏感词表(SensitiveWords)表数据库访问层
+ * 动态信息(ShareMoment)表数据库访问层
  *
  * @author cccs7 - csq020611@gmail.com
  * @since 2025-03-27 23:34:16
  */
-public interface SensitiveWordsDao {
+public interface ShareMomentDao {
 
     /**
      * 通过ID查询单条数据
@@ -19,57 +19,57 @@ public interface SensitiveWordsDao {
      * @param id 主键
      * @return 实例对象
      */
-    SensitiveWords queryById(Long id);
+    ShareMoment queryById(Long id);
 
     /**
      * 查询指定行数据
      *
-     * @param sensitiveWords 查询条件
+     * @param shareMoment 查询条件
      * @param pageable         分页对象
      * @return 对象列表
      */
-    List<SensitiveWords> queryAllByLimit(SensitiveWords sensitiveWords, @Param("pageable") Pageable pageable);
+    List<ShareMoment> queryAllByLimit(ShareMoment shareMoment, @Param("pageable") Pageable pageable);
 
     /**
      * 统计总行数
      *
-     * @param sensitiveWords 查询条件
+     * @param shareMoment 查询条件
      * @return 总行数
      */
-    long count(SensitiveWords sensitiveWords);
+    long count(ShareMoment shareMoment);
 
     /**
      * 新增数据
      *
-     * @param sensitiveWords 实例对象
+     * @param shareMoment 实例对象
      * @return 影响行数
      */
-    int insert(SensitiveWords sensitiveWords);
+    int insert(ShareMoment shareMoment);
 
     /**
      * 批量新增数据（MyBatis原生foreach方法）
      *
-     * @param entities List<SensitiveWords> 实例对象列表
+     * @param entities List<ShareMoment> 实例对象列表
      * @return 影响行数
      */
-    int insertBatch(@Param("entities") List<SensitiveWords> entities);
+    int insertBatch(@Param("entities") List<ShareMoment> entities);
 
     /**
      * 批量新增或按主键更新数据（MyBatis原生foreach方法）
      *
-     * @param entities List<SensitiveWords> 实例对象列表
+     * @param entities List<ShareMoment> 实例对象列表
      * @return 影响行数
      * @throws org.springframework.jdbc.BadSqlGrammarException 入参是空List的时候会抛SQL语句错误的异常，请自行校验入参
      */
-    int insertOrUpdateBatch(@Param("entities") List<SensitiveWords> entities);
+    int insertOrUpdateBatch(@Param("entities") List<ShareMoment> entities);
 
     /**
      * 修改数据
      *
-     * @param sensitiveWords 实例对象
+     * @param shareMoment 实例对象
      * @return 影响行数
      */
-    int update(SensitiveWords sensitiveWords);
+    int update(ShareMoment shareMoment);
 
     /**
      * 通过主键删除数据

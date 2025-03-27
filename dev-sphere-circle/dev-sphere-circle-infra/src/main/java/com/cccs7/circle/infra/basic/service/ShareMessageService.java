@@ -1,6 +1,6 @@
-package com.cccs7.practice.infra.basic.service;
+package com.cccs7.circle.infra.basic.service;
 
-import com.cccs7.practice.infra.basic.entity.ShareMessage;
+import com.cccs7.circle.infra.basic.entity.ShareMessage;
 
 /**
  * 消息表(ShareMessage)表服务接口

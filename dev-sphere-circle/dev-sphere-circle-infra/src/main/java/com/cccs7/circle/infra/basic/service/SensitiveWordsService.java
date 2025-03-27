@@ -1,14 +1,14 @@
-package com.cccs7.practice.infra.basic.service;
+package com.cccs7.circle.infra.basic.service;
 
-import com.cccs7.practice.infra.basic.entity.ShareMoment;
+import com.cccs7.circle.infra.basic.entity.SensitiveWords;
 
 /**
- * 动态信息(ShareMoment)表服务接口
+ * 敏感词表(SensitiveWords)表服务接口
  *
  * @author cccs7 - csq020611@gmail.com
  * @since 2025-03-27 23:34:16
  */
-public interface ShareMomentService {
+public interface SensitiveWordsService {
 
     /**
      * 通过ID查询单条数据
@@ -16,24 +16,24 @@ public interface ShareMomentService {
      * @param id 主键
      * @return 实例对象
      */
-    ShareMoment queryById(Long id);
+    SensitiveWords queryById(Long id);
 
 
     /**
      * 新增数据
      *
-     * @param shareMoment 实例对象
+     * @param sensitiveWords 实例对象
      * @return 实例对象
      */
-    ShareMoment insert(ShareMoment shareMoment);
+    SensitiveWords insert(SensitiveWords sensitiveWords);
 
     /**
      * 修改数据
      *
-     * @param shareMoment 实例对象
+     * @param sensitiveWords 实例对象
      * @return 实例对象
      */
-    ShareMoment update(ShareMoment shareMoment);
+    SensitiveWords update(SensitiveWords sensitiveWords);
 
     /**
      * 通过主键删除数据

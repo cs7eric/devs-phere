@@ -1,32 +1,36 @@
-package com.cccs7.practice.infra.basic.entity;
+package com.cccs7.circle.infra.basic.entity;
 
 import java.util.Date;
 import java.io.Serializable;
 
 /**
- * 圈子信息(ShareCircle)实体类
+ * 动态信息(ShareMoment)实体类
  *
  * @author cccs7 - csq020611@gmail.com
  * @since 2025-03-27 23:34:16
  */
-public class ShareCircle implements Serializable {
-    private static final long serialVersionUID = 871670322665286809L;
+public class ShareMoment implements Serializable {
+    private static final long serialVersionUID = 319647645845630001L;
 /**
-     * 圈子ID
+     * 动态ID
      */
     private Long id;
 /**
-     * 父级ID,-1为大类
+     * 圈子ID
      */
-    private Long parentId;
+    private Long circleId;
 /**
-     * 圈子名称
+     * 动态内容
      */
-    private String circleName;
+    private String content;
 /**
-     * 圈子图片
+     * 动态图片内容
      */
-    private String icon;
+    private String picUrls;
+/**
+     * 回复数
+     */
+    private Integer replyCount;
 /**
      * 创建人
      */
@@ -57,28 +61,36 @@ public class ShareCircle implements Serializable {
         this.id = id;
     }
 
-    public Long getParentId() {
-        return parentId;
+    public Long getCircleId() {
+        return circleId;
     }
 
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
+    public void setCircleId(Long circleId) {
+        this.circleId = circleId;
     }
 
-    public String getCircleName() {
-        return circleName;
+    public String getContent() {
+        return content;
     }
 
-    public void setCircleName(String circleName) {
-        this.circleName = circleName;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public String getIcon() {
-        return icon;
+    public String getPicUrls() {
+        return picUrls;
     }
 
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public void setPicUrls(String picUrls) {
+        this.picUrls = picUrls;
+    }
+
+    public Integer getReplyCount() {
+        return replyCount;
+    }
+
+    public void setReplyCount(Integer replyCount) {
+        this.replyCount = replyCount;
     }
 
     public String getCreatedBy() {

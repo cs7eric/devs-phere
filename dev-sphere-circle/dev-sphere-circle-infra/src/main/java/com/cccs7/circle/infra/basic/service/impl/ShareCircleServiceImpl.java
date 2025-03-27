@@ -1,8 +1,8 @@
-package com.cccs7.practice.infra.basic.service.impl;
+package com.cccs7.circle.infra.basic.service.impl;
 
-import com.cccs7.practice.infra.basic.entity.ShareCircle;
-import com.cccs7.practice.infra.basic.dao.ShareCircleDao;
-import com.cccs7.practice.infra.basic.service.ShareCircleService;
+import com.cccs7.circle.infra.basic.service.ShareCircleService;
+import com.cccs7.circle.infra.basic.entity.ShareCircle;
+import com.cccs7.circle.infra.basic.dao.ShareCircleDao;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

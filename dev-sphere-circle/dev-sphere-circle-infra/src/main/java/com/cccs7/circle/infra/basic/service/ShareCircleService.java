@@ -1,6 +1,6 @@
-package com.cccs7.practice.infra.basic.service;
+package com.cccs7.circle.infra.basic.service;
 
-import com.cccs7.practice.infra.basic.entity.ShareCircle;
+import com.cccs7.circle.infra.basic.entity.ShareCircle;
 
 /**
  * 圈子信息(ShareCircle)表服务接口
