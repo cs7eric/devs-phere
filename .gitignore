@@ -18,3 +18,4 @@ target/
 *.jar
 /log
 .log
+/data
