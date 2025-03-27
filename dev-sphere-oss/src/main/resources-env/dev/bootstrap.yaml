@@ -2,7 +2,7 @@ spring:
   application:
     name: dev-sphere-oss-dev
   profiles:
-    active: prod
+    active: dev
   cloud:
     nacos:
       config:
@@ -15,7 +15,4 @@ spring:
         enabled: true
         ip: 14.103.134.185  # 强制指定为服务器的公网 IP
         server-addr: 14.103.134.185:8848
-    inetutils:
-      preferred-networks: 14.103.134.185
-      ignored-interfaces: eth0
 
