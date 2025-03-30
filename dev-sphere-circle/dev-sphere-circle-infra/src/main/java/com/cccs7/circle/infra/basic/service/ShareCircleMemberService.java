@@ -1,14 +1,14 @@
 package com.cccs7.circle.infra.basic.service;
 
-import com.cccs7.circle.infra.basic.entity.ShareMoment;
+import com.cccs7.circle.infra.basic.entity.ShareCircleMember;
 
 /**
- * 动态信息(ShareMoment)表服务接口
+ * 圈子成员信息(ShareCircleMember)表服务接口
  *
  * @author cccs7 - csq020611@gmail.com
- * @since 2025-03-30 22:36:11
+ * @since 2025-03-30 22:09:18
  */
-public interface ShareMomentService {
+public interface ShareCircleMemberService {
 
     /**
      * 通过ID查询单条数据
@@ -16,23 +16,23 @@ public interface ShareMomentService {
      * @param id 主键
      * @return 实例对象
      */
-    ShareMoment queryById(Long id);
+    ShareCircleMember queryById(Long id);
 
     /**
      * 新增数据
      *
-     * @param shareMoment 实例对象
+     * @param shareCircleMember 实例对象
      * @return 实例对象
      */
-    ShareMoment insert(ShareMoment shareMoment);
+    ShareCircleMember insert(ShareCircleMember shareCircleMember);
 
     /**
      * 修改数据
      *
-     * @param shareMoment 实例对象
+     * @param shareCircleMember 实例对象
      * @return 实例对象
      */
-    ShareMoment update(ShareMoment shareMoment);
+    ShareCircleMember update(ShareCircleMember shareCircleMember);
 
     /**
      * 通过主键删除数据

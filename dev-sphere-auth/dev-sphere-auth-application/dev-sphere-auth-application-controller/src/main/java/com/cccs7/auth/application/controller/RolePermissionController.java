@@ -3,13 +3,11 @@ package com.cccs7.auth.application.controller;
 import com.alibaba.fastjson.JSON;
 import com.cccs7.auth.application.convert.AuthRolePermissionDTOConverter;
 import com.cccs7.auth.application.dto.AuthRolePermissionDTO;
-import com.cccs7.auth.entity.AuthPermissionBO;
 import com.cccs7.auth.entity.AuthRolePermissionBO;
 import com.cccs7.auth.entity.Result;
 import com.cccs7.auth.service.AuthRolePermissionDomainService;
 import com.google.common.base.Preconditions;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +24,7 @@ import javax.annotation.Resource;
  */
 @Slf4j
 @RestController
-@RequestMapping("/rolePermission/")
+@RequestMapping("/auth/rolePermission/")
 public class RolePermissionController {
 
     @Resource

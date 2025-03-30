@@ -1,16 +1,17 @@
 package com.cccs7.circle.infra.basic.service.impl;
 
-import com.cccs7.circle.infra.basic.service.ShareCircleService;
-import com.cccs7.circle.infra.basic.entity.ShareCircle;
 import com.cccs7.circle.infra.basic.mapper.ShareCircleDao;
+import com.cccs7.circle.infra.basic.entity.ShareCircle;
+import com.cccs7.circle.infra.basic.service.ShareCircleService;
 import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
 
 /**
  * 圈子信息(ShareCircle)表服务实现类
  *
  * @author cccs7 - csq020611@gmail.com
- * @since 2025-03-27 23:34:16
+ * @since 2025-03-30 21:18:47
  */
 @Service("shareCircleService")
 public class ShareCircleServiceImpl implements ShareCircleService {
@@ -27,7 +28,6 @@ public class ShareCircleServiceImpl implements ShareCircleService {
     public ShareCircle queryById(Long id) {
         return this.shareCircleDao.queryById(id);
     }
-
 
     /**
      * 新增数据

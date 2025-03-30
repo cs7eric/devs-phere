@@ -50,7 +50,6 @@ public class UserController {
             AuthUserBO authUserBO = AuthUserDTOConverter.INSTANCE.dto2bo(authUserDTO);
 
             Boolean registeredUser = authUserDomainService.register(authUserBO);
-
             return Result.ok(registeredUser);
 
         } catch (Exception e) {

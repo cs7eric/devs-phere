@@ -7,10 +7,10 @@ import java.io.Serializable;
  * 圈子信息(ShareCircle)实体类
  *
  * @author cccs7 - csq020611@gmail.com
- * @since 2025-03-27 23:34:16
+ * @since 2025-03-30 21:15:44
  */
 public class ShareCircle implements Serializable {
-    private static final long serialVersionUID = 871670322665286809L;
+    private static final long serialVersionUID = -90803107026128623L;
 /**
      * 圈子ID
      */

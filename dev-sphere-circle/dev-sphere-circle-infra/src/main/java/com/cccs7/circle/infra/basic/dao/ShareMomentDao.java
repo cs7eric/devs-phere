@@ -1,15 +1,15 @@
-package com.cccs7.circle.infra.basic.mapper;
+package com.cccs7.circle.infra.basic.dao;
 
 import com.cccs7.circle.infra.basic.entity.ShareMoment;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.data.domain.Pageable;
+
 import java.util.List;
 
 /**
  * 动态信息(ShareMoment)表数据库访问层
  *
  * @author cccs7 - csq020611@gmail.com
- * @since 2025-03-30 21:31:57
+ * @since 2025-03-30 22:36:11
  */
 public interface ShareMomentDao {
 

@@ -2,13 +2,14 @@ package com.cccs7.circle.infra.basic.mapper;
 
 import com.cccs7.circle.infra.basic.entity.ShareCircle;
 import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 /**
  * 圈子信息(ShareCircle)表数据库访问层
  *
  * @author cccs7 - csq020611@gmail.com
- * @since 2025-03-27 23:34:16
+ * @since 2025-03-30 21:18:46
  */
 public interface ShareCircleDao {
 

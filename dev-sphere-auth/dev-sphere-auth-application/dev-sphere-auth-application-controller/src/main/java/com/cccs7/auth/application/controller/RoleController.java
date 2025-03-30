@@ -21,7 +21,7 @@ import javax.annotation.Resource;
  */
 @Slf4j
 @RestController
-@RequestMapping("/role/")
+@RequestMapping("/auth/role/")
 public class RoleController {
 
     @Resource

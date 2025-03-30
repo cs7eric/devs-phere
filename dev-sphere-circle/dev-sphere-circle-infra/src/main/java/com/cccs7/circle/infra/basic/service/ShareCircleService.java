@@ -6,7 +6,7 @@ import com.cccs7.circle.infra.basic.entity.ShareCircle;
  * 圈子信息(ShareCircle)表服务接口
  *
  * @author cccs7 - csq020611@gmail.com
- * @since 2025-03-27 23:34:16
+ * @since 2025-03-30 21:18:47
  */
 public interface ShareCircleService {
 
