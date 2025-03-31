@@ -1,4 +1,4 @@
-package com.cccs7.circle.infra.basic.dao;
+package com.cccs7.circle.infra.basic.mapper;
 
 import com.cccs7.circle.infra.basic.entity.ShareCircleMember;
 import org.apache.ibatis.annotations.Param;

@@ -1,6 +1,6 @@
 package com.cccs7.circle.infra.basic.service.impl;
 
-import com.cccs7.circle.infra.basic.dao.ShareCircleMemberDao;
+import com.cccs7.circle.infra.basic.mapper.ShareCircleMemberDao;
 import com.cccs7.circle.infra.basic.entity.ShareCircleMember;
 import com.cccs7.circle.infra.basic.service.ShareCircleMemberService;
 import org.springframework.stereotype.Service;

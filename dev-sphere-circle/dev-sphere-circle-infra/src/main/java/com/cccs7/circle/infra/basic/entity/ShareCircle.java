@@ -1,16 +1,19 @@
 package com.cccs7.circle.infra.basic.entity;
 
-import java.util.Date;
+import lombok.Data;
+
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 圈子信息(ShareCircle)实体类
  *
  * @author cccs7 - csq020611@gmail.com
- * @since 2025-03-30 21:15:44
+ * @since 2025-03-30 21:34:44
  */
+@Data
 public class ShareCircle implements Serializable {
-    private static final long serialVersionUID = -90803107026128623L;
+    private static final long serialVersionUID = -66087068929731871L;
 /**
      * 圈子ID
      */
@@ -20,9 +23,17 @@ public class ShareCircle implements Serializable {
      */
     private Long parentId;
 /**
+     * 分类id
+     */
+    private Long categoryId;
+
+    private Integer memberCount;
+/**
      * 圈子名称
      */
     private String circleName;
+
+    private String circleIntro;
 /**
      * 圈子图片
      */
@@ -47,79 +58,6 @@ public class ShareCircle implements Serializable {
      * 是否被删除 0为删除 1已删除
      */
     private Integer isDeleted;
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
-    }
-
-    public String getCircleName() {
-        return circleName;
-    }
-
-    public void setCircleName(String circleName) {
-        this.circleName = circleName;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Date getCreatedTime() {
-        return createdTime;
-    }
-
-    public void setCreatedTime(Date createdTime) {
-        this.createdTime = createdTime;
-    }
-
-    public String getUpdateBy() {
-        return updateBy;
-    }
-
-    public void setUpdateBy(String updateBy) {
-        this.updateBy = updateBy;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public Integer getIsDeleted() {
-        return isDeleted;
-    }
-
-    public void setIsDeleted(Integer isDeleted) {
-        this.isDeleted = isDeleted;
-    }
 
 }
 
