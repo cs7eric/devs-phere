@@ -1,4 +1,4 @@
-package com.cccs7.circle;
+package com.cccs7.practice;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;

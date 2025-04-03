@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CircleDomainService
+public class CircleDomainServiceImpl
         implements com.cccs7.circle.service.CircleDomainService {
 
 

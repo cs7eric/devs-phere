@@ -17,7 +17,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/circle/moment")
+@RequestMapping("/share/moment")
 public class MomentController {
 
 

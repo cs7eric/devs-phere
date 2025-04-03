@@ -20,7 +20,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/circle/")
+@RequestMapping("/share/circle/")
 public class CircleController {
 
 

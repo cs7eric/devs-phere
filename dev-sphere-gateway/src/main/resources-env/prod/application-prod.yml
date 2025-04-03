@@ -37,6 +37,15 @@ spring:
               args:
                 retries: 3
                 statuses: BAD_GATEWAY,  REQUEST_TIMEOUT, SERVICE_UNAVAILABLE, INTERNAL_SERVER_ERROR
+        - id: circle
+          uri: lb://dev-sphere-circle-dev
+          predicates:
+            - Path=/share/**
+          filters:
+            - name: Retry
+              args:
+                retries: 3
+                statuses: BAD_GATEWAY,  REQUEST_TIMEOUT, SERVICE_UNAVAILABLE, INTERNAL_SERVER_ERROR
         - id: auth
           uri: lb://dev-sphere-auth-dev
           predicates:

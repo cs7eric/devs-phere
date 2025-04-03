@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @MapperScan("com.cccs7.**.mapper")
-@SpringBootApplication(scanBasePackages = "com.cccs7")
+@SpringBootApplication(scanBasePackages = "com.cccs7.circle")
 public class CircleApplication {
 
     public static void main(String[] args) {

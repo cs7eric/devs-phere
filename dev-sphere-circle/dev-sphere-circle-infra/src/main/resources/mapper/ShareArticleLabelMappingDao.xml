@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cccs7.circle.infra.basic.mapper.ShareMessageDao">
+<mapper namespace="com.cccs7.circle.infra.basic.mapper.ShareArticleLabelMappingDao">
 
-    <resultMap type="com.cccs7.circle.infra.basic.entity.ShareMessage" id="ShareMessageMap">
+    <resultMap type="com.cccs7.circle.infra.basic.entity.ShareArticleLabelMapping" id="ShareArticleLabelMappingMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
-        <result property="fromId" column="from_id" jdbcType="VARCHAR"/>
-        <result property="toId" column="to_id" jdbcType="VARCHAR"/>
-        <result property="content" column="content" jdbcType="VARCHAR"/>
-        <result property="isRead" column="is_read" jdbcType="INTEGER"/>
+        <result property="articleId" column="article_id" jdbcType="INTEGER"/>
+        <result property="labelId" column="label_id" jdbcType="INTEGER"/>
         <result property="createdBy" column="created_by" jdbcType="VARCHAR"/>
         <result property="createdTime" column="created_time" jdbcType="TIMESTAMP"/>
         <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
@@ -16,33 +14,27 @@
     </resultMap>
 
     <!--查询单个-->
-    <select id="queryById" resultMap="ShareMessageMap">
+    <select id="queryById" resultMap="ShareArticleLabelMappingMap">
         select
-id, from_id, to_id, content, is_read, created_by, created_time, update_by, update_time, is_deleted
-        from share_message
+id, article_id, label_id, created_by, created_time, update_by, update_time, is_deleted
+        from share_article_label_mapping
         where id = #{id}
     </select>
 
     <!--查询指定行数据-->
-    <select id="queryAllByLimit" resultMap="ShareMessageMap">
+    <select id="queryAllByLimit" resultMap="ShareArticleLabelMappingMap">
         select
-id, from_id, to_id, content, is_read, created_by, created_time, update_by, update_time, is_deleted
-        from share_message
+id, article_id, label_id, created_by, created_time, update_by, update_time, is_deleted
+        from share_article_label_mapping
         <where>
             <if test="id != null">
                 and id = #{id}
             </if>
-            <if test="fromId != null and fromId != ''">
-                and from_id = #{fromId}
+            <if test="articleId != null">
+                and article_id = #{articleId}
             </if>
-            <if test="toId != null and toId != ''">
-                and to_id = #{toId}
-            </if>
-            <if test="content != null and content != ''">
-                and content = #{content}
-            </if>
-            <if test="isRead != null">
-                and is_read = #{isRead}
+            <if test="labelId != null">
+                and label_id = #{labelId}
             </if>
             <if test="createdBy != null and createdBy != ''">
                 and created_by = #{createdBy}
@@ -66,22 +58,16 @@ id, from_id, to_id, content, is_read, created_by, created_time, update_by, updat
     <!--统计总行数-->
     <select id="count" resultType="java.lang.Long">
         select count(1)
-        from share_message
+        from share_article_label_mapping
         <where>
             <if test="id != null">
                 and id = #{id}
             </if>
-            <if test="fromId != null and fromId != ''">
-                and from_id = #{fromId}
+            <if test="articleId != null">
+                and article_id = #{articleId}
             </if>
-            <if test="toId != null and toId != ''">
-                and to_id = #{toId}
-            </if>
-            <if test="content != null and content != ''">
-                and content = #{content}
-            </if>
-            <if test="isRead != null">
-                and is_read = #{isRead}
+            <if test="labelId != null">
+                and label_id = #{labelId}
             </if>
             <if test="createdBy != null and createdBy != ''">
                 and created_by = #{createdBy}
@@ -103,29 +89,27 @@ id, from_id, to_id, content, is_read, created_by, created_time, update_by, updat
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into share_message(from_id, to_id, content, is_read, created_by, created_time, update_by, update_time, is_deleted)
-        values (#{fromId}, #{toId}, #{content}, #{isRead}, #{createdBy}, #{createdTime}, #{updateBy}, #{updateTime}, #{isDeleted})
+        insert into share_article_label_mapping(article_id, label_id, created_by, created_time, update_by, update_time, is_deleted)
+        values (#{articleId}, #{labelId}, #{createdBy}, #{createdTime}, #{updateBy}, #{updateTime}, #{isDeleted})
     </insert>
 
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into share_message(from_id, to_id, content, is_read, created_by, created_time, update_by, update_time, is_deleted)
+        insert into share_article_label_mapping(article_id, label_id, created_by, created_time, update_by, update_time, is_deleted)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.fromId}, #{entity.toId}, #{entity.content}, #{entity.isRead}, #{entity.createdBy}, #{entity.createdTime}, #{entity.updateBy}, #{entity.updateTime}, #{entity.isDeleted})
+        (#{entity.articleId}, #{entity.labelId}, #{entity.createdBy}, #{entity.createdTime}, #{entity.updateBy}, #{entity.updateTime}, #{entity.isDeleted})
         </foreach>
     </insert>
 
     <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into share_message(from_id, to_id, content, is_read, created_by, created_time, update_by, update_time, is_deleted)
+        insert into share_article_label_mapping(article_id, label_id, created_by, created_time, update_by, update_time, is_deleted)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.fromId}, #{entity.toId}, #{entity.content}, #{entity.isRead}, #{entity.createdBy}, #{entity.createdTime}, #{entity.updateBy}, #{entity.updateTime}, #{entity.isDeleted})
+            (#{entity.articleId}, #{entity.labelId}, #{entity.createdBy}, #{entity.createdTime}, #{entity.updateBy}, #{entity.updateTime}, #{entity.isDeleted})
         </foreach>
         on duplicate key update
-from_id = values(from_id),
-to_id = values(to_id),
-content = values(content),
-is_read = values(is_read),
+article_id = values(article_id),
+label_id = values(label_id),
 created_by = values(created_by),
 created_time = values(created_time),
 update_by = values(update_by),
@@ -135,19 +119,13 @@ is_deleted = values(is_deleted)
 
     <!--通过主键修改数据-->
     <update id="update">
-        update share_message
+        update share_article_label_mapping
         <set>
-            <if test="fromId != null and fromId != ''">
-                from_id = #{fromId},
+            <if test="articleId != null">
+                article_id = #{articleId},
             </if>
-            <if test="toId != null and toId != ''">
-                to_id = #{toId},
-            </if>
-            <if test="content != null and content != ''">
-                content = #{content},
-            </if>
-            <if test="isRead != null">
-                is_read = #{isRead},
+            <if test="labelId != null">
+                label_id = #{labelId},
             </if>
             <if test="createdBy != null and createdBy != ''">
                 created_by = #{createdBy},
@@ -170,7 +148,7 @@ is_deleted = values(is_deleted)
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from share_message where id = #{id}
+        delete from share_article_label_mapping where id = #{id}
     </delete>
 
 </mapper>

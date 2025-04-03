@@ -4,10 +4,7 @@ import com.alibaba.nacos.api.config.annotation.NacosValue;
 import com.cccs7.oss.entity.Result;
 import com.cccs7.oss.service.FileService;
 import com.cccs7.oss.util.MinioUtil;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -20,6 +17,7 @@ import java.util.List;
  * @date 2025/02/27
  */
 @RestController
+@RequestMapping("/oss/")
 public class FileController {
 
 
@@ -69,12 +67,14 @@ public class FileController {
      * @return {@link Result }
      */
     @PostMapping("/upload")
-    public Result uploadFile(MultipartFile uploadFile, String bucket, String objectName){
-
+    public Result uploadFile(
+            @RequestParam("uploadFile") MultipartFile uploadFile, // 名称必须与前端的formData.append一致
+            @RequestParam("bucket") String bucket,
+            @RequestParam("objectName") String objectName
+    ) {
         String url = fileService.uploadFile(uploadFile, bucket, objectName);
         return Result.ok(url);
     }
-
     @GetMapping("/testNacos")
     public String testNacos(){
         return storageType;
