@@ -41,7 +41,8 @@ public class MomentController {
 
         Preconditions.checkNotNull(shareMomentDTO.getContent(), "动态内容不能为空");
         Preconditions.checkNotNull(shareMomentDTO.getMomentTitle(), "动态名称不能为空");
-        Preconditions.checkNotNull(shareMomentDTO.getAuthorId(), "作者ID不能为空");
+        Preconditions.checkNotNull(shareMomentDTO.getUserName(), "作者ID不能为空");
+        Preconditions.checkNotNull(shareMomentDTO.getCircleId(), "所属圈子不能为空");
 
         ShareMomentBO shareMomentBO = MomentDTOConverter.INSTANCE.dto2bo(shareMomentDTO);
 
@@ -84,7 +85,7 @@ public class MomentController {
             log.info("CircleController.getSubscribeListByUserId.dto:{}", shareMomentDTO);
         }
 
-        Preconditions.checkNotNull(shareMomentDTO.getAuthorId(), "作者ID不能为空");
+        Preconditions.checkNotNull(shareMomentDTO.getUserName(), "作者名不能为空");
 
 
         ShareMomentBO shareMomentBO = MomentDTOConverter.INSTANCE.dto2bo(shareMomentDTO);

@@ -1,11 +1,12 @@
 package com.cccs7.circle.infra.basic.service.impl;
 
-import com.cccs7.circle.infra.basic.mapper.ShareCircleMemberDao;
 import com.cccs7.circle.infra.basic.entity.ShareCircleMember;
+import com.cccs7.circle.infra.basic.mapper.ShareCircleMemberDao;
 import com.cccs7.circle.infra.basic.service.ShareCircleMemberService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 圈子成员信息(ShareCircleMember)表服务实现类
@@ -63,5 +64,19 @@ public class ShareCircleMemberServiceImpl implements ShareCircleMemberService {
     @Override
     public boolean deleteById(Long id) {
         return this.shareCircleMemberDao.deleteById(id) > 0;
+    }
+
+
+    /**
+     * 查询订阅列表通过用户
+     *
+     * @param userName 用户名
+     * @return {@link List }<{@link ShareCircleMember }>
+     */
+    @Override
+    public List<ShareCircleMember> getSubscribeListByUser(String userName) {
+        ShareCircleMember circleMember = new ShareCircleMember();
+        circleMember.setUserName(userName);
+        return this.shareCircleMemberDao.queryByCondition(circleMember);
     }
 }

@@ -26,6 +26,14 @@ public class ShareCircleDTO implements Serializable {
      */
     private Long categoryId;
 
+
+
+    /**
+     * 用户名
+     */
+    private String userName;
+
+
     private Integer memberCount;
     /**
      * 圈子名称

@@ -4,7 +4,7 @@
 
     <resultMap type="com.cccs7.circle.infra.basic.entity.ShareMoment" id="ShareMomentMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
-        <result property="authorId" column="author_id" jdbcType="INTEGER"/>
+        <result property="userName" column="user_name" jdbcType="VARCHAR"/>
         <result property="circleId" column="circle_id" jdbcType="INTEGER"/>
         <result property="momentTitle" column="moment_title" jdbcType="VARCHAR"/>
         <result property="content" column="content" jdbcType="VARCHAR"/>
@@ -21,8 +21,20 @@
 
     <!--查询单个-->
     <select id="queryById" resultMap="ShareMomentMap">
-        select
-id, author_id, circle_id, moment_title, content, pic_urls, collect_count, like_count, reply_count, created_by, created_time, update_by, update_time, is_deleted
+        select id,
+               user_name,
+               circle_id,
+               moment_title,
+               content,
+               pic_urls,
+               collect_count,
+               like_count,
+               reply_count,
+               created_by,
+               created_time,
+               update_by,
+               update_time,
+               is_deleted
         from share_moment
         where id = #{id}
     </select>
@@ -30,14 +42,15 @@ id, author_id, circle_id, moment_title, content, pic_urls, collect_count, like_c
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="ShareMomentMap">
         select
-id, author_id, circle_id, moment_title, content, pic_urls, collect_count, like_count, reply_count, created_by, created_time, update_by, update_time, is_deleted
+        id, user_name, circle_id, moment_title, content, pic_urls, collect_count, like_count, reply_count, created_by,
+        created_time, update_by, update_time, is_deleted
         from share_moment
         <where>
             <if test="id != null">
                 and id = #{id}
             </if>
-            <if test="authorId != null">
-                and author_id = #{authorId}
+            <if test="userName != null">
+                and user_name = #{userName}
             </if>
             <if test="circleId != null">
                 and circle_id = #{circleId}
@@ -87,8 +100,8 @@ id, author_id, circle_id, moment_title, content, pic_urls, collect_count, like_c
             <if test="id != null">
                 and id = #{id}
             </if>
-            <if test="authorId != null">
-                and author_id = #{authorId}
+            <if test="userName != null">
+                and user_name = #{userName}
             </if>
             <if test="circleId != null">
                 and circle_id = #{circleId}
@@ -131,46 +144,54 @@ id, author_id, circle_id, moment_title, content, pic_urls, collect_count, like_c
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into share_moment(author_id, circle_id, moment_title, content, pic_urls, collect_count, like_count, reply_count, created_by, created_time, update_by, update_time, is_deleted)
-        values (#{authorId}, #{circleId}, #{momentTitle}, #{content}, #{picUrls}, #{collectCount}, #{likeCount}, #{replyCount}, #{createdBy}, #{createdTime}, #{updateBy}, #{updateTime}, #{isDeleted})
+        insert into share_moment(user_name, circle_id, moment_title, content, pic_urls, collect_count, like_count,
+                                 reply_count, created_by, created_time, update_by, update_time, is_deleted)
+        values (#{userName}, #{circleId}, #{momentTitle}, #{content}, #{picUrls}, #{collectCount}, #{likeCount},
+                #{replyCount}, #{createdBy}, #{createdTime}, #{updateBy}, #{updateTime}, #{isDeleted})
     </insert>
 
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into share_moment(author_id, circle_id, moment_title, content, pic_urls, collect_count, like_count, reply_count, created_by, created_time, update_by, update_time, is_deleted)
+        insert into share_moment(user_name, circle_id, moment_title, content, pic_urls, collect_count, like_count,
+        reply_count, created_by, created_time, update_by, update_time, is_deleted)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.authorId}, #{entity.circleId}, #{entity.momentTitle}, #{entity.content}, #{entity.picUrls}, #{entity.collectCount}, #{entity.likeCount}, #{entity.replyCount}, #{entity.createdBy}, #{entity.createdTime}, #{entity.updateBy}, #{entity.updateTime}, #{entity.isDeleted})
+            (#{entity.userName}, #{entity.circleId}, #{entity.momentTitle}, #{entity.content}, #{entity.picUrls},
+            #{entity.collectCount}, #{entity.likeCount}, #{entity.replyCount}, #{entity.createdBy},
+            #{entity.createdTime}, #{entity.updateBy}, #{entity.updateTime}, #{entity.isDeleted})
         </foreach>
     </insert>
 
     <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into share_moment(author_id, circle_id, moment_title, content, pic_urls, collect_count, like_count, reply_count, created_by, created_time, update_by, update_time, is_deleted)
+        insert into share_moment(user_name, circle_id, moment_title, content, pic_urls, collect_count, like_count,
+        reply_count, created_by, created_time, update_by, update_time, is_deleted)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.authorId}, #{entity.circleId}, #{entity.momentTitle}, #{entity.content}, #{entity.picUrls}, #{entity.collectCount}, #{entity.likeCount}, #{entity.replyCount}, #{entity.createdBy}, #{entity.createdTime}, #{entity.updateBy}, #{entity.updateTime}, #{entity.isDeleted})
+            (#{entity.userName}, #{entity.circleId}, #{entity.momentTitle}, #{entity.content}, #{entity.picUrls},
+            #{entity.collectCount}, #{entity.likeCount}, #{entity.replyCount}, #{entity.createdBy},
+            #{entity.createdTime}, #{entity.updateBy}, #{entity.updateTime}, #{entity.isDeleted})
         </foreach>
         on duplicate key update
-author_id = values(author_id),
-circle_id = values(circle_id),
-moment_title = values(moment_title),
-content = values(content),
-pic_urls = values(pic_urls),
-collect_count = values(collect_count),
-like_count = values(like_count),
-reply_count = values(reply_count),
-created_by = values(created_by),
-created_time = values(created_time),
-update_by = values(update_by),
-update_time = values(update_time),
-is_deleted = values(is_deleted)
+        user_name = values(user_name),
+        circle_id = values(circle_id),
+        moment_title = values(moment_title),
+        content = values(content),
+        pic_urls = values(pic_urls),
+        collect_count = values(collect_count),
+        like_count = values(like_count),
+        reply_count = values(reply_count),
+        created_by = values(created_by),
+        created_time = values(created_time),
+        update_by = values(update_by),
+        update_time = values(update_time),
+        is_deleted = values(is_deleted)
     </insert>
 
     <!--通过主键修改数据-->
     <update id="update">
         update share_moment
         <set>
-            <if test="authorId != null">
-                author_id = #{authorId},
+            <if test="userName != null">
+                user_name = #{userName},
             </if>
             <if test="circleId != null">
                 circle_id = #{circleId},
@@ -214,7 +235,9 @@ is_deleted = values(is_deleted)
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from share_moment where id = #{id}
+        delete
+        from share_moment
+        where id = #{id}
     </delete>
 
 </mapper>

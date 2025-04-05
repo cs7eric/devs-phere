@@ -1,5 +1,6 @@
 package com.cccs7.circle.infra.basic.mapper;
 
+import com.cccs7.circle.infra.basic.entity.ShareCircle;
 import com.cccs7.circle.infra.basic.entity.ShareCircleMember;
 import org.apache.ibatis.annotations.Param;
 
@@ -71,5 +72,20 @@ public interface ShareCircleMemberDao {
      */
     int deleteById(Long id);
 
+    /**
+     * 查询订阅列表通过用户
+     *
+     * @param userName 用户名
+     * @return {@link List }<{@link ShareCircle }>
+     */
+    List<ShareCircleMember> getSubscribeListByUser(String userName);
+
+    /**
+     * 按条件查询
+     *
+     * @param circleMember 圈成员
+     * @return {@link List }<{@link ShareCircleMember }>
+     */
+    List<ShareCircleMember> queryByCondition(ShareCircleMember circleMember);
 }
 

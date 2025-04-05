@@ -42,7 +42,8 @@ public class CircleController {
         }
 
         Preconditions.checkNotNull(shareCircleDTO.getCircleName(), "圈子名称不能为空");
-        Preconditions.checkNotNull(shareCircleDTO.getCircleName(), "圈子简介不能为空");
+        Preconditions.checkNotNull(shareCircleDTO.getCircleIntro(), "圈子简介不能为空");
+        Preconditions.checkNotNull(shareCircleDTO.getCategoryId(), "所属分类不能为空");
 
         ShareCircleBO circleBO = CircleDTOConverter.INSTANCE.dto2bo(shareCircleDTO);
         boolean add = circleDomainService.add(circleBO);
@@ -83,7 +84,7 @@ public class CircleController {
         }
 
         Preconditions.checkNotNull(circleActionDTO.getCircleId(), "圈子ID不能为空");
-        Preconditions.checkNotNull(circleActionDTO.getUserId(), "用户ID不能为空");
+        Preconditions.checkNotNull(circleActionDTO.getUserName(), "用户名不能为空");
 
         ShareCircleMemberBO circleMemberBO = CircleActionConverter.INSTANCE.action2MemberBO(circleActionDTO);
         boolean update = circleDomainService.subscribe(circleMemberBO);
@@ -103,8 +104,7 @@ public class CircleController {
             log.info("CircleController.getSubscribeListByUserId.dto:{}", circleActionDTO);
         }
 
-        Preconditions.checkNotNull(circleActionDTO.getUserId(), "用户ID不能为空");
-
+        Preconditions.checkNotNull(circleActionDTO.getUserName(), "用户名不能为空");
         ShareCircleMemberBO circleMemberBO = CircleActionConverter.INSTANCE.action2MemberBO(circleActionDTO);
         List<ShareCircleBO> circleBOList = circleDomainService.getSubscribeListByUserId(circleMemberBO);
         List<ShareCircleDTO> dtoList = CircleDTOConverter.INSTANCE.bos2dtos(circleBOList);

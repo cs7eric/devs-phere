@@ -13,17 +13,17 @@ import java.io.Serializable;
 @Data
 public class ShareCircleMemberDTO implements Serializable {
     private static final long serialVersionUID = 321419416165706028L;
-/**
+    /**
      * ID
      */
     private Long id;
-/**
+    /**
      * 圈子id
      */
     private Long circleId;
-/**
-     * 用户id
+    /**
+     * 用户名
      */
-    private Long userId;
+    private String userName;
 }
 

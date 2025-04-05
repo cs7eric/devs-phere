@@ -38,8 +38,9 @@ public class ShareArticleServiceImpl implements ShareArticleService {
      * @return 实例对象
      */
     @Override
-    public int insert(ShareArticle shareArticle) {
-        return this.shareArticleDao.insert(shareArticle);
+    public ShareArticle insert(ShareArticle shareArticle) {
+        this.shareArticleDao.insert(shareArticle);
+        return shareArticle;
     }
 
     /**

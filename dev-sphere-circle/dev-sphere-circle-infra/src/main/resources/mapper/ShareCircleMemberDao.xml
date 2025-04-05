@@ -5,7 +5,7 @@
     <resultMap type="com.cccs7.circle.infra.basic.entity.ShareCircleMember" id="ShareCircleMemberMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="circleId" column="circle_id" jdbcType="INTEGER"/>
-        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="userName" column="user_name" jdbcType="VARCHAR"/>
         <result property="createdBy" column="created_by" jdbcType="VARCHAR"/>
         <result property="createdTime" column="created_time" jdbcType="TIMESTAMP"/>
         <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
@@ -15,8 +15,14 @@
 
     <!--查询单个-->
     <select id="queryById" resultMap="ShareCircleMemberMap">
-        select
-id, circle_id, user_id, created_by, created_time, update_by, update_time, is_deleted
+        select id,
+               circle_id,
+               user_name,
+               created_by,
+               created_time,
+               update_by,
+               update_time,
+               is_deleted
         from share_circle_member
         where id = #{id}
     </select>
@@ -24,7 +30,7 @@ id, circle_id, user_id, created_by, created_time, update_by, update_time, is_del
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="ShareCircleMemberMap">
         select
-id, circle_id, user_id, created_by, created_time, update_by, update_time, is_deleted
+        id, circle_id, user_name, created_by, created_time, update_by, update_time, is_deleted
         from share_circle_member
         <where>
             <if test="id != null">
@@ -33,8 +39,8 @@ id, circle_id, user_id, created_by, created_time, update_by, update_time, is_del
             <if test="circleId != null">
                 and circle_id = #{circleId}
             </if>
-            <if test="userId != null">
-                and user_id = #{userId}
+            <if test="userName != null">
+                and user_name = #{userName}
             </if>
             <if test="createdBy != null and createdBy != ''">
                 and created_by = #{createdBy}
@@ -55,9 +61,10 @@ id, circle_id, user_id, created_by, created_time, update_by, update_time, is_del
         limit #{pageable.offset}, #{pageable.pageSize}
     </select>
 
-    <!--统计总行数-->
-    <select id="count" resultType="java.lang.Long">
-        select count(1)
+    <!--查询指定行数据-->
+    <select id="queryByCondition" resultMap="ShareCircleMemberMap">
+        select
+        id, circle_id, user_name, created_by, created_time, update_by, update_time, is_deleted
         from share_circle_member
         <where>
             <if test="id != null">
@@ -66,8 +73,8 @@ id, circle_id, user_id, created_by, created_time, update_by, update_time, is_del
             <if test="circleId != null">
                 and circle_id = #{circleId}
             </if>
-            <if test="userId != null">
-                and user_id = #{userId}
+            <if test="userName != null">
+                and user_name = #{userName}
             </if>
             <if test="createdBy != null and createdBy != ''">
                 and created_by = #{createdBy}
@@ -87,34 +94,84 @@ id, circle_id, user_id, created_by, created_time, update_by, update_time, is_del
         </where>
     </select>
 
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from share_circle_member
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="circleId != null">
+                and circle_id = #{circleId}
+            </if>
+            <if test="userName != null">
+                and user_name = #{userName}
+            </if>
+            <if test="createdBy != null and createdBy != ''">
+                and created_by = #{createdBy}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                and update_by = #{updateBy}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="isDeleted != null">
+                and is_deleted = #{isDeleted}
+            </if>
+        </where>
+    </select>
+    <select id="getSubscribeListByUser" resultMap="ShareCircleMemberMap">
+        select
+        id, circle_id, user_name
+        from share_circle_member
+        <where>
+            <if test="userName != null">
+                and user_name = #{userName}
+            </if>
+            <if test="isDeleted != null">
+                and is_deleted = #{isDeleted}
+            </if>
+        </where>
+    </select>
+
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into share_circle_member(circle_id, user_id, created_by, created_time, update_by, update_time, is_deleted)
-        values (#{circleId}, #{userId}, #{createdBy}, #{createdTime}, #{updateBy}, #{updateTime}, #{isDeleted})
+        insert into share_circle_member(circle_id, user_name, created_by, created_time, update_by, update_time,
+                                        is_deleted)
+        values (#{circleId}, #{userName}, #{createdBy}, #{createdTime}, #{updateBy}, #{updateTime}, #{isDeleted})
     </insert>
 
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into share_circle_member(circle_id, user_id, created_by, created_time, update_by, update_time, is_deleted)
+        insert into share_circle_member(circle_id, user_name, created_by, created_time, update_by, update_time,
+        is_deleted)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.circleId}, #{entity.userId}, #{entity.createdBy}, #{entity.createdTime}, #{entity.updateBy}, #{entity.updateTime}, #{entity.isDeleted})
+            (#{entity.circleId}, #{entity.userName}, #{entity.createdBy}, #{entity.createdTime}, #{entity.updateBy},
+            #{entity.updateTime}, #{entity.isDeleted})
         </foreach>
     </insert>
 
     <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into share_circle_member(circle_id, user_id, created_by, created_time, update_by, update_time, is_deleted)
+        insert into share_circle_member(circle_id, user_name, created_by, created_time, update_by, update_time,
+        is_deleted)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.circleId}, #{entity.userId}, #{entity.createdBy}, #{entity.createdTime}, #{entity.updateBy}, #{entity.updateTime}, #{entity.isDeleted})
+            (#{entity.circleId}, #{entity.userName}, #{entity.createdBy}, #{entity.createdTime}, #{entity.updateBy},
+            #{entity.updateTime}, #{entity.isDeleted})
         </foreach>
         on duplicate key update
-circle_id = values(circle_id),
-user_id = values(user_id),
-created_by = values(created_by),
-created_time = values(created_time),
-update_by = values(update_by),
-update_time = values(update_time),
-is_deleted = values(is_deleted)
+        circle_id = values(circle_id),
+        user_name = values(user_name),
+        created_by = values(created_by),
+        created_time = values(created_time),
+        update_by = values(update_by),
+        update_time = values(update_time),
+        is_deleted = values(is_deleted)
     </insert>
 
     <!--通过主键修改数据-->
@@ -124,8 +181,8 @@ is_deleted = values(is_deleted)
             <if test="circleId != null">
                 circle_id = #{circleId},
             </if>
-            <if test="userId != null">
-                user_id = #{userId},
+            <if test="userName != null">
+                user_name = #{userName},
             </if>
             <if test="createdBy != null and createdBy != ''">
                 created_by = #{createdBy},
@@ -148,7 +205,9 @@ is_deleted = values(is_deleted)
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from share_circle_member where id = #{id}
+        delete
+        from share_circle_member
+        where id = #{id}
     </delete>
 
 </mapper>

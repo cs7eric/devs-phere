@@ -21,9 +21,9 @@ public class ShareCircleMemberBO implements Serializable {
      * 圈子id
      */
     private Long circleId;
-/**
-     * 用户id
+    /**
+     * 用户名
      */
-    private Long userId;
+    private String userName;
 }
 

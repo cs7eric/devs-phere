@@ -30,8 +30,9 @@ public class ArticleController {
 
             Preconditions.checkNotNull(shareArticleDTO.getTitle(), "文章标题不能为空");
             Preconditions.checkNotNull(shareArticleDTO.getContent(), "文章内容不能为空");
-            Preconditions.checkNotNull(shareArticleDTO.getAuthorId(), "作者ID不能为空");
+            Preconditions.checkNotNull(shareArticleDTO.getUserName(), "作者名不能为空");
             Preconditions.checkNotNull(shareArticleDTO.getCircleId(), "所属圈子不能为空");
+            Preconditions.checkNotNull(shareArticleDTO.getLabelList(), "标签不能为空");
 
 
             ShareArticleBO articleBO = ArticleDTOConverter.INSTANCE.dto2bo(shareArticleDTO);

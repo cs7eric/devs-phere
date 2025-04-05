@@ -5,7 +5,7 @@
     <resultMap type="com.cccs7.circle.infra.basic.entity.ShareArticleLabelMapping" id="ShareArticleLabelMappingMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="articleId" column="article_id" jdbcType="INTEGER"/>
-        <result property="labelId" column="label_id" jdbcType="INTEGER"/>
+        <result property="labelName" column="label_name" jdbcType="VARCHAR"/>
         <result property="createdBy" column="created_by" jdbcType="VARCHAR"/>
         <result property="createdTime" column="created_time" jdbcType="TIMESTAMP"/>
         <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
@@ -16,7 +16,7 @@
     <!--查询单个-->
     <select id="queryById" resultMap="ShareArticleLabelMappingMap">
         select
-id, article_id, label_id, created_by, created_time, update_by, update_time, is_deleted
+id, article_id, label_name, created_by, created_time, update_by, update_time, is_deleted
         from share_article_label_mapping
         where id = #{id}
     </select>
@@ -24,7 +24,7 @@ id, article_id, label_id, created_by, created_time, update_by, update_time, is_d
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="ShareArticleLabelMappingMap">
         select
-id, article_id, label_id, created_by, created_time, update_by, update_time, is_deleted
+id, article_id, label_name, created_by, created_time, update_by, update_time, is_deleted
         from share_article_label_mapping
         <where>
             <if test="id != null">
@@ -33,8 +33,8 @@ id, article_id, label_id, created_by, created_time, update_by, update_time, is_d
             <if test="articleId != null">
                 and article_id = #{articleId}
             </if>
-            <if test="labelId != null">
-                and label_id = #{labelId}
+            <if test="labelName != null">
+                and label_name = #{labelName}
             </if>
             <if test="createdBy != null and createdBy != ''">
                 and created_by = #{createdBy}
@@ -66,8 +66,8 @@ id, article_id, label_id, created_by, created_time, update_by, update_time, is_d
             <if test="articleId != null">
                 and article_id = #{articleId}
             </if>
-            <if test="labelId != null">
-                and label_id = #{labelId}
+            <if test="labelName != null">
+                and label_name = #{labelName}
             </if>
             <if test="createdBy != null and createdBy != ''">
                 and created_by = #{createdBy}
@@ -89,27 +89,27 @@ id, article_id, label_id, created_by, created_time, update_by, update_time, is_d
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into share_article_label_mapping(article_id, label_id, created_by, created_time, update_by, update_time, is_deleted)
-        values (#{articleId}, #{labelId}, #{createdBy}, #{createdTime}, #{updateBy}, #{updateTime}, #{isDeleted})
+        insert into share_article_label_mapping(article_id, label_name, created_by, created_time, update_by, update_time, is_deleted)
+        values (#{articleId}, #{labelName}, #{createdBy}, #{createdTime}, #{updateBy}, #{updateTime}, #{isDeleted})
     </insert>
 
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into share_article_label_mapping(article_id, label_id, created_by, created_time, update_by, update_time, is_deleted)
+        insert into share_article_label_mapping(article_id, label_name, created_by, created_time, update_by, update_time, is_deleted)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.articleId}, #{entity.labelId}, #{entity.createdBy}, #{entity.createdTime}, #{entity.updateBy}, #{entity.updateTime}, #{entity.isDeleted})
+        (#{entity.articleId}, #{entity.labelName}, #{entity.createdBy}, #{entity.createdTime}, #{entity.updateBy}, #{entity.updateTime}, #{entity.isDeleted})
         </foreach>
     </insert>
 
     <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into share_article_label_mapping(article_id, label_id, created_by, created_time, update_by, update_time, is_deleted)
+        insert into share_article_label_mapping(article_id, label_name, created_by, created_time, update_by, update_time, is_deleted)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.articleId}, #{entity.labelId}, #{entity.createdBy}, #{entity.createdTime}, #{entity.updateBy}, #{entity.updateTime}, #{entity.isDeleted})
+            (#{entity.articleId}, #{entity.labelName}, #{entity.createdBy}, #{entity.createdTime}, #{entity.updateBy}, #{entity.updateTime}, #{entity.isDeleted})
         </foreach>
         on duplicate key update
 article_id = values(article_id),
-label_id = values(label_id),
+label_name = values(label_name),
 created_by = values(created_by),
 created_time = values(created_time),
 update_by = values(update_by),
@@ -124,8 +124,8 @@ is_deleted = values(is_deleted)
             <if test="articleId != null">
                 article_id = #{articleId},
             </if>
-            <if test="labelId != null">
-                label_id = #{labelId},
+            <if test="labelName != null">
+                label_name = #{labelName},
             </if>
             <if test="createdBy != null and createdBy != ''">
                 created_by = #{createdBy},

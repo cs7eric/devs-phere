@@ -11,8 +11,10 @@
 
     <!--查询单个-->
     <select id="queryById" resultMap="SensitiveWordsMap">
-        select
-id, words, type, is_deleted
+        select id,
+               words,
+               type,
+               is_deleted
         from sensitive_words
         where id = #{id}
     </select>

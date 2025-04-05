@@ -18,13 +18,13 @@ public class CircleActionDTO {
     /**
      * 用户ID
      */
-    private Long UserId;
+    private String userName;
 
 
     /**
      * 圈子ID
      */
-    private Long CircleId;
+    private Long circleId;
 
 
     /**

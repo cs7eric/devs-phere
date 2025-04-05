@@ -27,7 +27,7 @@ public interface ShareArticleService {
      * @param shareArticle 实例对象
      * @return 实例对象
      */
-    int insert(ShareArticle shareArticle);
+    ShareArticle insert(ShareArticle shareArticle);
 
     /**
      * 修改数据

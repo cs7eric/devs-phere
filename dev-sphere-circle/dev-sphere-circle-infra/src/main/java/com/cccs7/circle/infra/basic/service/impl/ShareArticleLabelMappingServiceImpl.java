@@ -1,11 +1,14 @@
 package com.cccs7.circle.infra.basic.service.impl;
 
+import com.cccs7.circle.infra.basic.entity.ShareArticle;
 import com.cccs7.circle.infra.basic.entity.ShareArticleLabelMapping;
 import com.cccs7.circle.infra.basic.mapper.ShareArticleLabelMappingDao;
 import com.cccs7.circle.infra.basic.service.ShareArticleLabelMappingService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 文章标签关系表(ShareArticleLabelMapping)表服务实现类
@@ -63,5 +66,19 @@ public class ShareArticleLabelMappingServiceImpl implements ShareArticleLabelMap
     @Override
     public boolean deleteById(Long id) {
         return this.shareArticleLabelMappingDao.deleteById(id) > 0;
+    }
+
+    @Override
+    public void batchInsert(ShareArticle article, List<String> labelList) {
+
+        Long articleId = article.getId();
+        List<ShareArticleLabelMapping> mappingList = labelList.stream().map(labelName -> {
+            ShareArticleLabelMapping articleLabelMapping = new ShareArticleLabelMapping();
+            articleLabelMapping.setArticleId(articleId);
+            articleLabelMapping.setLabelName(labelName);
+            articleLabelMapping.setIsDeleted(0);
+            return articleLabelMapping;
+        }).collect(Collectors.toList());
+        this.shareArticleLabelMappingDao.insertBatch(mappingList);
     }
 }

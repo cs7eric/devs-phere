@@ -21,7 +21,7 @@ public class ShareArticleLabelMappingDTO {
     /**
      * 标签id
      */
-    private Long labelId;
+    private String labelName;
 
     private Integer isDeleted;
 

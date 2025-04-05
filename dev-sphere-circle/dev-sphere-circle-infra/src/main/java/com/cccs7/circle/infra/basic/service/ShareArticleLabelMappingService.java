@@ -1,6 +1,9 @@
 package com.cccs7.circle.infra.basic.service;
 
+import com.cccs7.circle.infra.basic.entity.ShareArticle;
 import com.cccs7.circle.infra.basic.entity.ShareArticleLabelMapping;
+
+import java.util.List;
 
 /**
  * 文章标签关系表(ShareArticleLabelMapping)表服务接口
@@ -43,4 +46,11 @@ public interface ShareArticleLabelMappingService {
      */
     boolean deleteById(Long id);
 
+    /**
+     * 批量插入
+     *
+     * @param article   文章
+     * @param labelList 标签列表
+     */
+    void batchInsert(ShareArticle article, List<String> labelList);
 }

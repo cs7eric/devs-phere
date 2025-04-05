@@ -21,7 +21,8 @@ public class ShareArticleBO implements Serializable {
     /**
      * 作者id
      */
-    private Long authorId;
+    private String userName;
+
     /**
      * 圈子ID
      */
@@ -53,6 +54,6 @@ public class ShareArticleBO implements Serializable {
     private Integer isDeleted;
 
 
-    private List<ShareArticleLabelMappingBO> labelMappingBOList;
+    private List<String> labelList;
 }
 

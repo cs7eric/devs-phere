@@ -1,6 +1,9 @@
 package com.cccs7.circle.infra.basic.service;
 
+import com.cccs7.circle.infra.basic.entity.ShareCircle;
 import com.cccs7.circle.infra.basic.entity.ShareCircleMember;
+
+import java.util.List;
 
 /**
  * 圈子成员信息(ShareCircleMember)表服务接口
@@ -42,4 +45,11 @@ public interface ShareCircleMemberService {
      */
     boolean deleteById(Long id);
 
+    /**
+     * 查询订阅列表通过用户
+     *
+     * @param userName 用户名
+     * @return {@link List }<{@link ShareCircle }>
+     */
+    List<ShareCircleMember> getSubscribeListByUser(String userName);
 }

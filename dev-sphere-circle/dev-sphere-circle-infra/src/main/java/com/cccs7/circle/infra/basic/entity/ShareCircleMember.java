@@ -2,8 +2,8 @@ package com.cccs7.circle.infra.basic.entity;
 
 import lombok.Data;
 
-import java.util.Date;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 圈子成员信息(ShareCircleMember)实体类
@@ -14,35 +14,35 @@ import java.io.Serializable;
 @Data
 public class ShareCircleMember implements Serializable {
     private static final long serialVersionUID = 321419416165706028L;
-/**
+    /**
      * ID
      */
     private Long id;
-/**
+    /**
      * 圈子id
      */
     private Long circleId;
-/**
-     * 用户id
+    /**
+     * 用户名
      */
-    private Long userId;
-/**
+    private String userName;
+    /**
      * 创建人
      */
     private String createdBy;
-/**
+    /**
      * 创建时间
      */
     private Date createdTime;
-/**
+    /**
      * 更新人
      */
     private String updateBy;
-/**
+    /**
      * 更新时间
      */
     private Date updateTime;
-/**
+    /**
      * 是否被删除 0为删除 1已删除
      */
     private Integer isDeleted;

@@ -21,7 +21,7 @@ public class ShareArticleDTO implements Serializable {
     /**
      * 作者id
      */
-    private Long authorId;
+    private String userName;
     /**
      * 圈子ID
      */
@@ -52,7 +52,7 @@ public class ShareArticleDTO implements Serializable {
      */
     private Integer isDeleted;
 
-    private List<ShareArticleLabelMappingDTO> labelMappingDTOList;
+    private List<String> labelList;
 
 }
 
