@@ -23,6 +23,12 @@ public class ShareArticleBO implements Serializable {
      */
     private String userName;
 
+
+    /**
+     * 文章摘要
+     */
+    private String articleAbstract;
+
     /**
      * 圈子ID
      */

@@ -2,6 +2,8 @@ package com.cccs7.circle.infra.basic.service;
 
 import com.cccs7.circle.infra.basic.entity.ShareCircle;
 
+import java.util.List;
+
 /**
  * 圈子信息(ShareCircle)表服务接口
  *
@@ -43,4 +45,11 @@ public interface ShareCircleService {
      */
     boolean deleteById(Long id);
 
+    /**
+     * 按条件查询
+     *
+     * @param circle 圆
+     * @return {@link List }<{@link ShareCircle }>
+     */
+    List<ShareCircle> queryByCondition(ShareCircle circle);
 }

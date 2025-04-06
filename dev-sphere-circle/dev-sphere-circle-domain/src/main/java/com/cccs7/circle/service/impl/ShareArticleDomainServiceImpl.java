@@ -57,6 +57,26 @@ public class ShareArticleDomainServiceImpl implements ShareArticleDomainService 
 
     @Override
     public List<ShareArticleBO> query(ShareArticleBO articleBO) {
-        return null;
+        ShareArticle article = ArticleBOConverter.INSTANCE.bo2po(articleBO);
+        List<ShareArticle> articleList = articleService.queryByCondition(article);
+        List<ShareArticleBO> articleBOList = ArticleBOConverter.INSTANCE.pos2bos(articleList);
+
+        return articleBOList;
+    }
+
+    /**
+     * 查询文章通过圈子
+     *
+     * @param articleBO 篇博
+     * @return {@link List }<{@link ShareArticleBO }>
+     */
+    @Override
+    public List<ShareArticleBO> getArticleByCircle(ShareArticleBO articleBO) {
+
+        ShareArticle article = ArticleBOConverter.INSTANCE.bo2po(articleBO);
+        List<ShareArticle> articleList = articleService.queryByCondition(article);
+        List<ShareArticleBO> articleBOList = ArticleBOConverter.INSTANCE.pos2bos(articleList);
+
+        return articleBOList;
     }
 }

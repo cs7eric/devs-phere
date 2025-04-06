@@ -71,5 +71,12 @@ public interface ShareCircleDao {
      */
     int deleteById(Long id);
 
+    /**
+     * 按条件查询
+     *
+     * @param circle 圆
+     * @return {@link List }<{@link ShareCircle }>
+     */
+    List<ShareCircle> queryByCondition(ShareCircle circle);
 }
 

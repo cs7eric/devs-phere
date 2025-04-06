@@ -35,6 +35,12 @@ public class ShareArticle implements Serializable {
      * 文章内容
      */
     private String content;
+
+    /**
+     * 文章摘要
+     */
+    private String articleAbstract;
+
     /**
      * 收藏数
      */

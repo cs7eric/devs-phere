@@ -38,4 +38,12 @@ public interface ShareArticleDomainService {
     Boolean delete(ShareArticleBO shareArticleBO);
 
     List<ShareArticleBO> query(ShareArticleBO articleBO);
+
+    /**
+     * 查询文章通过圈子ID
+     *
+     * @param articleBO 篇博
+     * @return {@link List }<{@link ShareArticleBO }>
+     */
+    List<ShareArticleBO> getArticleByCircle(ShareArticleBO articleBO);
 }

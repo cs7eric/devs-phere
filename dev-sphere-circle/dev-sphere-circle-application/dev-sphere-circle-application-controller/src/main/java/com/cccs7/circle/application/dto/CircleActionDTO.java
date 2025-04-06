@@ -37,4 +37,6 @@ public class CircleActionDTO {
      * 圈子名字
      */
     private String circleName;
+
+    private Long categoryId;
 }

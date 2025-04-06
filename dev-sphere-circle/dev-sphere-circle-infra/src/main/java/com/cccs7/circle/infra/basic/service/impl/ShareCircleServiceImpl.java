@@ -6,6 +6,7 @@ import com.cccs7.circle.infra.basic.service.ShareCircleService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 圈子信息(ShareCircle)表服务实现类
@@ -62,5 +63,10 @@ public class ShareCircleServiceImpl implements ShareCircleService {
     @Override
     public boolean deleteById(Long id) {
         return this.shareCircleDao.deleteById(id) > 0;
+    }
+
+    @Override
+    public List<ShareCircle> queryByCondition(ShareCircle circle) {
+        return this.shareCircleDao.queryByCondition(circle);
     }
 }

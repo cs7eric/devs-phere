@@ -68,7 +68,6 @@ public class ArticleController {
             if (log.isInfoEnabled()) {
                 log.info("ArticleController.query.dto:{}", shareArticleDTO);
             }
-
             ShareArticleBO articleBO =ArticleDTOConverter.INSTANCE.dto2bo(shareArticleDTO);
             List<ShareArticleBO> articleBOList = articleDomainService.query(articleBO);
             List<ShareArticleDTO> dtoList = ArticleDTOConverter.INSTANCE.bos2dtos(articleBOList);
@@ -96,4 +95,28 @@ public class ArticleController {
             return Result.fail(false);
         }
     }
+
+    /**
+     * 查询文章通过圈子ID
+     *
+     * @param shareArticleDTO 分享文章
+     * @return {@link Result }<{@link List }<{@link ShareArticleDTO }>>
+     */
+    @PostMapping("/getArticleByCircle")
+    public Result<List<ShareArticleDTO>> getArticleByCircle(@RequestBody ShareArticleDTO shareArticleDTO) {
+        try {
+            if (log.isInfoEnabled()) {
+                log.info("ArticleController.getArticleByCircle.dto:{}", shareArticleDTO);
+            }
+
+            ShareArticleBO articleBO =ArticleDTOConverter.INSTANCE.dto2bo(shareArticleDTO);
+            List<ShareArticleBO> articleBOList = articleDomainService.getArticleByCircle(articleBO);
+            List<ShareArticleDTO> dtoList = ArticleDTOConverter.INSTANCE.bos2dtos(articleBOList);
+            return Result.ok(dtoList);
+        } catch (Exception e) {
+            log.error("ArticleController.query.error", e);
+            return Result.fail(Collections.emptyList());
+        }
+    }
+
 }

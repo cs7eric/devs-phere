@@ -83,4 +83,17 @@ public class CircleDomainServiceImpl
 
         return true;
     }
+
+    @Override
+    public List<ShareCircleBO> getCircleListByCategory(ShareCircleBO circleBO) {
+        if (log.isInfoEnabled()) {
+            log.info("CircleDomainServiceImpl.getCircleListByCategory.bo:{}", circleBO);
+        }
+        ShareCircle circle = CircleBOConverter.INSTANCE.bo2po(circleBO);
+        circle.setIsDeleted(0);
+        List<ShareCircle> circleList = circleService.queryByCondition(circle);
+        List<ShareCircleBO> circleBOList = CircleBOConverter.INSTANCE.pos2bos(circleList);
+
+        return circleBOList;
+    }
 }

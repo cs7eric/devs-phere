@@ -8,6 +8,7 @@
         <result property="circleId" column="circle_id" jdbcType="INTEGER"/>
         <result property="title" column="title" jdbcType="VARCHAR"/>
         <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="articleAbstract" column="article_abstract" jdbcType="VARCHAR"/>
         <result property="collectCount" column="collect_count" jdbcType="INTEGER"/>
         <result property="likeCount" column="like_count" jdbcType="INTEGER"/>
         <result property="replyCount" column="reply_count" jdbcType="INTEGER"/>
@@ -21,7 +22,7 @@
     <!--查询单个-->
     <select id="queryById" resultMap="ShareArticleMap">
         select
-id, user_name, circle_id, title, content, collect_count, like_count, reply_count, created_by, created_time, update_by, update_time, is_deleted
+id, user_name, article_abstract, circle_id, title, content, collect_count, like_count, reply_count, created_by, created_time, update_by, update_time, is_deleted
         from share_article
         where id = #{id}
     </select>
@@ -29,7 +30,7 @@ id, user_name, circle_id, title, content, collect_count, like_count, reply_count
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="ShareArticleMap">
         select
-id, user_name, circle_id, title, content, collect_count, like_count, reply_count, created_by, created_time, update_by, update_time, is_deleted
+id, user_name, article_abstract,circle_id, title, content, collect_count, like_count, reply_count, created_by, created_time, update_by, update_time, is_deleted
         from share_article
         <where>
             <if test="id != null">
@@ -123,7 +124,7 @@ id, user_name, circle_id, title, content, collect_count, like_count, reply_count
     </select>
     <select id="queryByCondition" resultMap="ShareArticleMap">
         select
-        id, user_name, circle_id, title, content, collect_count, like_count, reply_count, created_by, created_time,
+        id, user_name, article_abstract,circle_id, title, content, collect_count, like_count, reply_count, created_by, created_time,
         update_by, update_time, is_deleted
         from share_article
         <where>
@@ -171,12 +172,12 @@ id, user_name, circle_id, title, content, collect_count, like_count, reply_count
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into share_article(user_name, circle_id, title, content, collect_count, like_count, reply_count, created_by, created_time, update_by, update_time, is_deleted)
+        insert into share_article(user_name, circle_id, title, content, collect_count,article_abstract, like_count, reply_count, created_by, created_time, update_by, update_time, is_deleted)
         values (#{userName}, #{circleId}, #{title}, #{content}, #{collectCount}, #{likeCount}, #{replyCount}, #{createdBy}, #{createdTime}, #{updateBy}, #{updateTime}, #{isDeleted})
     </insert>
 
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into share_article(user_name, circle_id, title, content, collect_count, like_count, reply_count, created_by, created_time, update_by, update_time, is_deleted)
+        insert into share_article(user_name, circle_id, title, content, collect_count,article_abstract, like_count, reply_count, created_by, created_time, update_by, update_time, is_deleted)
         values
         <foreach collection="entities" item="entity" separator=",">
         (#{entity.userName}, #{entity.circleId}, #{entity.title}, #{entity.content}, #{entity.collectCount}, #{entity.likeCount}, #{entity.replyCount}, #{entity.createdBy}, #{entity.createdTime}, #{entity.updateBy}, #{entity.updateTime}, #{entity.isDeleted})
@@ -184,7 +185,7 @@ id, user_name, circle_id, title, content, collect_count, like_count, reply_count
     </insert>
 
     <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into share_article(user_name, circle_id, title, content, collect_count, like_count, reply_count, created_by, created_time, update_by, update_time, is_deleted)
+        insert into share_article(user_name, circle_id, title, content, collect_count, article_abstract,like_count, reply_count, created_by, created_time, update_by, update_time, is_deleted)
         values
         <foreach collection="entities" item="entity" separator=",">
             (#{entity.userName}, #{entity.circleId}, #{entity.title}, #{entity.content}, #{entity.collectCount}, #{entity.likeCount}, #{entity.replyCount}, #{entity.createdBy}, #{entity.createdTime}, #{entity.updateBy}, #{entity.updateTime}, #{entity.isDeleted})

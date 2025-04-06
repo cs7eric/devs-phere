@@ -30,6 +30,12 @@ public class ShareArticleDTO implements Serializable {
      * 文章标题
      */
     private String title;
+
+    /**
+     * 文章摘要
+     */
+    private String articleAbstract;
+
     /**
      * 文章内容
      */

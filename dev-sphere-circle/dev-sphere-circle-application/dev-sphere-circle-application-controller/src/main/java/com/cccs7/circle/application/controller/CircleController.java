@@ -132,5 +132,22 @@ public class CircleController {
         return Result.ok(dtoList);
     }
 
+    @PostMapping("getCircleListByCategory")
+    public Result<List<ShareCircleDTO>> getCircleListByCategory(@RequestBody ShareCircleDTO shareCircleDTO) {
+
+        if (log.isInfoEnabled()) {
+            log.info("CircleController.getCircleListByCategory.dto:{}", shareCircleDTO);
+        }
+
+        Preconditions.checkNotNull(shareCircleDTO.getCategoryId(), "所属分类不能为空");
+        ShareCircleBO circleBO = CircleDTOConverter.INSTANCE.dto2bo(shareCircleDTO);
+
+        List<ShareCircleBO> circleBOList = circleDomainService.getCircleListByCategory(circleBO);
+        List<ShareCircleDTO> dtoList = CircleDTOConverter.INSTANCE.bos2dtos(circleBOList);
+        return Result.ok(dtoList);
+    }
+
+
+
 
 }
