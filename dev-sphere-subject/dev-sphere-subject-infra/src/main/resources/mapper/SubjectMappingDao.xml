@@ -94,7 +94,7 @@ id, subject_id, category_id, label_id, created_by, created_time, update_by, upda
         </where>
     </select>
     <select id="queryDistinctLabelId" resultMap="SubjectMappingMap">
-        select distinct label_id
+        select distinct subject_id, label_id
         from subject_mapping
         <where>
             <if test="id != null">

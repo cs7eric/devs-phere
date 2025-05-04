@@ -158,6 +158,24 @@ public class SubjectInfoDomainServiceImpl
         pageResult.setRecords(subjectInfoBOList);
         return pageResult;
     }
+
+    @Override
+    public List<SubjectInfoBO> getSubjectListByCategory(SubjectInfoBO subjectInfoBO) {
+
+        if (log.isInfoEnabled()) {
+            log.info("SubjectInfoDomainService.getSubjectListByCategory.bo:{}", JSON.toJSONString(subjectInfoBO));
+        }
+
+        SubjectInfo subjectInfo = SubjectInfoConverter.INSTANCE.bo2po(subjectInfoBO);
+
+        SubjectMapping subjectMapping = new SubjectMapping();
+        subjectMapping.setLabelId(subjectInfoBO.getLabelId());
+        List<SubjectMapping> mappingList = subjectMappingService.queryLabelId(subjectMapping);
+        List<Long> subjectIdList = mappingList.stream().map(SubjectMapping::getSubjectId).collect(Collectors.toList());
+        List<SubjectInfo> subjectInfoList = subjectInfoService.getSubjectsByIds(subjectIdList);
+        List<SubjectInfoBO> subjectInfoBOList = SubjectInfoConverter.INSTANCE.pos2bos(subjectInfoList);
+        return subjectInfoBOList;
+    }
 }
 
 

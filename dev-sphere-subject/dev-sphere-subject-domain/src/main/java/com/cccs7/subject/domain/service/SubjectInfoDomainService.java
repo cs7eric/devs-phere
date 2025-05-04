@@ -3,6 +3,8 @@ package com.cccs7.subject.domain.service;
 import com.cccs7.subject.common.entity.PageResult;
 import com.cccs7.subject.domain.entity.SubjectInfoBO;
 
+import java.util.List;
+
 /**
  * 题目领域服务
  * subjectInfo.bo.service
@@ -42,4 +44,12 @@ public interface SubjectInfoDomainService {
      * @return {@link PageResult }<{@link SubjectInfoBO }>
      */
     PageResult<SubjectInfoBO> getSceneSubjectPage(SubjectInfoBO subjectInfoBO);
+
+    /**
+     * 通过分类查询题目列表
+     *
+     * @param subjectInfoBO 题目信息薄
+     * @return {@link List }<{@link SubjectInfoBO }>
+     */
+    List<SubjectInfoBO> getSubjectListByCategory(SubjectInfoBO subjectInfoBO);
 }
