@@ -62,5 +62,4 @@ public interface AuthUserDomainService {
      */
     SaTokenInfo doLogin(String validCode);
 
-    SaTokenInfo login(AuthUserBO authUserBO);
 }

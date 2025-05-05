@@ -6,6 +6,7 @@ import com.cccs7.subject.infra.basic.service.SubjectInfoService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -127,6 +128,9 @@ public class SubjectInfoServiceImpl implements SubjectInfoService {
      */
     @Override
     public List<SubjectInfo> getSubjectsByIds(List<Long> subjectIdList) {
+        if (subjectIdList == null || subjectIdList.isEmpty()) {
+            return Collections.emptyList(); // or throw an exception
+        }
         return this.subjectInfoDao.getSubjectsByIds(subjectIdList);
     }
 }
