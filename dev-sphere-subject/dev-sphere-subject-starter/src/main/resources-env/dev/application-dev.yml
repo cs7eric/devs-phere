@@ -31,6 +31,10 @@ spring:
           enabled: true
         config:
           enabled: true
-
+es:
+  cluster:
+    esConfigs[0]:
+      name: 6570b6c6d1dd
+      nodes: 14.103.134.185:9200
 logging:
   config: classpath:log4j2-spring.xml
