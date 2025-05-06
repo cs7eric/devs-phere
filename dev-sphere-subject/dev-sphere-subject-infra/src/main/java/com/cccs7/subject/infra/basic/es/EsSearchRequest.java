@@ -1,5 +1,6 @@
 package com.cccs7.subject.infra.basic.es;
 
+import lombok.Data;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.sort.SortOrder;
@@ -10,6 +11,7 @@ import org.elasticsearch.search.sort.SortOrder;
  * @author cccs7 - csq020611@gmail.com
  * @date 2025/05/07
  */
+@Data
 public class EsSearchRequest {
 
     /**
