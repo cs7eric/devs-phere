@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.cccs7.subject.common.entity.PageResult;
 import com.cccs7.subject.common.enums.IsDeletedFlagEnum;
 import com.cccs7.subject.common.enums.SubjectInfoTypeEnum;
+import com.cccs7.subject.common.util.IdWorkerUtil;
 import com.cccs7.subject.domain.convert.SubjectInfoConverter;
 import com.cccs7.subject.domain.entity.SubjectInfoBO;
 import com.cccs7.subject.domain.entity.SubjectOptionBO;
@@ -12,15 +13,19 @@ import com.cccs7.subject.domain.handler.subject.SubjectTypeHandler;
 import com.cccs7.subject.domain.handler.subject.SubjectTypeHandlerFactory;
 import com.cccs7.subject.domain.service.SubjectInfoDomainService;
 import com.cccs7.subject.infra.basic.entity.SubjectInfo;
+import com.cccs7.subject.infra.basic.entity.SubjectInfoEs;
 import com.cccs7.subject.infra.basic.entity.SubjectLabel;
 import com.cccs7.subject.infra.basic.entity.SubjectMapping;
+import com.cccs7.subject.infra.basic.service.SubjectEsService;
 import com.cccs7.subject.infra.basic.service.SubjectInfoService;
 import com.cccs7.subject.infra.basic.service.SubjectLabelService;
 import com.cccs7.subject.infra.basic.service.SubjectMappingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,8 +53,11 @@ public class SubjectInfoDomainServiceImpl
     @Resource
     private SubjectLabelService subjectLabelService;
 
+    @Resource
+    private SubjectEsService subjectEsService;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void add(SubjectInfoBO subjectInfoBO) {
         if (log.isInfoEnabled()) {
             log.info("SubjectInfoDomainService.add.bo:{}", JSON.toJSONString(subjectInfoBO));
@@ -74,8 +82,18 @@ public class SubjectInfoDomainServiceImpl
                 mappingList.add(subjectMapping);
             });
         });
-
         subjectMappingService.batchInsert(mappingList);
+
+        //同步到 es
+        SubjectInfoEs subjectInfoEs = new SubjectInfoEs();
+        subjectInfoEs.setDocId(new IdWorkerUtil(1, 1, 1).nextId());
+        subjectInfoEs.setSubjectId(subjectInfo.getId());
+        subjectInfoEs.setSubjectAnswer(subjectInfoBO.getSubjectAnswer());
+        subjectInfoEs.setCreateTime(new Date().getTime());
+        subjectInfoEs.setCreateUser("cccs7");
+        subjectInfoEs.setSubjectName(subjectInfo.getSubjectName());
+        subjectInfoEs.setSubjectType(subjectInfo.getSubjectType());
+        subjectEsService.insert(subjectInfoEs);
     }
 
 
