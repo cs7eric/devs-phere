@@ -177,3 +177,4 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
         return labelMap;
     }
 }
+
