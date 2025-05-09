@@ -17,6 +17,14 @@
         <result property="isDeleted" column="is_deleted" jdbcType="INTEGER"/>
     </resultMap>
 
+    <select id="getSubjectsByIds" resultMap="SubjectInfoMap">
+        SELECT * FROM subject_info
+        WHERE id IN
+        <foreach item="id" index="index" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
     <!--查询单个-->
     <select id="queryById" resultMap="SubjectInfoMap">
         select id,
@@ -204,6 +212,26 @@
         and a.is_deleted = 0
         and b.is_deleted = 0
         limit #{start},#{pageSize}
+    </select>
+    <select id="queryByCondition" resultMap="SubjectInfoMap">
+        select a.id,
+            a.subject_name,
+            a.subject_difficult,
+            a.settle_name,
+            a.subject_type,
+            a.subject_score,
+            a.subject_parse,
+            a.created_by,
+            a.created_time,
+            a.update_by,
+            a.update_time,
+            a.is_deleted
+        from subject_info a,
+            subject_mapping b
+        where a.id = b.subject_id
+            and a.subject_type = #{subjectType}
+            and a.is_deleted = 0
+            and b.is_deleted = 0
     </select>
 
 

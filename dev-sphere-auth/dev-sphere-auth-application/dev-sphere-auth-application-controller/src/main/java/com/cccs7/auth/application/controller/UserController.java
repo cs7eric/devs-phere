@@ -59,7 +59,6 @@ public class UserController {
     }
 
 
-
     /**
      * 更新用户信息
      *
@@ -76,7 +75,7 @@ public class UserController {
 
             checkUserInfo(authUserDTO);
             AuthUserBO authUserBO = AuthUserDTOConverter.INSTANCE.dto2bo(authUserDTO);
-            return Result.ok( authUserDomainService.update(authUserBO));
+            return Result.ok(authUserDomainService.update(authUserBO));
 
 
         } catch (Exception e) {
@@ -96,7 +95,7 @@ public class UserController {
             Preconditions.checkArgument(!StringUtils.isBlank(authUserDTO.getId().toString()), "ID不能为空");
 
             AuthUserBO authUserBO = AuthUserDTOConverter.INSTANCE.dto2bo(authUserDTO);
-            return Result.ok( authUserDomainService.delete(authUserBO));
+            return Result.ok(authUserDomainService.delete(authUserBO));
 
 
         } catch (Exception e) {
@@ -122,7 +121,7 @@ public class UserController {
             Preconditions.checkArgument(!StringUtils.isBlank(authUserDTO.getId().toString()), "ID不能为空");
 
             AuthUserBO authUserBO = AuthUserDTOConverter.INSTANCE.dto2bo(authUserDTO);
-            return Result.ok( authUserDomainService.changeStatus(authUserBO));
+            return Result.ok(authUserDomainService.changeStatus(authUserBO));
 
 
         } catch (Exception e) {
@@ -149,7 +148,7 @@ public class UserController {
 
             AuthUserBO authUserBO = AuthUserDTOConverter.INSTANCE.dto2bo(authUserDTO);
 
-            AuthUserBO userInfo =  authUserDomainService.getUserInfo(authUserBO);
+            AuthUserBO userInfo = authUserDomainService.getUserInfo(authUserBO);
             return Result.ok(userInfo);
 
         } catch (Exception e) {
@@ -177,13 +176,15 @@ public class UserController {
             log.error("UserController.doLogin.dto.error:{}", e.getMessage(), e);
             return Result.fail("登录失败，请重新尝试");
         }
-
     }
 
-
-    public void checkUserInfo(AuthUserDTO authUserDTO){
+    public void checkUserInfo(AuthUserDTO authUserDTO) {
 
         Preconditions.checkArgument(!StringUtils.isBlank(authUserDTO.getUserName()), "用户名不能为空");
     }
 
 }
+
+
+
+

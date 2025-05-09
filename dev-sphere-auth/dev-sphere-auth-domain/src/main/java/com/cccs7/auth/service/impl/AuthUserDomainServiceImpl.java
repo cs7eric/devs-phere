@@ -173,4 +173,5 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
         StpUtil.login(openId);
         return StpUtil.getTokenInfo();
     }
+
 }

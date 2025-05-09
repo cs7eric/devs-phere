@@ -61,4 +61,5 @@ public interface AuthUserDomainService {
      * @return {@link SaTokenInfo }
      */
     SaTokenInfo doLogin(String validCode);
+
 }

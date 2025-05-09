@@ -6,6 +6,7 @@ import com.cccs7.subject.infra.basic.service.SubjectInfoService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -112,5 +113,24 @@ public class SubjectInfoServiceImpl implements SubjectInfoService {
     @Override
     public List<SubjectInfo> queryConditionByPage(SubjectInfo subjectInfo,Integer subjectType , int start, Integer pageSize) {
         return this.subjectInfoDao.queryConditionByPage(subjectInfo, subjectType, start, pageSize);
+    }
+
+    @Override
+    public List<SubjectInfo> queryByCondition(SubjectInfo subjectInfo) {
+        return this.subjectInfoDao.queryByCondition(subjectInfo);
+    }
+
+    /**
+     * 按id获取题目
+     *
+     * @param subjectIdList 题目id列表
+     * @return {@link List }<{@link SubjectInfo }>
+     */
+    @Override
+    public List<SubjectInfo> getSubjectsByIds(List<Long> subjectIdList) {
+        if (subjectIdList == null || subjectIdList.isEmpty()) {
+            return Collections.emptyList(); // or throw an exception
+        }
+        return this.subjectInfoDao.getSubjectsByIds(subjectIdList);
     }
 }

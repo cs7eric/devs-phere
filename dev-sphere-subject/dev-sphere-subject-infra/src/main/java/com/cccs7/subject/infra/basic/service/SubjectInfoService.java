@@ -78,4 +78,20 @@ public interface SubjectInfoService {
      * @return {@link List }<{@link SubjectInfo }>
      */
     List<SubjectInfo> queryConditionByPage(SubjectInfo subjectInfo, Integer subjectType, int start, Integer pageSize);
+
+    /**
+     * 按条件查询
+     *
+     * @param subjectInfo 题目信息
+     * @return {@link List }<{@link SubjectInfo }>
+     */
+    List<SubjectInfo> queryByCondition(SubjectInfo subjectInfo);
+
+    /**
+     * 按id获取题目
+     *
+     * @param subjectIdList 题目id列表
+     * @return {@link List }<{@link SubjectInfo }>
+     */
+    List<SubjectInfo> getSubjectsByIds(List<Long> subjectIdList);
 }

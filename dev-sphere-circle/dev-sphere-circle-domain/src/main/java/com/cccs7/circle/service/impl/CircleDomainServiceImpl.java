@@ -11,6 +11,7 @@ import com.cccs7.circle.infra.basic.service.ShareCircleService;
 import com.cccs7.circle.service.CircleDomainService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -51,12 +52,16 @@ public class CircleDomainServiceImpl
     }
 
     @Override
+    @Transactional
     public boolean subscribe(ShareCircleMemberBO circleMemberBO) {
 
         if (log.isInfoEnabled()) {
             log.info("CircleDomainServiceImpl.subscribe.bo:{}", circleMemberBO);
         }
         ShareCircleMember member = CircleMemberBOConverter.INSTANCE.bo2po(circleMemberBO);
+        ShareCircle circle = circleService.queryById(circleMemberBO.getCircleId());
+        circle.setMemberCount(circle.getMemberCount() + 1);
+        circleService.update(circle);
         memberService.insert(member);
         return true;
     }
@@ -71,7 +76,7 @@ public class CircleDomainServiceImpl
 
         ShareCircle circle = CircleBOConverter.INSTANCE.bo2po(circleBO);
         circle.setIsDeleted(0);
-        circle.setMemberCount(0);
+        circle.setMemberCount(1);
         circle.setParentId(1L);
         ShareCircle insertedCircle = circleService.insert(circle);
 

@@ -143,4 +143,54 @@ public class SubjectController {
         }
     }
 
+    /**
+     * 通过分类查询题目列表
+     *
+     * @param subjectInfoDTO 题目信息dto
+     * @return {@link Result }<{@link List }<{@link SubjectInfoDTO }>>
+     */
+    @PostMapping("/getSubjectListByCategory")
+    public Result<List<SubjectInfoDTO>> getSubjectListByCategory(@RequestBody SubjectInfoDTO subjectInfoDTO) {
+        try {
+            if (log.isInfoEnabled()) {
+                log.info("SubjectCategoryController.getSubjectListByCategory.dto:{}", subjectInfoDTO);
+            }
+
+            Preconditions.checkNotNull(subjectInfoDTO.getCategoryId(), "所属分类不能为空");
+
+            SubjectInfoBO subjectInfoBO = SubjectInfoDTOConverter.INSTANCE.dto2bo(subjectInfoDTO);
+            List<SubjectInfoBO> subjectBOList = subjectInfoDomainService.getSubjectListByCategory(subjectInfoBO);
+            List<SubjectInfoDTO> dtoList = SubjectInfoDTOConverter.INSTANCE.bos2dtos(subjectBOList);
+            return Result.ok(dtoList);
+        } catch (Exception e) {
+            log.error("subjectCategoryController.getSubjectListByCategory.error:{}", e.getMessage());
+            return Result.fail(null);
+        }
+    }
+
+    /**
+     * 通过标签查询题目列表
+     *
+     * @param subjectInfoDTO 题目信息dto
+     * @return {@link Result }<{@link List }<{@link SubjectInfoDTO }>>
+     */
+    @PostMapping("/getSubjectListByLabel")
+    public Result<List<SubjectInfoDTO>> getSubjectListByLabel(@RequestBody SubjectInfoDTO subjectInfoDTO) {
+        try {
+            if (log.isInfoEnabled()) {
+                log.info("SubjectCategoryController.getSubjectListByCategory.dto:{}", subjectInfoDTO);
+            }
+
+            Preconditions.checkNotNull(subjectInfoDTO.getLabelId(), "所属标签不能为空");
+
+            SubjectInfoBO subjectInfoBO = SubjectInfoDTOConverter.INSTANCE.dto2bo(subjectInfoDTO);
+            List<SubjectInfoBO> subjectBOList = subjectInfoDomainService.getSubjectListByCategory(subjectInfoBO);
+            List<SubjectInfoDTO> dtoList = SubjectInfoDTOConverter.INSTANCE.bos2dtos(subjectBOList);
+            return Result.ok(dtoList);
+        } catch (Exception e) {
+            log.error("subjectCategoryController.getSubjectListByCategory.error:{}", e.getMessage());
+            return Result.fail(null);
+        }
+    }
+
 }

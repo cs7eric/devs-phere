@@ -120,5 +120,21 @@ public interface SubjectInfoDao {
                                            @Param("subjectType") Integer subjectType,
                                            @Param("start") int start,
                                            @Param("pageSize") Integer pageSize);
+
+    /**
+     * 按条件查询
+     *
+     * @param subjectInfo 题目信息
+     * @return {@link List }<{@link SubjectInfo }>
+     */
+    List<SubjectInfo> queryByCondition(SubjectInfo subjectInfo);
+
+    /**
+     * 批量按id获取题目
+     *
+     * @param ids id
+     * @return {@link List }<{@link SubjectInfo }>
+     */
+    List<SubjectInfo> getSubjectsByIds(@Param("ids") List<Long> ids);
 }
 

@@ -173,7 +173,7 @@ id, user_name, article_abstract,circle_id, title, content, collect_count, like_c
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
         insert into share_article(user_name, circle_id, title, content, collect_count,article_abstract, like_count, reply_count, created_by, created_time, update_by, update_time, is_deleted)
-        values (#{userName}, #{circleId}, #{title}, #{content}, #{collectCount}, #{likeCount}, #{replyCount}, #{createdBy}, #{createdTime}, #{updateBy}, #{updateTime}, #{isDeleted})
+        values (#{userName}, #{circleId}, #{title}, #{content}, #{collectCount}, #{articleAbstract}, #{likeCount}, #{replyCount}, #{createdBy}, #{createdTime}, #{updateBy}, #{updateTime}, #{isDeleted})
     </insert>
 
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
