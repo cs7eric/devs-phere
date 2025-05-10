@@ -194,6 +194,16 @@ public class SubjectInfoDomainServiceImpl
         List<SubjectInfoBO> subjectInfoBOList = SubjectInfoConverter.INSTANCE.pos2bos(subjectInfoList);
         return subjectInfoBOList;
     }
+
+
+    @Override
+    public PageResult<SubjectInfoEs> getSubjectPageBySearch(SubjectInfoBO subjectInfoBO) {
+        SubjectInfoEs subjectInfoEs = new SubjectInfoEs();
+        subjectInfoEs.setPageNo(subjectInfoBO.getPageNo());
+        subjectInfoEs.setPageSize(subjectInfoBO.getPageSize());
+        subjectInfoEs.setKeyWord(subjectInfoBO.getKeyWord());
+        return subjectEsService.querySubjectList(subjectInfoEs);
+    }
 }
 
 

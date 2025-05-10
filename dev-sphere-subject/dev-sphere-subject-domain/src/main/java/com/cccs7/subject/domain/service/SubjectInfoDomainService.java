@@ -2,6 +2,7 @@ package com.cccs7.subject.domain.service;
 
 import com.cccs7.subject.common.entity.PageResult;
 import com.cccs7.subject.domain.entity.SubjectInfoBO;
+import com.cccs7.subject.infra.basic.entity.SubjectInfoEs;
 
 import java.util.List;
 
@@ -52,4 +53,12 @@ public interface SubjectInfoDomainService {
      * @return {@link List }<{@link SubjectInfoBO }>
      */
     List<SubjectInfoBO> getSubjectListByCategory(SubjectInfoBO subjectInfoBO);
+
+    /**
+     * 全文检索
+     *
+     * @param subjectInfoBO 题目信息
+     * @return {@link PageResult }<{@link SubjectInfoEs }>
+     */
+    PageResult<SubjectInfoEs> getSubjectPageBySearch(SubjectInfoBO subjectInfoBO);
 }

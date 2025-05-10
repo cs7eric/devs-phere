@@ -9,6 +9,7 @@ import com.cccs7.subject.domain.entity.SubjectAnswerBO;
 import com.cccs7.subject.domain.entity.SubjectInfoBO;
 import com.cccs7.subject.domain.service.SubjectInfoDomainService;
 import com.cccs7.subject.infra.basic.entity.SubjectInfo;
+import com.cccs7.subject.infra.basic.entity.SubjectInfoEs;
 import com.google.common.base.Preconditions;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -190,6 +191,33 @@ public class SubjectController {
         } catch (Exception e) {
             log.error("subjectCategoryController.getSubjectListByCategory.error:{}", e.getMessage());
             return Result.fail(null);
+        }
+    }
+
+    /**
+     * 全文检索
+     *
+     * @param subjectInfoDTO 题目信息dto
+     * @return {@link Result }<{@link PageResult }<{@link SubjectInfoEs }>>
+     */
+    @PostMapping("/getSubjectPageBySearch")
+    public Result<PageResult<SubjectInfoEs>> getSubjectPageBySearch(@RequestBody SubjectInfoDTO subjectInfoDTO) {
+        try {
+            if (log.isInfoEnabled()) {
+                log.info("SubjectCategoryController.getSubjectPageBySearch.dto:{}", subjectInfoDTO);
+            }
+
+            Preconditions.checkArgument(StringUtils.isNotBlank(subjectInfoDTO.getKeyWord()));
+
+            SubjectInfoBO subjectInfoBO = SubjectInfoDTOConverter.INSTANCE.dto2bo(subjectInfoDTO);
+            subjectInfoBO.setPageNo(subjectInfoDTO.getPageNo());
+            subjectInfoBO.setPageSize(subjectInfoDTO.getPageSize());
+            PageResult<SubjectInfoEs> boPageResult = subjectInfoDomainService.getSubjectPageBySearch(subjectInfoBO);
+
+            return Result.ok(boPageResult);
+        } catch (Exception e) {
+            log.error("subjectCategoryController.getSubjectPageBySearch.error:{}", e.getMessage(), e);
+            return Result.fail("全文检索失败");
         }
     }
 
