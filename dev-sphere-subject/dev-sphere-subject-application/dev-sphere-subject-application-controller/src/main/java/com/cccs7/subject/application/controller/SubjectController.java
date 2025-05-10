@@ -5,6 +5,7 @@ import com.cccs7.subject.application.convert.SubjectInfoDTOConverter;
 import com.cccs7.subject.application.dto.SubjectInfoDTO;
 import com.cccs7.subject.common.entity.PageResult;
 import com.cccs7.subject.common.entity.Result;
+import com.cccs7.subject.common.util.LoginUtil;
 import com.cccs7.subject.domain.entity.SubjectAnswerBO;
 import com.cccs7.subject.domain.entity.SubjectInfoBO;
 import com.cccs7.subject.domain.service.SubjectInfoDomainService;
@@ -14,7 +15,10 @@ import com.google.common.base.Preconditions;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -206,7 +210,8 @@ public class SubjectController {
             if (log.isInfoEnabled()) {
                 log.info("SubjectCategoryController.getSubjectPageBySearch.dto:{}", subjectInfoDTO);
             }
-
+            String loginId = LoginUtil.getLoginId();
+            log.info("user.context:{}", loginId);
             Preconditions.checkArgument(StringUtils.isNotBlank(subjectInfoDTO.getKeyWord()));
 
             SubjectInfoBO subjectInfoBO = SubjectInfoDTOConverter.INSTANCE.dto2bo(subjectInfoDTO);

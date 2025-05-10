@@ -41,10 +41,10 @@ public class LoginFilter implements GlobalFilter {
 
         String loginId = request.getHeaders().getFirst("loginId");
 
+        log.info("now.loginId:{}", loginId);
         boolean login = StpUtil.isLogin(loginId);
         if (!login) {
             throw new Exception("未获取到用户信息");
-
         }
         mutate.header("loginId", String.valueOf(loginId));
         return chain.filter(exchange.mutate().request(mutate.build()).build());

@@ -1,6 +1,7 @@
-package com.cccs7.subject.application.util;
+package com.cccs7.subject.common.util;
 
-import com.cccs7.subject.application.context.LoginContextHolder;
+
+import com.cccs7.subject.common.context.LoginContextHolder;
 
 /**
  * 用户登录 Util
