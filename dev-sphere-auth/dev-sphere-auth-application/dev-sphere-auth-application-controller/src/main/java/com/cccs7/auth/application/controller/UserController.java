@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -175,6 +176,60 @@ public class UserController {
         } catch (Exception e) {
             log.error("UserController.doLogin.dto.error:{}", e.getMessage(), e);
             return Result.fail("登录失败，请重新尝试");
+        }
+    }
+
+    /**
+     * 查询用户列表
+     *
+     * @param authUserDTO 授权用户dto
+     * @return {@link Result }<{@link List }<{@link AuthUserDTO }>>
+     */
+    @PostMapping("getUserList")
+    public Result<List<AuthUserDTO>> getUserList(@RequestBody AuthUserDTO authUserDTO) {
+
+        try {
+            if (log.isInfoEnabled()) {
+                log.info("UserController.getUserList.dto:{}", JSON.toJSONString(authUserDTO));
+            }
+
+
+            AuthUserBO authUserBO = AuthUserDTOConverter.INSTANCE.dto2bo(authUserDTO);
+
+            List<AuthUserBO> userBOList = authUserDomainService.getUserList(authUserBO);
+            List<AuthUserDTO> userDTOList = AuthUserDTOConverter.INSTANCE.bos2dtos(userBOList);
+            return Result.ok(userDTOList);
+
+        } catch (Exception e) {
+            log.error("UserController.getUserList.dto.error:{}", e.getMessage(), e);
+            return Result.fail("获取失败，请重新尝试");
+        }
+    }
+
+    /**
+     * 用户检索
+     *
+     * @param authUserDTO 授权用户dto
+     * @return {@link Result }<{@link List }<{@link AuthUserDTO }>>
+     */
+    @PostMapping("findUser")
+    public Result<List<AuthUserDTO>> findUser(@RequestBody AuthUserDTO authUserDTO) {
+
+        try {
+            if (log.isInfoEnabled()) {
+                log.info("UserController.findUser.dto:{}", JSON.toJSONString(authUserDTO));
+            }
+
+
+            AuthUserBO authUserBO = AuthUserDTOConverter.INSTANCE.dto2bo(authUserDTO);
+
+            List<AuthUserBO> userBOList = authUserDomainService.findUser(authUserBO);
+            List<AuthUserDTO> userDTOList = AuthUserDTOConverter.INSTANCE.bos2dtos(userBOList);
+            return Result.ok(userDTOList);
+
+        } catch (Exception e) {
+            log.error("UserController.findUser.dto.error:{}", e.getMessage(), e);
+            return Result.fail("检索失败，请重新尝试");
         }
     }
 

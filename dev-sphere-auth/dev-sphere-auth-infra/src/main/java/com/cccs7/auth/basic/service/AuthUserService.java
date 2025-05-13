@@ -77,4 +77,21 @@ public interface AuthUserService {
      * @return {@link List }<{@link AuthUser }>
      */
     List<AuthUser> queryByCondition(AuthUser authUser);
+
+
+    /**
+     * 获取所有用户
+     *
+     * @param authUser 身份验证用户
+     * @return {@link List }<{@link AuthUser }>
+     */
+    List<AuthUser> queryAll(AuthUser authUser);
+
+    /**
+     * 通过昵称查找用户
+     *
+     * @param nickName 尼克名字
+     * @return {@link List }<{@link AuthUser }>
+     */
+    List<AuthUser> findUserByNickName(AuthUser authUser);
 }

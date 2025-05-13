@@ -108,4 +108,26 @@ public class AuthUserServiceImpl implements AuthUserService {
     public List<AuthUser> queryByCondition(AuthUser authUser) {
         return this.authUserDao.queryByCondition(authUser);
     }
+
+    /**
+     * 查询所有
+     *
+     * @param authUser 身份验证用户
+     * @return {@link List }<{@link AuthUser }>
+     */
+    @Override
+    public List<AuthUser> queryAll(AuthUser authUser) {
+        return this.authUserDao.queryAll(authUser);
+    }
+
+    /**
+     * 通过昵称查找用户
+     *
+     * @param authUser 身份验证用户
+     * @return {@link List }<{@link AuthUser }>
+     */
+    @Override
+    public List<AuthUser> findUserByNickName(AuthUser authUser) {
+        return this.authUserDao.findUserByNickName(authUser);
+    }
 }

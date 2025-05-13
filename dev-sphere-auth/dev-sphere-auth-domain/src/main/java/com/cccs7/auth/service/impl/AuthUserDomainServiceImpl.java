@@ -174,4 +174,29 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
         return StpUtil.getTokenInfo();
     }
 
+    /**
+     * 查询用户列表
+     *
+     * @param authUserBO 授权用户bo
+     * @return {@link List }<{@link AuthUserBO }>
+     */
+    @Override
+    public List<AuthUserBO> getUserList(AuthUserBO authUserBO) {
+        AuthUser authUser = AuthUserBOConverter.INSTANCE.bo2po(authUserBO);
+        List<AuthUser> authUserList = authUserService.queryByCondition(authUser);
+        return AuthUserBOConverter.INSTANCE.pos2bos(authUserList);
+    }
+
+    /**
+     * 找到用户
+     *
+     * @param authUserBO 授权用户bo
+     * @return {@link List }<{@link AuthUserBO }>
+     */
+    @Override
+    public List<AuthUserBO> findUser(AuthUserBO authUserBO) {
+        AuthUser authUser = AuthUserBOConverter.INSTANCE.bo2po(authUserBO);
+        List<AuthUser> authUserList = authUserService.findUserByNickName(authUser);
+        return AuthUserBOConverter.INSTANCE.pos2bos(authUserList);
+    }
 }

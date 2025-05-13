@@ -4,6 +4,8 @@ import cn.dev33.satoken.stp.SaTokenInfo;
 import com.cccs7.auth.entity.AuthUserBO;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * 授权用户域服务
  *
@@ -62,4 +64,19 @@ public interface AuthUserDomainService {
      */
     SaTokenInfo doLogin(String validCode);
 
+    /**
+     * 查询用户列表
+     *
+     * @param authUserBO 授权用户bo
+     * @return {@link List }<{@link AuthUserBO }>
+     */
+    List<AuthUserBO> getUserList(AuthUserBO authUserBO);
+
+    /**
+     * 检索用户
+     *
+     * @param authUserBO 授权用户bo
+     * @return {@link List }<{@link AuthUserBO }>
+     */
+    List<AuthUserBO> findUser(AuthUserBO authUserBO);
 }
