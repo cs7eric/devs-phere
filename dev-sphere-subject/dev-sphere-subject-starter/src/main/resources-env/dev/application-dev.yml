@@ -31,6 +31,28 @@ spring:
           enabled: true
         config:
           enabled: true
+  # redis 配置
+  redis:
+    # Redis数据库索引（默认为0）
+    database: 1
+    # Redis服务器地址
+    host: 14.103.134.185
+    # Redis服务器连接端口
+    port: 6379
+    # Redis服务器连接密码（默认为空）
+    password: C020611.
+    # 连接超时时间
+    timeout: 5s
+    jedis:
+      pool:
+        # 连接池最大连接数
+        max-active: 50
+        # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: 10s
+        # 连接池中的最大空闲连接
+        max-idle: 50
+        # 连接池中的最小空闲连接
+        min-idle: 5
 es:
   cluster:
     esConfigs[0]:

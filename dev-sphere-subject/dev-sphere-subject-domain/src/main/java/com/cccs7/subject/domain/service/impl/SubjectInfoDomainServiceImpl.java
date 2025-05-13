@@ -6,6 +6,7 @@ import com.cccs7.subject.common.entity.PageResult;
 import com.cccs7.subject.common.enums.IsDeletedFlagEnum;
 import com.cccs7.subject.common.enums.SubjectInfoTypeEnum;
 import com.cccs7.subject.common.util.IdWorkerUtil;
+import com.cccs7.subject.common.util.LoginUtil;
 import com.cccs7.subject.domain.convert.SubjectInfoConverter;
 import com.cccs7.subject.domain.entity.SubjectInfoBO;
 import com.cccs7.subject.domain.entity.SubjectOptionBO;
@@ -16,6 +17,7 @@ import com.cccs7.subject.infra.basic.entity.SubjectInfo;
 import com.cccs7.subject.infra.basic.entity.SubjectInfoEs;
 import com.cccs7.subject.infra.basic.entity.SubjectLabel;
 import com.cccs7.subject.infra.basic.entity.SubjectMapping;
+import com.cccs7.subject.infra.basic.redis.RedisUtil;
 import com.cccs7.subject.infra.basic.service.SubjectEsService;
 import com.cccs7.subject.infra.basic.service.SubjectInfoService;
 import com.cccs7.subject.infra.basic.service.SubjectLabelService;
@@ -56,6 +58,12 @@ public class SubjectInfoDomainServiceImpl
     @Resource
     private SubjectEsService subjectEsService;
 
+    @Resource
+    private RedisUtil redisUtil;
+
+
+    public static final String RANK_KEY = "subject_rank";
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void add(SubjectInfoBO subjectInfoBO) {
@@ -94,6 +102,9 @@ public class SubjectInfoDomainServiceImpl
         subjectInfoEs.setSubjectName(subjectInfo.getSubjectName());
         subjectInfoEs.setSubjectType(subjectInfo.getSubjectType());
         subjectEsService.insert(subjectInfoEs);
+
+        //同步到 redis
+        redisUtil.addScore(RANK_KEY, LoginUtil.getLoginId(), 1);
     }
 
 
