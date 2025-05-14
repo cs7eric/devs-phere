@@ -62,6 +62,12 @@ public class ArticleController {
         }
     }
 
+    /**
+     * 查询
+     *
+     * @param shareArticleDTO 分享文章
+     * @return {@link Result }<{@link List }<{@link ShareArticleDTO }>>
+     */
     @PostMapping("/query")
     public Result<List<ShareArticleDTO>> query(@RequestBody ShareArticleDTO shareArticleDTO) {
         try {

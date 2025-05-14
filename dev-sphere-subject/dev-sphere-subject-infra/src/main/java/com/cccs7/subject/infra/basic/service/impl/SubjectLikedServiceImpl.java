@@ -1,20 +1,24 @@
 package com.cccs7.subject.infra.basic.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.cccs7.subject.infra.basic.entity.SubjectLiked;
 import com.cccs7.subject.infra.basic.mapper.SubjectLikedDao;
 import com.cccs7.subject.infra.basic.service.SubjectLikedService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Objects;
 
 /**
- * 题目点赞表(SubjectLiked)表服务实现类
+ * 题目点赞表 表服务实现类
  *
- * @author makejava
- * @since 2025-01-01 23:12:18
+ * @author cccs7
+ * @since 2025-05-14 23:10:16
  */
-@Service("subjectLikedService")
+@Service("SubjectLikedService")
 public class SubjectLikedServiceImpl implements SubjectLikedService {
+
     @Resource
     private SubjectLikedDao subjectLikedDao;
 
@@ -26,9 +30,8 @@ public class SubjectLikedServiceImpl implements SubjectLikedService {
      */
     @Override
     public SubjectLiked queryById(Long id) {
-        return this.subjectLikedDao.queryById(id);
+        return this.subjectLikedDao.selectById(id);
     }
-
 
     /**
      * 新增数据
@@ -37,9 +40,8 @@ public class SubjectLikedServiceImpl implements SubjectLikedService {
      * @return 实例对象
      */
     @Override
-    public SubjectLiked insert(SubjectLiked subjectLiked) {
-        this.subjectLikedDao.insert(subjectLiked);
-        return subjectLiked;
+    public int insert(SubjectLiked subjectLiked) {
+        return this.subjectLikedDao.insert(subjectLiked);
     }
 
     /**
@@ -49,9 +51,8 @@ public class SubjectLikedServiceImpl implements SubjectLikedService {
      * @return 实例对象
      */
     @Override
-    public SubjectLiked update(SubjectLiked subjectLiked) {
-        this.subjectLikedDao.update(subjectLiked);
-        return this.queryById(subjectLiked.getId());
+    public int update(SubjectLiked subjectLiked) {
+        return this.subjectLikedDao.updateById(subjectLiked);
     }
 
     /**
@@ -64,4 +65,29 @@ public class SubjectLikedServiceImpl implements SubjectLikedService {
     public boolean deleteById(Long id) {
         return this.subjectLikedDao.deleteById(id) > 0;
     }
+
+    /**
+     * 条件查询
+     *
+     * @param subjectLiked 条件
+     * @return 实例对象
+     */
+    @Override
+    public SubjectLiked queryByCondition(SubjectLiked subjectLiked) {
+
+        LambdaQueryWrapper<SubjectLiked> queryWrapper = Wrappers.<SubjectLiked>lambdaQuery()
+                .eq(Objects.nonNull(subjectLiked.getId()), SubjectLiked::getId, subjectLiked.getId())
+                .eq(Objects.nonNull(subjectLiked.getSubjectId()), SubjectLiked::getSubjectId, subjectLiked.getSubjectId())
+                .eq(Objects.nonNull(subjectLiked.getLikeUserId()), SubjectLiked::getLikeUserId, subjectLiked.getLikeUserId())
+                .eq(Objects.nonNull(subjectLiked.getStatus()), SubjectLiked::getStatus, subjectLiked.getStatus())
+                .eq(Objects.nonNull(subjectLiked.getCreatedBy()), SubjectLiked::getCreatedBy, subjectLiked.getCreatedBy())
+                .eq(Objects.nonNull(subjectLiked.getCreatedTime()), SubjectLiked::getCreatedTime, subjectLiked.getCreatedTime())
+                .eq(Objects.nonNull(subjectLiked.getUpdateBy()), SubjectLiked::getUpdateBy, subjectLiked.getUpdateBy())
+                .eq(Objects.nonNull(subjectLiked.getUpdateTime()), SubjectLiked::getUpdateTime, subjectLiked.getUpdateTime())
+                .eq(Objects.nonNull(subjectLiked.getIsDeleted()), SubjectLiked::getIsDeleted, subjectLiked.getIsDeleted())
+                ;
+        return subjectLikedDao.selectOne(queryWrapper);
+
+    }
+
 }
