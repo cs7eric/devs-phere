@@ -3,6 +3,7 @@ package com.cccs7.subject.domain.entity;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 题目点赞表 bo
