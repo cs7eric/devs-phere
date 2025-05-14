@@ -1,17 +1,18 @@
-package com.cccs7.subject.application.dto;
+package com.cccs7.subject.domain.entity;
 
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
- * 题目点赞表 dto
+ * 题目点赞表 bo
  *
  * @author cccs7
  * @since 2025-05-14 23:10:16
  */
 @Data
-public class SubjectLikedDTO implements Serializable {
+public class SubjectLikedBO implements Serializable {
 
     /**
      * 主键

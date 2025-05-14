@@ -25,7 +25,7 @@ id, subject_id, like_user_id, status, created_by, created_time, update_by, updat
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="SubjectLikedMap">
         select
-id, subject_id, like_user_id, status, created_by, created_time, update_by, update_time, is_deleted
+        id, subject_id, like_user_id, status, created_by, created_time, update_by, update_time, is_deleted
         from subject_liked
         <where>
             <if test="id != null">

@@ -22,7 +22,7 @@ public class SwaggerFileWriter implements CommandLineRunner {
 
     private void writeApiDocsToFile() {
         String url = "http://localhost:8089/v2/api-docs?group=subject-service"; // 确保服务已启动并且URL正确
-        String outputPath = "E:/project-repo/dev-sphere-front/subject-openapi.json"; // 指定输出路径
+        String outputPath = "G:/project-repo/dev-sphere-front/subject-openapi.json"; // 指定输出路径
 
         try {
             String apiDocs = restTemplate.getForObject(url, String.class); // 获取 API 文档

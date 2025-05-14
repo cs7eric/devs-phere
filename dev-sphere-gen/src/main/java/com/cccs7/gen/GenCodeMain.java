@@ -1,6 +1,7 @@
 package com.cccs7.gen;
 
-import com.jingdianjichi.core.core.CodeGenerationCode;
+
+import com.cccs7.core.core.CodeGenerationCode;
 
 public class GenCodeMain {
 
