@@ -1,6 +1,6 @@
-package com.cccs7.circle.common.entity;
+package com.cccs7.practice.common.entity;
 
-import com.cccs7.circle.common.enums.ResultCodeEnum;
+import com.cccs7.practice.common.enums.ResultCodeEnum;
 import lombok.Data;
 
 /**

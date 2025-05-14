@@ -1,4 +1,4 @@
-package com.cccs7.circle.common.enums;
+package com.cccs7.practice.common.enums;
 
 import lombok.Getter;
 

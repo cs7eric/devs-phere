@@ -11,6 +11,15 @@
 
     <artifactId>dev-sphere-practice-domain</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.cccs7</groupId>
+            <artifactId>dev-sphere-practice-infra</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+    </dependencies>
+
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>

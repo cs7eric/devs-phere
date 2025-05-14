@@ -2,13 +2,14 @@ package com.cccs7.subject.infra.basic.mapper;
 
 import com.cccs7.subject.infra.basic.entity.SubjectLiked;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 /**
  * 题目点赞表(SubjectLiked)表数据库访问层
  *
- * @author makejava
- * @since 2025-01-01 23:12:18
+ * @author cccs7 - csq020611@gmail.com
+ * @since 2025-05-15 00:02:12
  */
 public interface SubjectLikedDao {
 
@@ -19,6 +20,15 @@ public interface SubjectLikedDao {
      * @return 实例对象
      */
     SubjectLiked queryById(Long id);
+
+    /**
+     * 查询指定行数据
+     *
+     * @param subjectLiked 查询条件
+     * @param pageable         分页对象
+     * @return 对象列表
+     */
+    List<SubjectLiked> queryAllByLimit(SubjectLiked subjectLiked, @Param("pageable") Pageable pageable);
 
     /**
      * 统计总行数

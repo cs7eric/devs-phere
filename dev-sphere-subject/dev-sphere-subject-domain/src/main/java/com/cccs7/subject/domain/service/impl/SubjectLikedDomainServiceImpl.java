@@ -65,7 +65,8 @@ public class SubjectLikedDomainServiceImpl implements SubjectLikedDomainService 
     @Override
     public Boolean update(SubjectLikedBO subjectLikedBO) {
         SubjectLiked subjectLiked = SubjectLikedBOConverter.INSTANCE.convertBOToEntity(subjectLikedBO);
-        return subjectLikedService.update(subjectLiked) > 0;
+        subjectLikedService.update(subjectLiked);
+        return true;
     }
 
     @Override
@@ -73,7 +74,9 @@ public class SubjectLikedDomainServiceImpl implements SubjectLikedDomainService 
         SubjectLiked subjectLiked = new SubjectLiked();
         subjectLiked.setId(subjectLikedBO.getId());
         subjectLiked.setIsDeleted(IsDeletedFlagEnum.DELETED.getCode());
-        return subjectLikedService.update(subjectLiked) > 0;
+        subjectLikedService.update(subjectLiked);
+        return true;
+
     }
 
 }

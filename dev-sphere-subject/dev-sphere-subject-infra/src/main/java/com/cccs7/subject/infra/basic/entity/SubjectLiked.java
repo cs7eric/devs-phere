@@ -1,12 +1,13 @@
 package com.cccs7.subject.infra.basic.entity;
 
-import lombok.Data;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 题目点赞表 实体类

@@ -1,4 +1,4 @@
-package com.cccs7.subject.application.dto;
+package com.cccs7.practice.domain.entity;
 
 import lombok.Data;
 
@@ -6,13 +6,13 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 题目点赞表 dto
+ * 练习详情表 bo
  *
  * @author cccs7
- * @since 2025-05-14 23:10:16
+ * @since 2025-05-14 23:43:15
  */
 @Data
-public class SubjectLikedDTO implements Serializable {
+public class PracticeDetailBO implements Serializable {
 
     /**
      * 主键
@@ -20,19 +20,29 @@ public class SubjectLikedDTO implements Serializable {
     private Long id;
 
     /**
+     * 练题id
+     */
+    private Long practiceId;
+
+    /**
      * 题目id
      */
     private Long subjectId;
 
     /**
-     * 点赞人id
+     * 题目类型
      */
-    private String likeUserId;
+    private Integer subjectType;
 
     /**
-     * 点赞状态 1点赞 0不点赞
+     * 回答状态
      */
-    private Integer status;
+    private Integer answerStatus;
+
+    /**
+     * 回答内容
+     */
+    private String answerContent;
 
     /**
      * 创建人
@@ -45,17 +55,17 @@ public class SubjectLikedDTO implements Serializable {
     private Date createdTime;
 
     /**
-     * 修改人
+     * 更新人
      */
     private String updateBy;
 
     /**
-     * 修改时间
+     * 更新时间
      */
     private Date updateTime;
 
     /**
-     * 
+     * 是否被删除 0为删除 1已删除
      */
     private Integer isDeleted;
 

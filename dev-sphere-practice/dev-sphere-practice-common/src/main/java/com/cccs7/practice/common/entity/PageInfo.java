@@ -1,4 +1,4 @@
-package com.cccs7.circle.common.entity;
+package com.cccs7.practice.common.entity;
 
 import lombok.Data;
 

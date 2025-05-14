@@ -8,23 +8,23 @@
 # 数据库连接信息
 jdbc:
   dbName: dev-sphere
-  tableName: subject_liked
+  tableName: practice_set_detail
   url: jdbc:mysql://1.92.68.100:3306/
   username: cccs7
   password: C020611.
   driver: com.mysql.cj.jdbc.Driver
 
 # 使用的模板与生成文件映射给关系
-mapperInfos: genCode/subjectLikedMapper.yml
+mapperInfos: genCode/practiceDetailMapper.yml
 
 # 全局参数
 params:
   # 作者
   author: cccs7
   # 模块
-  module: subject
+  module: practice
   # controller 通用前缀
-  api: /subjectLiked
+  api: /practice
   # 生成对象是否移除前缀
   removePre: false
   # 使用内置函数赋值给变量  FunctionUtils 中替换
