@@ -183,6 +183,7 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
     @Override
     public List<AuthUserBO> getUserList(AuthUserBO authUserBO) {
         AuthUser authUser = AuthUserBOConverter.INSTANCE.bo2po(authUserBO);
+        authUser.setIsDeleted(0);
         List<AuthUser> authUserList = authUserService.queryByCondition(authUser);
         return AuthUserBOConverter.INSTANCE.pos2bos(authUserList);
     }

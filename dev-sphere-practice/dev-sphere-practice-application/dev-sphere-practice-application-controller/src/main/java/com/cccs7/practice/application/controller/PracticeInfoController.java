@@ -38,17 +38,7 @@ public class PracticeInfoController {
             if (log.isInfoEnabled()) {
                 log.info("PracticeInfoController.add.dto:{}", JSON.toJSONString(practiceInfoDTO));
             }
-            Preconditions.checkNotNull(practiceInfoDTO.getId(), "主键不能为空");
-            Preconditions.checkNotNull(practiceInfoDTO.getSetId(), "套题id不能为空");
-            Preconditions.checkNotNull(practiceInfoDTO.getCompleteStatus(), "是否完成 1完成 0未完成不能为空");
-            Preconditions.checkNotNull(practiceInfoDTO.getTimeUse(), "用时不能为空");
-            Preconditions.checkNotNull(practiceInfoDTO.getSubmitTime(), "交卷时间不能为空");
-            Preconditions.checkNotNull(practiceInfoDTO.getCorrectRate(), "正确率不能为空");
             Preconditions.checkNotNull(practiceInfoDTO.getCreatedBy(), "创建人不能为空");
-            Preconditions.checkNotNull(practiceInfoDTO.getCreatedTime(), "创建时间不能为空");
-            Preconditions.checkNotNull(practiceInfoDTO.getUpdateBy(), "更新人不能为空");
-            Preconditions.checkNotNull(practiceInfoDTO.getUpdateTime(), "更新时间不能为空");
-            Preconditions.checkNotNull(practiceInfoDTO.getIsDeleted(), "是否被删除 0为删除 1已删除不能为空");
             PracticeInfoBO PracticeInfoBO = PracticeInfoDTOConverter.INSTANCE.convertDTOToBO(practiceInfoDTO);
             return Result.ok(practiceInfoDomainService.add(PracticeInfoBO));
         } catch (Exception e) {

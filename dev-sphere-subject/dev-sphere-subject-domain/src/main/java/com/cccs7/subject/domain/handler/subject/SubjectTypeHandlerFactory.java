@@ -18,12 +18,16 @@ import java.util.Map;
 
 @Component
 public class SubjectTypeHandlerFactory implements InitializingBean {
-
     @Resource
     private List<SubjectTypeHandler> handlerList;
-
     private Map<SubjectInfoTypeEnum, SubjectTypeHandler> handlerMap = new HashMap<>();
 
+    /**
+     * 获取对应处理类
+     *
+     * @param subjectType 题目类型
+     * @return {@link SubjectTypeHandler }
+     */
     public SubjectTypeHandler getHandler(int subjectType) {
         SubjectInfoTypeEnum typeEnum = SubjectInfoTypeEnum.getByCode(subjectType);
         return handlerMap.get(typeEnum);
